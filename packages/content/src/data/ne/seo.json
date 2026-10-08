@@ -1,0 +1,59 @@
+{
+  "siteName": "केशव दत्त भट्ट | आधिकारिक पोर्टफोलियो",
+  "siteUrl": "https://keshabbhatt.com.np",
+  "defaultTitle": "केशव दत्त भट्ट | व्यवसाय परामर्शदाता तथा वित्तीय क्षेत्र विज्ञ नेपाल",
+  "titleTemplate": "%s | केशव दत्त भट्ट",
+  "description": "केशव दत्त भट्टको आधिकारिक कार्यकारी पोर्टफोलियो: व्यवसाय परामर्शदाता, बिजनेस कोच तथा वित्तीय क्षेत्र विज्ञ, काठमाडौँ नेपाल। बैंकिङ, पुँजी बजार, मूल्याङ्कन र रणनीतिक व्यवस्थापन।",
+  "keywords": [
+    "केशव भट्ट",
+    "केशव दत्त भट्ट",
+    "व्यवसाय परामर्शदाता नेपाल",
+    "बिजनेस कोच नेपाल",
+    "वित्तीय परामर्शदाता काठमाडौँ",
+    "व्यवस्थापन परामर्शदाता",
+    "बैंकिङ तथा पुँजी बजार नेपाल",
+    "लगानी विश्लेषण नेपाल",
+    "रणनीतिक व्यवस्थापन",
+    "संस्थागत सुशासन",
+    "Keshab Bhatt",
+    "Keshab Datt Bhatt"
+  ],
+  "author": {
+    "name": "केशव दत्त भट्ट (Keshab Datt Bhatt)",
+    "url": "https://keshabbhatt.com.np",
+    "jobTitle": "व्यवसाय परामर्शदाता तथा वित्तीय क्षेत्र विज्ञ",
+    "worksFor": "वित्तीय तथा रणनीतिक परामर्श सेवा",
+    "address": {
+      "streetAddress": "कोटेश्वर ३२",
+      "addressLocality": "काठमाडौँ",
+      "addressCountry": "नेपाल"
+    },
+    "email": "keshabdattb66@gmail.com",
+    "telephone": "+977 9865718024",
+    "sameAs": [
+      "https://linkedin.com/in/keshabbhatt",
+      "https://twitter.com/keshabbhatt"
+    ]
+  },
+  "openGraph": {
+    "type": "website",
+    "locale": "ne_NP",
+    "url": "https://keshabbhatt.com.np/ne",
+    "title": "केशव दत्त भट्ट | व्यवसाय परामर्शदाता तथा रणनीतिक व्यवस्थापन",
+    "description": "केशव दत्त भट्टको आधिकारिक पोर्टफोलियो: व्यवसाय परामर्शदाता, पुँजी बजार तथा वित्तीय रणनीतिकार, नेपाल।",
+    "siteName": "केशव दत्त भट्ट पोर्टफोलियो",
+    "images": [
+      {
+        "url": "/images/og-cover.jpg",
+        "width": 1200,
+        "height": 630,
+        "alt": "केशव दत्त भट्ट - व्यवसाय परामर्शदाता तथा वित्तीय रणनीति"
+      }
+    ]
+  },
+  "twitter": {
+    "card": "summary_large_image",
+    "site": "@keshabbhatt",
+    "creator": "@keshabbhatt"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "areasOfExpertise": {
+    "sectionTitle": "कार्यकारी विशेषज्ञताका क्षेत्रहरू",
+    "items": [
+      { "id": "strategic-management", "title": "रणनीतिक व्यवस्थापन", "icon": "Target" },
+      { "id": "banking-services", "title": "बैंकिङ तथा वित्तीय सेवा", "icon": "Landmark" },
+      { "id": "capital-markets", "title": "पुँजी बजार तथा शेयर बजार", "icon": "BarChart3" },
+      { "id": "financial-analysis", "title": "वित्तीय विश्लेषण", "icon": "FileSpreadsheet" },
+      { "id": "investment-analysis", "title": "लगानी विश्लेषण", "icon": "Coins" },
+      { "id": "business-development", "title": "व्यावसायिक विकास", "icon": "Briefcase" },
+      { "id": "leadership-management", "title": "नेतृत्व तथा व्यवस्थापन", "icon": "Users" },
+      { "id": "risk-governance", "title": "जोखिम तथा संस्थागत सुशासन", "icon": "ShieldCheck" },
+      { "id": "data-thinking", "title": "तथ्यांक तथा विश्लेषणात्मक सोच", "icon": "Binary" },
+      { "id": "corporate-advisory", "title": "संस्थागत परामर्श तथा सल्लाह", "icon": "Handshake" }
+    ]
+  },
+  "professionalPhilosophy": {
+    "sectionTitle": "व्यावसायिक दर्शन तथा सिद्धान्त",
+    "items": [
+      { "id": 1, "text": "पूर्वाग्रहभन्दा प्रमाणलाई प्राथमिकता" },
+      { "id": 2, "text": "क्षणिक देखावटीभन्दा दीर्घकालीन मूल्य" },
+      { "id": 3, "text": "प्रतिक्रिया दिनुअघि विश्लेषणात्मक सोच" },
+      { "id": 4, "text": "नैतिक नेतृत्व" },
+      { "id": 5, "text": "जवाफदेहिता र उत्तरदायित्व" },
+      { "id": 6, "text": "निरन्तर सिकाइ तथा ज्ञान विस्तार" },
+      { "id": 7, "text": "अनुशासित निर्णय प्रक्रिया" },
+      { "id": 8, "text": "दिगो विकास र स्थायित्व" },
+      { "id": 9, "text": "सरोकारवालाहरूको सामूहिक हित" }
+    ]
+  }
+}

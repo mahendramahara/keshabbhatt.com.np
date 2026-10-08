@@ -1,0 +1,59 @@
+{
+  "siteName": "Keshab Datt Bhatt | Executive Portfolio",
+  "siteUrl": "https://keshabbhatt.com.np",
+  "defaultTitle": "Keshab Datt Bhatt | Business Consultant & Financial Sector Leader Nepal",
+  "titleTemplate": "%s | Keshab Datt Bhatt",
+  "description": "Official executive portfolio of Keshab Datt Bhatt - Business Consultant, Business Coach, and Financial Sector Professional in Kathmandu, Nepal. Specialized in Banking, Capital Markets, Valuation, and Strategic Management.",
+  "keywords": [
+    "Keshab Bhatt",
+    "Keshab Datt Bhatt",
+    "Business Consultant Nepal",
+    "Business Coach Nepal",
+    "Financial Consultant Kathmandu",
+    "Management Consultant Nepal",
+    "Banking and Capital Markets",
+    "Investment Analysis Nepal",
+    "Tribhuvan University MBS Finance",
+    "Strategic Management Consultant",
+    "Corporate Governance Nepal",
+    "Valuation and Financial Modelling"
+  ],
+  "author": {
+    "name": "Keshab Datt Bhatt",
+    "url": "https://keshabbhatt.com.np",
+    "jobTitle": "Business Consultant & Financial Sector Professional",
+    "worksFor": "Financial & Strategic Advisory Services",
+    "address": {
+      "streetAddress": "Koteshwor 32",
+      "addressLocality": "Kathmandu",
+      "addressCountry": "Nepal"
+    },
+    "email": "keshabdattb66@gmail.com",
+    "telephone": "+977 9865718024",
+    "sameAs": [
+      "https://linkedin.com/in/keshabbhatt",
+      "https://twitter.com/keshabbhatt"
+    ]
+  },
+  "openGraph": {
+    "type": "website",
+    "locale": "en_US",
+    "url": "https://keshabbhatt.com.np/en",
+    "title": "Keshab Datt Bhatt | Business Consultant & Strategic Management",
+    "description": "Executive portfolio of Keshab Datt Bhatt: Business Consultant, Capital Markets Specialist & Financial Strategist in Nepal.",
+    "siteName": "Keshab Datt Bhatt Portfolio",
+    "images": [
+      {
+        "url": "/images/og-cover.jpg",
+        "width": 1200,
+        "height": 630,
+        "alt": "Keshab Datt Bhatt - Business Consultant & Financial Strategy"
+      }
+    ]
+  },
+  "twitter": {
+    "card": "summary_large_image",
+    "site": "@keshabbhatt",
+    "creator": "@keshabbhatt"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "nav": [
+    { "id": "home", "label": "Home", "href": "#home" },
+    { "id": "about", "label": "About", "href": "#about" },
+    { "id": "expertise", "label": "Expertise", "href": "#expertise" },
+    { "id": "experience", "label": "Experience", "href": "#experience" },
+    { "id": "work-research", "label": "Work & Research", "href": "#work-research" },
+    { "id": "articles", "label": "Articles", "href": "#articles" },
+    { "id": "education", "label": "Education", "href": "#education" },
+    { "id": "contact", "label": "Contact", "href": "#contact" }
+  ],
+  "footer": {
+    "tagline": "Finance | Strategy | Leadership",
+    "quote": "Better decisions. Stronger institutions. A more inclusive financial future.",
+    "links": [
+      { "id": "home", "label": "Home", "href": "#home" },
+      { "id": "about", "label": "About", "href": "#about" },
+      { "id": "contact", "label": "Contact", "href": "#contact" }
+    ],
+    "copyright": "2026 Keshab Datt Bhatt. All rights reserved."
+  }
+}

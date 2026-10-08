@@ -1,0 +1,22 @@
+{
+  "nav": [
+    { "id": "home", "label": "गृहपृष्ठ", "href": "#home" },
+    { "id": "about", "label": "परिचय", "href": "#about" },
+    { "id": "expertise", "label": "विशेषज्ञता", "href": "#expertise" },
+    { "id": "experience", "label": "अनुभव", "href": "#experience" },
+    { "id": "work-research", "label": "कार्य तथा अनुसन्धान", "href": "#work-research" },
+    { "id": "articles", "label": "लेख तथा विचार", "href": "#articles" },
+    { "id": "education", "label": "शिक्षा", "href": "#education" },
+    { "id": "contact", "label": "सम्पर्क", "href": "#contact" }
+  ],
+  "footer": {
+    "tagline": "वित्त | रणनीति | नेतृत्व",
+    "quote": "सही निर्णय। सबल संस्थाहरू। समावेशी वित्तीय भविष्य।",
+    "links": [
+      { "id": "home", "label": "गृहपृष्ठ", "href": "#home" },
+      { "id": "about", "label": "परिचय", "href": "#about" },
+      { "id": "contact", "label": "सम्पर्क", "href": "#contact" }
+    ],
+    "copyright": "२०२६ केशव दत्त भट्ट। सर्वाधिकार सुरक्षित।"
+  }
+}

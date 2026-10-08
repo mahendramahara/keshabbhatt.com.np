@@ -1,0 +1,406 @@
+{
+  "nav": [
+    { "id": "home", "label": "Home", "href": "#home" },
+    { "id": "about", "label": "About", "href": "#about" },
+    { "id": "expertise", "label": "Expertise", "href": "#expertise" },
+    { "id": "experience", "label": "Experience", "href": "#experience" },
+    { "id": "work-research", "label": "Work & Research", "href": "#work-research" },
+    { "id": "articles", "label": "Articles", "href": "#articles" },
+    { "id": "education", "label": "Education", "href": "#education" },
+    { "id": "contact", "label": "Contact", "href": "#contact" }
+  ],
+  "hero": {
+    "quote": "Turning financial insight into sustainable opportunities.",
+    "badge": "MANAGEMENT & FINANCIAL SECTOR PROFESSIONAL",
+    "name": "Keshab",
+    "nameHighlight": "Datt Bhatt",
+    "subtitle": "Banking | Capital Markets | Strategic Management",
+    "description": "A results-oriented professional with a strong academic foundation in finance, strategic thinking and leadership, committed to creating value in the banking and financial sector.",
+    "tags": [
+      { "id": "banking", "label": "Banking & Financial Services", "icon": "Landmark" },
+      { "id": "capital-markets", "label": "Capital Markets & Investment", "icon": "TrendingUp" },
+      { "id": "strategy", "label": "Strategic Management", "icon": "Target" },
+      { "id": "biz-dev", "label": "Business Development", "icon": "Briefcase" }
+    ],
+    "downloadCvText": "Download CV",
+    "cvUrl": "/cv/keshabbhatt.com.np.pdf",
+    "connectLinkedInText": "Connect on LinkedIn",
+    "linkedInUrl": "https://linkedin.com/in/keshabbhatt",
+    "contactQuickInfo": {
+      "location": "Koteshwor 32, Kathmandu, Nepal",
+      "email": "keshabdattb66@gmail.com",
+      "phone": "+977 9865718024",
+      "linkedIn": "linkedin.com/in/keshabbhatt"
+    },
+    "pillars": ["STRATEGY", "CAPITAL", "GROWTH"]
+  },
+  "executiveProfile": {
+    "title": "Executive Profile",
+    "body": "I am Keshab Datt Bhatt, a management and financial professional with a strong academic foundation in business and a growing focus on banking, capital markets and strategic management. I bring analytical thinking, a problem-solving mindset and a long-term perspective to create value in financial institutions and the broader financial ecosystem. My goal is to contribute to organizational growth, deepen my expertise in financial markets and advance toward leadership roles in the banking and financial sector.",
+    "readMoreText": "Read More",
+    "readMoreUrl": "#about"
+  },
+  "valueProposition": {
+    "title": "Value Proposition",
+    "body": "I combine strategic thinking, financial analysis and market insight with strong leadership and communication skills to support better decisions, manage risk and unlock growth opportunities. I help organizations and teams turn data into insight, insight into strategy, and strategy into sustainable value.",
+    "tags": ["Strategy", "Analysis", "Leadership"],
+    "workflow": ["Insight", "Decision", "Impact"],
+    "featuredQuote": {
+      "text": "Building financial systems that create inclusive growth and long-term value.",
+      "author": "Keshab Datt Bhatt"
+    }
+  },
+  "areasOfExpertise": {
+    "sectionTitle": "Areas of Executive Expertise",
+    "items": [
+      { "id": "strategic-management", "title": "Strategic Management", "icon": "Target" },
+      { "id": "banking-services", "title": "Banking & Financial Services", "icon": "Landmark" },
+      { "id": "capital-markets", "title": "Capital Markets & Stock Market", "icon": "BarChart3" },
+      { "id": "financial-analysis", "title": "Financial Analysis", "icon": "FileSpreadsheet" },
+      { "id": "investment-analysis", "title": "Investment Analysis", "icon": "Coins" },
+      { "id": "business-development", "title": "Business Development", "icon": "Briefcase" },
+      { "id": "leadership-management", "title": "Leadership & Management", "icon": "Users" },
+      { "id": "risk-governance", "title": "Risk & Governance", "icon": "ShieldCheck" },
+      { "id": "data-thinking", "title": "Data & Analytical Thinking", "icon": "Binary" },
+      { "id": "corporate-advisory", "title": "Corporate Advisory & Consulting", "icon": "Handshake" }
+    ]
+  },
+  "professionalPhilosophy": {
+    "sectionTitle": "Professional Philosophy",
+    "items": [
+      { "id": 1, "text": "Evidence before assumption" },
+      { "id": 2, "text": "Long-term value over short-term appearance" },
+      { "id": 3, "text": "Analytical thinking before reaction" },
+      { "id": 4, "text": "Ethical leadership" },
+      { "id": 5, "text": "Accountability" },
+      { "id": 6, "text": "Continuous learning" },
+      { "id": 7, "text": "Disciplined decision-making" },
+      { "id": 8, "text": "Sustainable growth" },
+      { "id": 9, "text": "Stakeholder value" }
+    ]
+  },
+  "leadershipApproach": {
+    "title": "Leadership Approach",
+    "summary": "I lead with clarity, set direction, build capable teams and make data-informed decisions. My leadership combines analytical thinking with people development to achieve sustainable results.",
+    "traits": [
+      { "id": "clarity", "title": "Strategic Clarity", "icon": "Compass" },
+      { "id": "accountability", "title": "Accountability", "icon": "CheckCircle2" },
+      { "id": "data-decisions", "title": "Data-Informed Decisions", "icon": "LineChart" },
+      { "id": "communication", "title": "Effective Communication", "icon": "MessageSquare" },
+      { "id": "team-dev", "title": "Team Development", "icon": "Users" },
+      { "id": "delegation", "title": "Delegation", "icon": "Share2" },
+      { "id": "performance", "title": "Performance Orientation", "icon": "Zap" },
+      { "id": "ethical-conduct", "title": "Ethical Conduct", "icon": "Scale" },
+      { "id": "adaptability", "title": "Adaptability", "icon": "Shuffle" },
+      { "id": "crisis-mgmt", "title": "Crisis Management", "icon": "ShieldAlert" }
+    ]
+  },
+  "managementCapabilities": {
+    "sectionTitle": "Management Capabilities",
+    "items": [
+      { "id": "strat-plan", "title": "Strategic Planning", "description": "Define vision, set direction and align resources.", "icon": "Compass" },
+      { "id": "org-mgmt", "title": "Organizational Management", "description": "Build effective structures and processes.", "icon": "Layers" },
+      { "id": "fin-mgmt", "title": "Financial Management", "description": "Optimize capital and performance.", "icon": "Wallet" },
+      { "id": "perf-mgmt", "title": "Performance Management", "description": "Drive results through measurement and accountability.", "icon": "Activity" },
+      { "id": "operations", "title": "Operations", "description": "Ensure efficiency and quality.", "icon": "Settings" },
+      { "id": "biz-dev-cap", "title": "Business Development", "description": "Identify opportunities and build relationships.", "icon": "Globe" },
+      { "id": "hr-mgmt", "title": "Human Resource Management", "description": "Develop talent and high-performing teams.", "icon": "UserCheck" },
+      { "id": "stakeholder-mgmt", "title": "Stakeholder Management", "description": "Engage and create mutual value.", "icon": "Handshake" },
+      { "id": "negotiation", "title": "Negotiation", "description": "Build consensus and win-win outcomes.", "icon": "MessagesSquare" },
+      { "id": "change-mgmt", "title": "Change Management", "description": "Lead transformation and embrace innovation.", "icon": "RefreshCw" }
+    ]
+  },
+  "capitalMarketPerspective": {
+    "title": "Capital Market & Investment Perspective",
+    "columns": [
+      [
+        "Equity Markets",
+        "Securities Markets",
+        "Investment Analysis",
+        "Fundamental Analysis",
+        "Technical Awareness",
+        "Valuation",
+        "Market Cycles"
+      ],
+      [
+        "Investor Psychology",
+        "Risk-Return Trade-offs",
+        "Portfolio Diversification",
+        "Corporate Financial Performance",
+        "Macroeconomic Influences",
+        "Monetary & Financial Policy",
+        "Financial-Sector Development"
+      ]
+    ]
+  },
+  "analyticalFramework": {
+    "title": "Analytical Framework",
+    "steps": [
+      { "step": 1, "name": "Define" },
+      { "step": 2, "name": "Diagnose" },
+      { "step": 3, "name": "Analyze" },
+      { "step": 4, "name": "Evaluate" },
+      { "step": 5, "name": "Decide" },
+      { "step": 6, "name": "Execute" },
+      { "step": 7, "name": "Measure" },
+      { "step": 8, "name": "Improve" }
+    ],
+    "appliedToLeft": [
+      "Business Problems",
+      "Financial Decisions",
+      "Investment Questions",
+      "Market Opportunities"
+    ],
+    "appliedToRight": [
+      "Organizational Challenges",
+      "Strategic Decisions",
+      "Risk Assessment"
+    ]
+  },
+  "experienceSection": {
+    "title": "Professional Experience",
+    "items": [
+      {
+        "id": "exp-1",
+        "organization": "Banking & Financial Advisory Institution",
+        "position": "Management & Financial Sector Associate",
+        "period": "01/2023 - Present",
+        "location": "Kathmandu, Nepal",
+        "roleType": "Executive Leadership Track",
+        "tagline": "Institutional capital modeling, balance sheet stress-testing, and executive strategy advisory.",
+        "responsibilities": [
+          "Formulate institutional financial models, capital adequacy assessments, and portfolio asset evaluations under NRB regulatory directives.",
+          "Design strategic risk frameworks, liquidity profiling, and operational efficiency benchmarks for banking partners.",
+          "Collaborate directly with executive leadership and boards on sustainable growth initiatives and corporate governance."
+        ],
+        "strategicImpact": "Structured strategic valuation models and liquidity frameworks adopted for organizational asset allocation and risk profiling.",
+        "leadershipScope": "Lead cross-functional research workstreams and mentored junior financial analysts on regulatory compliance and market forecasting.",
+        "keyAchievements": [
+          "Engineered multi-scenario DCF and capital stress-test templates adopted across institutional analysis workflows.",
+          "Advised senior management on asset-liability management (ALM) liquidity buffers against interest rate volatility.",
+          "Formulated comprehensive board presentation decks aligning departmental goals with 3-year strategic growth metrics."
+        ],
+        "skills": [
+          "Banking Operations",
+          "Capital Adequacy (Basel III / NRB)",
+          "Financial Modeling",
+          "Risk Governance",
+          "Strategic Planning"
+        ]
+      },
+      {
+        "id": "exp-2",
+        "organization": "Capital Markets & Securities Research Practice",
+        "position": "Financial Analyst & Market Researcher",
+        "period": "2021 - 2023",
+        "location": "Nepal",
+        "roleType": "Core Analytical Practice",
+        "tagline": "Secondary equity analytics, valuation multiples, and sectoral macroeconomic forecasting.",
+        "responsibilities": [
+          "Conducted quantitative and qualitative valuation research on NEPSE-listed financial institutions, hydropower, and insurance corporations.",
+          "Synthesized macroeconomic indicators, inflation dynamics, and NRB monetary policy directives into quarterly market intelligence reports.",
+          "Assisted institutional investors and advisory clients in portfolio rebalancing and intrinsic equity value assessments."
+        ],
+        "strategicImpact": "Delivered actionable valuation insights that protected client asset allocations during monetary tightening and market consolidation phases.",
+        "leadershipScope": "Spearheaded quarterly market review publications and guided research interns on financial statement forensics.",
+        "keyAchievements": [
+          "Authored 15+ comprehensive equity research notes and valuation analyses covering key market bellwethers.",
+          "Automated financial statement ratio extraction dashboards, accelerating research turnaround time by 35%.",
+          "Conducted technical and fundamental investment seminars for institutional asset allocators."
+        ],
+        "skills": [
+          "Equity Valuation",
+          "Discounted Cash Flow (DCF)",
+          "NEPSE Market Analysis",
+          "Macroeconomic Research",
+          "Financial Statement Forensics"
+        ]
+      },
+      {
+        "id": "exp-3",
+        "organization": "Corporate Strategy & Management Consulting Group",
+        "position": "Business Strategy & Operations Analyst",
+        "period": "2019 - 2021",
+        "location": "Nepal",
+        "roleType": "Advisory Practice",
+        "tagline": "Operational cost diagnostics, business process restructuring, and performance optimization.",
+        "responsibilities": [
+          "Diagnosed organizational cost structures, departmental budget variance, and operational productivity bottlenecks.",
+          "Developed business turnaround strategies, key performance indicators (KPIs), and executive management dashboards.",
+          "Conducted market feasibility studies and financial viability evaluations for corporate expansion ventures."
+        ],
+        "strategicImpact": "Identified operational cost containment opportunities resulting in measurable efficiency gains and streamlined departmental workflows.",
+        "leadershipScope": "Facilitated cross-departmental alignment workshops and presented cost optimization roadmaps to senior business executives.",
+        "keyAchievements": [
+          "Structured 3-year organizational transformation roadmaps successfully implemented across commercial client units.",
+          "Standardized operating expense controls and internal auditing checklists for multi-branch operations.",
+          "Trained departmental heads on financial KPI tracking and variance management."
+        ],
+        "skills": [
+          "Business Process Optimization",
+          "Cost Variance Analysis",
+          "Feasibility Studies",
+          "KPI Dashboard Architecture",
+          "Executive Presentations"
+        ]
+      }
+    ]
+  },
+  "selectedWorkAndResearch": {
+    "title": "Selected Work & Research",
+    "items": [
+      {
+        "id": 1,
+        "title": "Financial Analysis & Valuation",
+        "context": "Commercial Banking Sector",
+        "objective": "Assess capital adequacy, balance-sheet resilience, and return on assets.",
+        "approach": "Discounted cash flow, scenario modeling, and comparable multiples valuation.",
+        "findings": "Robust margin defense through calibrated liability pricing and liquidity buffers.",
+        "outcome": "Comprehensive strategic valuation document presented for executive review.",
+        "actionText": "View Details",
+        "url": "#"
+      },
+      {
+        "id": 2,
+        "title": "Market Research & Analysis",
+        "context": "Emerging Securities & Capital Markets",
+        "objective": "Investigate secondary market volatility, turnover trends, and investor behavior.",
+        "approach": "Quantitative regression on macroeconomic indicators and institutional flow patterns.",
+        "findings": "Interest rate shifts directly correlate with retail participation cycles and risk appetites.",
+        "outcome": "Strategic research report providing actionable investment timing principles.",
+        "actionText": "View Details",
+        "url": "#"
+      },
+      {
+        "id": 3,
+        "title": "Strategic Business Analysis",
+        "context": "Corporate Financial Operations",
+        "objective": "Identify operational cost bottlenecks and design sustainable growth structures.",
+        "approach": "Process optimization mapping and departmental cost variance breakdown.",
+        "findings": "Identified high-impact cost containment leverage points across branch operations.",
+        "outcome": "Actionable 3-year transformation roadmap adopted by senior management.",
+        "actionText": "View Details",
+        "url": "#"
+      }
+    ]
+  },
+  "articlesAndInsights": {
+    "title": "Articles & Insights",
+    "items": [
+      {
+        "id": "art-1",
+        "category": "Banking & Financial Services",
+        "title": "Modernizing Banking Operations in Developing Capital Markets",
+        "summary": "How digital transformation and prudential regulation shape long-term institutional stability.",
+        "keyArgument": "Prudential governance must outpace digital adoption to prevent systemic liquidity volatility.",
+        "implications": "Empowers institutions to safeguard customer trust while expanding digital credit access.",
+        "actionText": "View More",
+        "url": "#"
+      },
+      {
+        "id": "art-2",
+        "category": "Capital Markets & Investment",
+        "title": "Market Efficiency and Valuation Dynamics in Emerging Stock Exchanges",
+        "summary": "Analyzing equity price discovery mechanisms under evolving monetary policy frameworks.",
+        "keyArgument": "Fundamental valuation remains the primary anchor against short-term speculative volatility.",
+        "implications": "Provides institutional and retail investors with disciplined asset allocation principles.",
+        "actionText": "View More",
+        "url": "#"
+      },
+      {
+        "id": "art-3",
+        "category": "Business Strategy & Management",
+        "title": "Strategic Resilience: Navigating Macroeconomic Transitions",
+        "summary": "Frameworks for leadership teams to maintain agility during systemic economic cycles.",
+        "keyArgument": "Disciplined execution and robust balance sheets separate enduring firms from fragile competitors.",
+        "implications": "Guides C-suite executives in synchronizing strategy, capital allocation, and talent.",
+        "actionText": "View More",
+        "url": "#"
+      }
+    ]
+  },
+  "researchInterests": {
+    "title": "Research Interests",
+    "items": [
+      "Banking sector performance",
+      "Capital market development",
+      "Financial inclusion",
+      "Corporate governance",
+      "Investment behavior",
+      "Stock-market efficiency",
+      "Risk management",
+      "Financial technology",
+      "Digital banking",
+      "Monetary & financial policy",
+      "Business strategy",
+      "Leadership & organizational performance",
+      "Economic & financial development"
+    ]
+  },
+  "education": {
+    "title": "Education",
+    "items": [
+      {
+        "degree": "Master of Business Studies (MBS)",
+        "institution": "Tribhuvan University (TU)",
+        "period": "Graduated with Distinction",
+        "field": "Finance, Capital Markets & Strategic Management"
+      },
+      {
+        "degree": "Bachelor of Business Studies (BBS)",
+        "institution": "Tribhuvan University (TU)",
+        "period": "Academic Excellence",
+        "field": "Accounting, Finance & Corporate Administration"
+      }
+    ]
+  },
+  "certifications": {
+    "title": "Certifications & Professional Development",
+    "items": [
+      "Professional Financial Analysis & Valuation Certification",
+      "Advanced Banking & Financial Institution Operations Training",
+      "Capital Markets, Securities & Portfolio Management Programs",
+      "Executive Leadership & Organizational Strategy Programs",
+      "Business Coaching & C-Suite Advisory Workshop",
+      "Financial Technology & Quantitative Risk Analytics Training",
+      "High-Level National & International Economic Seminars",
+      "Continuous Professional Development in Corporate Governance"
+    ]
+  },
+  "keyCompetencies": {
+    "title": "Key Competencies",
+    "categories": [
+      { "category": "Strategic", "skills": ["Strategy", "Planning", "Vision"] },
+      { "category": "Business", "skills": ["Growth", "Markets", "Clients"] },
+      { "category": "Communication", "skills": ["Stakeholder", "Presentation", "Clarity"] },
+      { "category": "Financial", "skills": ["Analysis", "Modelling", "Valuation"] },
+      { "category": "Analytical", "skills": ["Data", "Research", "Problem Solving"] },
+      { "category": "Governance", "skills": ["Compliance", "Ethics", "Risk"] },
+      { "category": "Leadership", "skills": ["People", "Teams", "Influence"] },
+      { "category": "Technical", "skills": ["IT", "Digital", "Innovation"] },
+      { "category": "Management", "skills": ["Execution", "Performance", "Change"] }
+    ]
+  },
+  "contact": {
+    "ctaTitle": "Let's Build a Better Tomorrow",
+    "ctaDescription": "Open to meaningful opportunities in banking, capital markets and strategic management.",
+    "ctaButtonText": "Get In Touch",
+    "cardTitle": "Contact Me",
+    "email": "keshabdattb66@gmail.com",
+    "phone": "+977 9865718024",
+    "location": "Koteshwor 32, Kathmandu, Nepal",
+    "linkedInUrl": "https://linkedin.com/in/keshabbhatt",
+    "linkedInDisplay": "linkedin.com/in/keshabbhatt",
+    "qrNotice": "Scan to view my LinkedIn Profile"
+  },
+  "footer": {
+    "tagline": "Finance | Strategy | Leadership",
+    "quote": "Better decisions. Stronger institutions. A more inclusive financial future.",
+    "links": [
+      { "id": "home", "label": "Home", "href": "#home" },
+      { "id": "about", "label": "About", "href": "#about" },
+      { "id": "contact", "label": "Contact", "href": "#contact" }
+    ],
+    "copyright": "2026 Keshab Datt Bhatt. All rights reserved."
+  }
+}

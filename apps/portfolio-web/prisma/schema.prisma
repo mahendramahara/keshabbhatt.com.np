@@ -1,0 +1,49 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "rhel-openssl-3.0.x"]
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Blog {
+  id             String    @id @default(uuid())
+  slug           String
+  title          String
+  excerpt        String
+  content        String
+  coverImage     String?   @map("cover_image")
+  category       String
+  tags           String[]  @default([])
+  isPublished    Boolean   @default(true) @map("is_published")
+  publishedAt    DateTime  @default(now()) @map("published_at")
+  updatedAt      DateTime  @updatedAt @map("updated_at")
+  locale         String    @default("en")
+  seoTitle       String?   @map("seo_title")
+  seoDescription String?   @map("seo_description")
+  canonicalUrl   String?   @map("canonical_url")
+  ogImage        String?   @map("og_image")
+  authorName     String    @default("Keshab Datt Bhatt") @map("author_name")
+  authorRole     String    @default("Management & Financial Sector Professional") @map("author_role")
+  authorAvatar   String?   @map("author_avatar")
+  viewCount      Int       @default(0) @map("view_count")
+  createdAt      DateTime  @default(now()) @map("created_at")
+
+  @@unique([slug, locale])
+  @@index([slug])
+  @@index([isPublished, locale, publishedAt(sort: Desc)])
+  @@index([category])
+  @@map("blogs")
+}
+
+model SystemKeepAlive {
+  id        String   @id @default(uuid())
+  pingedAt  DateTime @default(now()) @map("pinged_at")
+  source    String   @default("auto-cron")
+  status    String   @default("ok")
+
+  @@map("system_keep_alive")
+}

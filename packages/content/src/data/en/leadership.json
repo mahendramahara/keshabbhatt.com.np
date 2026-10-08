@@ -1,0 +1,16 @@
+{
+  "title": "Leadership Approach",
+  "summary": "I lead with clarity, set direction, build capable teams and make data-informed decisions. My leadership combines analytical thinking with people development to achieve sustainable results.",
+  "traits": [
+    { "id": "clarity", "title": "Strategic Clarity", "icon": "Compass" },
+    { "id": "accountability", "title": "Accountability", "icon": "CheckCircle2" },
+    { "id": "data-decisions", "title": "Data-Informed Decisions", "icon": "LineChart" },
+    { "id": "communication", "title": "Effective Communication", "icon": "MessageSquare" },
+    { "id": "team-dev", "title": "Team Development", "icon": "Users" },
+    { "id": "delegation", "title": "Delegation", "icon": "Share2" },
+    { "id": "performance", "title": "Performance Orientation", "icon": "Zap" },
+    { "id": "ethical-conduct", "title": "Ethical Conduct", "icon": "Scale" },
+    { "id": "adaptability", "title": "Adaptability", "icon": "Shuffle" },
+    { "id": "crisis-mgmt", "title": "Crisis Management", "icon": "ShieldAlert" }
+  ]
+}

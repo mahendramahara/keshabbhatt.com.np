@@ -1,0 +1,15 @@
+{
+  "title": "व्यवस्थापकीय क्षमताहरू",
+  "items": [
+    { "id": "strat-plan", "title": "रणनीतिक योजना", "description": "दृष्टिकोण तय गर्ने, दिशा निर्धारण गर्ने र स्रोत परिचालन गर्ने।", "icon": "Compass" },
+    { "id": "org-mgmt", "title": "संगठनात्मक व्यवस्थापन", "description": "प्रभावकारी संरचना र कार्यप्रणाली निर्माण।", "icon": "Layers" },
+    { "id": "fin-mgmt", "title": "वित्तीय व्यवस्थापन", "description": "पुँजीको उच्चतम सदुपयोग र वित्तीय सबलीकरण।", "icon": "Wallet" },
+    { "id": "perf-mgmt", "title": "कार्यसम्पादन व्यवस्थापन", "description": "मापन र उत्तरदायित्वमार्फत उत्कृष्ट नतिजा।", "icon": "Activity" },
+    { "id": "operations", "title": "सञ्चालन दक्षता", "description": "गुणस्तर र समयसापेक्ष कार्यक्षमता सुनिश्चितता।", "icon": "Settings" },
+    { "id": "biz-dev-cap", "title": "व्यापार विस्तार", "description": "नयाँ अवसरहरूको पहिचान र दिगो सम्बन्ध निर्माण।", "icon": "Globe" },
+    { "id": "hr-mgmt", "title": "मानव स्रोत व्यवस्थापन", "description": "प्रतिभा प्रस्फुटन र उच्च कार्यसम्पादन टोली विकास।", "icon": "UserCheck" },
+    { "id": "stakeholder-mgmt", "title": "सरोकारवाला व्यवस्थापन", "description": "पारस्परिक विश्वास र सहकार्य अभिवृद्धि।", "icon": "Handshake" },
+    { "id": "negotiation", "title": "वार्ता तथा समन्वय", "description": "सहमति निर्माण र विन-विन नतिजा।", "icon": "MessagesSquare" },
+    { "id": "change-mgmt", "title": "परिवर्तन व्यवस्थापन", "description": "नवप्रवर्तन र रूपान्तरणको नेतृत्व।", "icon": "RefreshCw" }
+  ]
+}

@@ -1,0 +1,223 @@
+{
+  "title": "Articles & Insights",
+  "subtitle": "Executive perspectives, financial analysis, and strategic commentary by Keshab Datt Bhatt.",
+  "viewAllText": "See All Articles by Myself",
+  "items": [
+    {
+      "id": "art-1",
+      "slug": "modernizing-banking-operations",
+      "category": "Banking & Financial Services",
+      "title": "Modernizing Banking Operations in Developing Capital Markets",
+      "summary": "How digital transformation and prudential regulation shape long-term institutional stability and liquidity defense.",
+      "keyArgument": "Prudential governance must outpace digital adoption to prevent systemic liquidity volatility.",
+      "implications": "Empowers institutions to safeguard customer trust while expanding digital credit access.",
+      "date": "March 2026",
+      "readTime": "5 min read",
+      "actionText": "Read Article",
+      "url": "/en/articles/modernizing-banking-operations",
+      "content": [
+        "In developing financial ecosystems, the modernization of commercial banking operations is no longer merely a technological upgrade—it is an existential strategic imperative. Rapid digital adoption among retail depositors has compressed transaction settlement cycles and heightened expectations for seamless service delivery.",
+        "However, operational speed without institutional prudence creates acute vulnerabilities. Asset-liability management (ALM) teams must navigate volatile liquidity swings exacerbated by instant digital transfers. Prudential governance structures, stress-tested capital buffers, and real-time treasury monitoring must be integrated directly into operational workflows.",
+        "Sustainable banking leaders recognize that trust remains the primary currency of financial intermediation. By harmonizing automated risk scoring with human executive oversight, institutions achieve operational agility while strictly preserving solvency and depositor security."
+      ]
+    },
+    {
+      "id": "art-2",
+      "slug": "market-efficiency-valuation-dynamics",
+      "category": "Capital Markets & Investment",
+      "title": "Market Efficiency and Valuation Dynamics in Emerging Stock Exchanges",
+      "summary": "Analyzing equity price discovery mechanisms under evolving monetary policy frameworks and retail participation.",
+      "keyArgument": "Fundamental valuation remains the primary anchor against short-term speculative volatility.",
+      "implications": "Provides institutional and retail investors with disciplined asset allocation principles.",
+      "date": "February 2026",
+      "readTime": "6 min read",
+      "actionText": "Read Article",
+      "url": "/en/articles/market-efficiency-valuation-dynamics",
+      "content": [
+        "Emerging stock exchanges frequently exhibit characteristics of semi-strong form inefficiency, where asset prices diverge from underlying fundamental intrinsic values due to information asymmetry and concentrated liquidity pools.",
+        "During phases of shifting monetary policy and changing policy rates, retail sentiment often drives irrational valuation multiples in high-beta equity counters. A rigorous analytical framework incorporating discounted cash flows (DCF), return on invested capital (ROIC), and economic moat analysis provides the essential safeguard against market irrationality.",
+        "Institutional investors who adhere to systematic valuation disciplines consistently outperform speculative market participants across multi-year macroeconomic cycles."
+      ]
+    },
+    {
+      "id": "art-3",
+      "slug": "strategic-resilience-macro-transitions",
+      "category": "Business Strategy & Management",
+      "title": "Strategic Resilience: Navigating Macroeconomic Transitions",
+      "summary": "Frameworks for leadership teams to maintain organizational agility and capital conservation during systemic cycles.",
+      "keyArgument": "Disciplined execution and robust balance sheets separate enduring firms from fragile competitors.",
+      "implications": "Guides C-suite executives in synchronizing strategy, capital allocation, and talent.",
+      "date": "February 2026",
+      "readTime": "4 min read",
+      "actionText": "Read Article",
+      "url": "/en/articles/strategic-resilience-macro-transitions",
+      "content": [
+        "Macroeconomic transitions—characterized by inflation fluctuations, currency adjustments, and shifting consumer demand—test the fundamental architecture of modern enterprises.",
+        "Strategic resilience requires a dual-track leadership mindset: protecting core cash-flow generators while aggressively reallocating underutilized resources toward high-margin growth vectors. Organizations with flexible cost structures and low debt leverage consistently seize counter-cyclical merger and market expansion opportunities.",
+        "Executive leadership must cultivate cultural adaptability across all operational tiers to translate high-level corporate vision into decisive frontline execution."
+      ]
+    },
+    {
+      "id": "art-4",
+      "slug": "prudential-risk-governance",
+      "category": "Corporate Governance & Risk",
+      "title": "Prudential Risk Governance and Capital Adequacy in Financial Institutions",
+      "summary": "Establishing resilient internal capital adequacy assessment processes (ICAAP) to mitigate systemic headwinds.",
+      "keyArgument": "Proactive stress-testing transforms compliance from a regulatory burden into a competitive moat.",
+      "implications": "Prevents credit impairment concentrations and secures credit rating stability.",
+      "date": "January 2026",
+      "readTime": "5 min read",
+      "actionText": "Read Article",
+      "url": "/en/articles/prudential-risk-governance",
+      "content": [
+        "In an interconnected financial landscape, credit, market, and operational risks cannot be managed in departmental silos. Comprehensive enterprise risk management (ERM) demands an integrated view of risk-weighted assets.",
+        "Forward-looking capital adequacy assessments require multi-scenario stress tests simulating liquidity contractions, interest rate spikes, and sector-specific loan default surges. Institutions that maintain surplus Tier-1 capital ratios enter economic downturns from a position of profound strength.",
+        "Boards of directors must maintain rigorous committee oversight, ensuring that executive compensation aligns with long-term risk-adjusted profitability rather than short-term balance-sheet growth."
+      ]
+    },
+    {
+      "id": "art-5",
+      "slug": "data-driven-investment-strategies",
+      "category": "Investment Analysis & Research",
+      "title": "Data-Driven Investment Analysis: Balancing Fundamentals and Liquidity",
+      "summary": "Integrating quantitative macro indicators with corporate earnings quality for disciplined portfolio construction.",
+      "keyArgument": "Quantitative rigor eliminates behavioral bias in portfolio selection and position sizing.",
+      "implications": "Enables asset managers to achieve higher Sharpe ratios across long investment horizons.",
+      "date": "January 2026",
+      "readTime": "5 min read",
+      "actionText": "Read Article",
+      "url": "/en/articles/data-driven-investment-strategies",
+      "content": [
+        "Traditional fundamental analysis is significantly enhanced when coupled with data-driven quantitative screening. Evaluating free cash flow yields, debt service coverage ratios (DSCR), and earnings persistence metrics provides objective filtration across hundreds of listed equities.",
+        "Liquidity profiling is equally vital: a fundamentally sound business whose shares trade in illiquid conditions poses significant exit risk for institutional asset managers. Integrating volume-weighted average price (VWAP) analysis into position allocation guarantees disciplined execution.",
+        "The synthesis of quantitative screening and qualitative business appraisal represents the pinnacle of modern investment management."
+      ]
+    },
+    {
+      "id": "art-6",
+      "slug": "corporate-governance-board-oversight",
+      "category": "Corporate Governance & Risk",
+      "title": "Corporate Governance and Board Oversight: The Bedrock of Shareholder Value",
+      "summary": "Why transparent board structures, independent audits, and ethical leadership protect long-term market valuations.",
+      "keyArgument": "Governance premiums directly lower corporate cost of capital in competitive financial markets.",
+      "implications": "Encourages international institutional investment and safeguards minority shareholder rights.",
+      "date": "December 2025",
+      "readTime": "4 min read",
+      "actionText": "Read Article",
+      "url": "/en/articles/corporate-governance-board-oversight",
+      "content": [
+        "Corporate governance is not a bureaucratic checkbox; it is the fundamental framework through which an organization protects its integrity, operational license, and investor capital.",
+        "Empirical evidence across regional stock exchanges demonstrates that firms with independent board oversight, transparent disclosure standards, and robust internal audit committees enjoy lower debt financing costs and sustained equity valuation premiums.",
+        "Ethical leadership at the board level establishes corporate culture. When executives are held strictly accountable to fiduciary responsibilities, systemic compliance failures are eliminated before they endanger organizational solvency."
+      ]
+    },
+    {
+      "id": "art-7",
+      "slug": "fintech-evolution-digital-credit",
+      "category": "Banking & Financial Services",
+      "title": "FinTech Evolution and the Future of Digital Credit Delivery",
+      "summary": "Reinventing micro and consumer lending through alternative credit scoring, API integrations, and instant underwriting.",
+      "keyArgument": "Alternative data credit evaluation unlocks unbanked potential without sacrificing portfolio quality.",
+      "implications": "Accelerates financial inclusion in underserved rural and peri-urban economic corridors.",
+      "date": "December 2025",
+      "readTime": "6 min read",
+      "actionText": "Read Article",
+      "url": "/en/articles/fintech-evolution-digital-credit",
+      "content": [
+        "The convergence of telecommunications, payment switches, and commercial banking has opened extraordinary horizons for digital credit delivery in developing economies.",
+        "Traditional collateral-heavy lending models systematically exclude entrepreneurial talent in the informal economy. By utilizing alternative data footprints—including digital transaction histories, utility payment records, and supply-chain invoices—financial institutions can accurately assess borrower creditworthiness.",
+        "The challenge for financial regulators is balancing frictionless digital access with robust consumer protection and responsible debt limits."
+      ]
+    },
+    {
+      "id": "art-8",
+      "slug": "interest-rate-dynamics-nepse",
+      "category": "Capital Markets & Investment",
+      "title": "Monetary Policy Transmission and Equity Cycles in Emerging Markets",
+      "summary": "Understanding the direct causal transmission mechanisms between central bank policy rates, banking liquidity, and stock market indices.",
+      "keyArgument": "Banking sector liquidity availability dictates secondary market transaction volumes more than earnings announcements.",
+      "implications": "Allows financial analysts to anticipate broader market turning points months in advance.",
+      "date": "November 2025",
+      "readTime": "5 min read",
+      "actionText": "Read Article",
+      "url": "/en/articles/interest-rate-dynamics-nepse",
+      "content": [
+        "In economies with developing capital markets, the transmission mechanism from central bank open market operations to secondary equity trading is exceptionally direct and rapid.",
+        "When interbank rates climb and credit-deposit ratios tighten, institutional liquidity recedes from capital market investments into risk-free fixed deposits. Conversely, liquidity easing triggers swift capital reallocation into dividend-yielding securities.",
+        "Investors who track credit-to-deposit trends, interbank lending rates, and treasury bill yields gain vital predictive foresight on equity market liquidity direction."
+      ]
+    },
+    {
+      "id": "art-9",
+      "slug": "sustainable-finance-esg-integration",
+      "category": "Business Strategy & Management",
+      "title": "Sustainable Finance: Integrating ESG Metrics into Credit Appraisals",
+      "summary": "Why environmental and social risk assessment is now an indispensable component of institutional credit underwriting.",
+      "keyArgument": "Climate and environmental risks directly translate into balance-sheet credit write-offs if neglected.",
+      "implications": "Aligns institutional portfolios with green bonds and multilateral climate financing facilities.",
+      "date": "November 2025",
+      "readTime": "5 min read",
+      "actionText": "Read Article",
+      "url": "/en/articles/sustainable-finance-esg-integration",
+      "content": [
+        "Sustainable finance has evolved from a progressive corporate social responsibility concept into a core financial risk evaluation discipline.",
+        "Financial institutions operating in ecologically vulnerable regions face tangible asset impairments from extreme weather disruptions, water table shifts, and regulatory carbon penalties. Credit officers must evaluate borrower environmental risk resilience with the same precision applied to financial debt service coverage ratios.",
+        "Institutions that develop verified green finance underwriting frameworks successfully attract concessional funding from international development finance institutions (DFIs)."
+      ]
+    },
+    {
+      "id": "art-10",
+      "slug": "executive-decision-making-under-uncertainty",
+      "category": "Business Strategy & Management",
+      "title": "Executive Decision-Making Under Volatility: An Analytical Playbook",
+      "summary": "How C-suite leaders overcome cognitive bias and analysis paralysis during fast-moving economic crises.",
+      "keyArgument": "Structured analytical decomposition turns complex ambiguities into manageable tactical bets.",
+      "implications": "Maintains team morale and operational momentum during corporate reorganizations.",
+      "date": "October 2025",
+      "readTime": "4 min read",
+      "actionText": "Read Article",
+      "url": "/en/articles/executive-decision-making-under-uncertainty",
+      "content": [
+        "During economic turbulence, leaders face conflicting signals, incomplete data, and high-stakes trade-offs. The natural human tendency is either impulsive reaction or paralyzed hesitation.",
+        "The analytical decision-making framework breaks ambiguous strategic challenges into empirical sub-components: identifying non-negotiables, modeling probability distributions, and establishing clear trigger milestones for contingency execution.",
+        "Clarity of strategic direction and transparent communication unite teams around shared purpose when operating environments become unpredictable."
+      ]
+    },
+    {
+      "id": "art-11",
+      "slug": "sme-capital-access-growth-catalysts",
+      "category": "Banking & Financial Services",
+      "title": "Catalyzing SME Financing: Structural Solutions for Financial Inclusion",
+      "summary": "Bridging the credit gap for small and medium enterprises through cash-flow lending and supply-chain financing.",
+      "keyArgument": "SMEs represent the true engine of national GDP growth, requiring specialized credit structures.",
+      "implications": "Expands productive employment while diversifying commercial bank loan books.",
+      "date": "October 2025",
+      "readTime": "5 min read",
+      "actionText": "Read Article",
+      "url": "/en/articles/sme-capital-access-growth-catalysts",
+      "content": [
+        "Small and medium enterprises (SMEs) generate over seventy percent of employment in developing nations, yet face the most severe structural credit rationing in commercial banking.",
+        "Overcoming this gap requires transitioning from traditional collateral-backed mortgage lending to cash-flow based revolving credit facilities. Supply-chain factoring and electronic invoice discounting enable emerging suppliers to monetize accounts receivable immediately.",
+        "Commercial banks that create dedicated SME underwriting units with accelerated turnaround times build enduring customer loyalty and highly diversified interest income."
+      ]
+    },
+    {
+      "id": "art-12",
+      "slug": "balance-sheet-optimization-commercial-banks",
+      "category": "Financial Valuation & Modeling",
+      "title": "Strategic Balance-Sheet Optimization in High-Cost Liquidity Environments",
+      "summary": "Treasury techniques for defending net interest margins (NIM) while preserving regulatory liquidity ratios.",
+      "keyArgument": "Disciplined liability pricing and duration matching safeguard profitability during monetary contractions.",
+      "implications": "Ensures sustainable return on equity (ROE) for financial institution shareholders.",
+      "date": "September 2025",
+      "readTime": "5 min read",
+      "actionText": "Read Article",
+      "url": "/en/articles/balance-sheet-optimization-commercial-banks",
+      "content": [
+        "In tight liquidity conditions, the bidding war for wholesale institutional deposits rapidly compresses net interest margins across the banking sector.",
+        "Balance sheet optimization requires active asset-liability duration matching. Treasury desks must optimize yield curves, deploy floating-rate loan contracts, and prioritize granular retail savings accounts over volatile high-cost institutional bulk deposits.",
+        "Banks that master balance sheet efficiency generate superior return on equity while comfortably meeting statutory liquidity and net stable funding ratio requirements."
+      ]
+    }
+  ]
+}

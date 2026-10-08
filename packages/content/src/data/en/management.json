@@ -1,0 +1,15 @@
+{
+  "title": "Management Capabilities",
+  "items": [
+    { "id": "strat-plan", "title": "Strategic Planning", "description": "Define vision, set direction and align resources.", "icon": "Compass" },
+    { "id": "org-mgmt", "title": "Organizational Management", "description": "Build effective structures and processes.", "icon": "Layers" },
+    { "id": "fin-mgmt", "title": "Financial Management", "description": "Optimize capital and performance.", "icon": "Wallet" },
+    { "id": "perf-mgmt", "title": "Performance Management", "description": "Drive results through measurement and accountability.", "icon": "Activity" },
+    { "id": "operations", "title": "Operations", "description": "Ensure efficiency and quality.", "icon": "Settings" },
+    { "id": "biz-dev-cap", "title": "Business Development", "description": "Identify opportunities and build relationships.", "icon": "Globe" },
+    { "id": "hr-mgmt", "title": "Human Resource Management", "description": "Develop talent and high-performing teams.", "icon": "UserCheck" },
+    { "id": "stakeholder-mgmt", "title": "Stakeholder Management", "description": "Engage and create mutual value.", "icon": "Handshake" },
+    { "id": "negotiation", "title": "Negotiation", "description": "Build consensus and win-win outcomes.", "icon": "MessagesSquare" },
+    { "id": "change-mgmt", "title": "Change Management", "description": "Lead transformation and embrace innovation.", "icon": "RefreshCw" }
+  ]
+}

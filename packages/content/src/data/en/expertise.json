@@ -1,0 +1,31 @@
+{
+  "areasOfExpertise": {
+    "sectionTitle": "Areas of Executive Expertise",
+    "items": [
+      { "id": "strategic-management", "title": "Strategic Management", "icon": "Target" },
+      { "id": "banking-services", "title": "Banking & Financial Services", "icon": "Landmark" },
+      { "id": "capital-markets", "title": "Capital Markets & Stock Market", "icon": "BarChart3" },
+      { "id": "financial-analysis", "title": "Financial Analysis", "icon": "FileSpreadsheet" },
+      { "id": "investment-analysis", "title": "Investment Analysis", "icon": "Coins" },
+      { "id": "business-development", "title": "Business Development", "icon": "Briefcase" },
+      { "id": "leadership-management", "title": "Leadership & Management", "icon": "Users" },
+      { "id": "risk-governance", "title": "Risk & Governance", "icon": "ShieldCheck" },
+      { "id": "data-thinking", "title": "Data & Analytical Thinking", "icon": "Binary" },
+      { "id": "corporate-advisory", "title": "Corporate Advisory & Consulting", "icon": "Handshake" }
+    ]
+  },
+  "professionalPhilosophy": {
+    "sectionTitle": "Professional Philosophy",
+    "items": [
+      { "id": 1, "text": "Evidence before assumption" },
+      { "id": 2, "text": "Long-term value over short-term appearance" },
+      { "id": 3, "text": "Analytical thinking before reaction" },
+      { "id": 4, "text": "Ethical leadership" },
+      { "id": 5, "text": "Accountability" },
+      { "id": 6, "text": "Continuous learning" },
+      { "id": 7, "text": "Disciplined decision-making" },
+      { "id": 8, "text": "Sustainable growth" },
+      { "id": 9, "text": "Stakeholder value" }
+    ]
+  }
+}

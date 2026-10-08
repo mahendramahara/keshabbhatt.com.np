@@ -1,0 +1,172 @@
+{
+  "title": "Professional Experience",
+  "subtitle": "Practical execution across computer systems, institutional teaching, and financial sector advisory.",
+  "foundationTitle": "Key Applied Experience & Training",
+  "foundationItems": [
+    {
+      "id": "found-1",
+      "title": "18-Month Computer Application Diploma",
+      "duration": "18 Months",
+      "category": "Office Productivity & Financial Computing",
+      "gainedTitle": "Gained from this experience:",
+      "gainedPoints": [
+        "Advanced spreadsheet financial modeling, analytical formulas, and pivot reporting in Excel.",
+        "Computerized accounting operations, journal entries, and financial ledger management in Tally ERP.",
+        "Database fundamentals, data structuring, and electronic documentation management.",
+        "Professional business reporting, document digitisation, and office workflow optimization."
+      ]
+    },
+    {
+      "id": "found-2",
+      "title": "5-Month Computer Hardware & Networking",
+      "duration": "5 Months",
+      "category": "IT Infrastructure & Systems Engineering",
+      "gainedTitle": "Gained from this experience:",
+      "gainedPoints": [
+        "Computer hardware diagnostics, component assembling, and system troubleshooting.",
+        "Local Area Network (LAN) configuration, IP subnetting, and router/switch setup.",
+        "Operating system installations, driver management, and system performance tuning.",
+        "Hardware preventative servicing, peripheral integration, and data security basics."
+      ]
+    },
+    {
+      "id": "found-3",
+      "title": "3 Years of Teaching Experience",
+      "duration": "3 Years",
+      "category": "Academic Instruction & Mentorship",
+      "gainedTitle": "Gained from this experience:",
+      "gainedPoints": [
+        "Public speaking, classroom instruction, and clear pedagogical communication.",
+        "Deconstructing complex business, financial, and analytical concepts for students.",
+        "Curriculum planning, student performance evaluation, and academic administration.",
+        "Student mentorship, leadership empathy, and structured teamwork coordination."
+      ]
+    }
+  ],
+  "institutionalTitle": "Sectoral & Institutional Experience",
+  "institutionalItems": [
+    {
+      "id": "inst-1",
+      "title": "Government & IRD Related Experience",
+      "organization": "Inland Revenue Department (IRD) & Tax Compliance",
+      "period": "Professional Exposure",
+      "scope": "Direct tax portal operations, PAN/VAT filing, and fiscal documentation.",
+      "gainedPoints": [
+        "Hands-on execution of e-TDS returns, VAT declarations, and PAN registration via the official IRD portal.",
+        "Coordination with government tax officers and statutory auditors for compliance closures.",
+        "Tax assessment calculations, deduction reconciliations, and regulatory compliance filing."
+      ],
+      "skills": ["IRD Portal", "PAN / VAT Filing", "e-TDS Reconciliation", "Tax Compliance", "Statutory Audit"]
+    },
+    {
+      "id": "inst-2",
+      "title": "Banking & Financial Advisory Institution",
+      "organization": "Banking & Financial Advisory",
+      "period": "01/2023 - Present",
+      "scope": "Institutional financial modeling, capital adequacy, and liquidity frameworks.",
+      "gainedPoints": [
+        "Formulated institutional financial models, capital adequacy assessments, and portfolio asset evaluations under NRB directives.",
+        "Designed strategic risk frameworks, liquidity profiling, and operational efficiency benchmarks for banking partners.",
+        "Collaborated directly with executive leadership on sustainable growth initiatives and corporate governance."
+      ],
+      "skills": ["Banking Operations", "Capital Adequacy (Basel III)", "Financial Modeling", "Risk Governance"]
+    },
+    {
+      "id": "inst-3",
+      "title": "Capital Markets & Securities Research",
+      "organization": "Securities & Investment Practice",
+      "period": "2021 - 2023",
+      "scope": "Secondary equity analytics, valuation multiples, and sectoral macroeconomic forecasting.",
+      "gainedPoints": [
+        "Conducted quantitative and qualitative valuation research on NEPSE-listed financial institutions, hydropower, and insurance corporations.",
+        "Synthesized macroeconomic indicators, inflation dynamics, and NRB monetary policy directives into quarterly reports.",
+        "Guided institutional investors on portfolio rebalancing and intrinsic equity valuation using DCF models."
+      ],
+      "skills": ["NEPSE Research", "DCF Valuation", "Equity Multiples", "Macroeconomic Analysis"]
+    },
+    {
+      "id": "inst-4",
+      "title": "Corporate Strategy & Business Advisory",
+      "organization": "Management Consulting Practice",
+      "period": "2019 - 2021",
+      "scope": "Operational cost diagnostics, turnaround strategies, and management dashboards.",
+      "gainedPoints": [
+        "Diagnosed organizational cost structures, departmental budget variance, and operational productivity bottlenecks.",
+        "Developed business turnaround strategies, key performance indicators (KPIs), and executive management dashboards.",
+        "Conducted market feasibility studies and financial viability evaluations for corporate expansion ventures."
+      ],
+      "skills": ["Turnaround Strategy", "Cost Optimization", "Process Mapping", "KPI Architecture"]
+    }
+  ],
+  "items": [
+    {
+      "id": "exp-1",
+      "organization": "Banking & Financial Advisory Institution",
+      "position": "Management & Financial Sector Associate",
+      "period": "01/2023 - Present",
+      "location": "Kathmandu, Nepal",
+      "roleType": "Executive Leadership Track",
+      "tagline": "Institutional capital modeling, balance sheet stress-testing, and executive strategy advisory.",
+      "responsibilities": [
+        "Formulate institutional financial models, capital adequacy assessments, and portfolio asset evaluations under NRB regulatory directives.",
+        "Design strategic risk frameworks, liquidity profiling, and operational efficiency benchmarks for banking partners.",
+        "Collaborate directly with executive leadership and boards on sustainable growth initiatives and corporate governance."
+      ],
+      "strategicImpact": "Structured strategic valuation models and liquidity frameworks adopted for organizational asset allocation and risk profiling.",
+      "leadershipScope": "Lead cross-functional research workstreams and mentored junior financial analysts on regulatory compliance and market forecasting.",
+      "skills": [
+        "Banking Operations",
+        "Capital Adequacy (Basel III / NRB)",
+        "Financial Modeling",
+        "Risk Governance",
+        "Strategic Planning"
+      ]
+    },
+    {
+      "id": "exp-2",
+      "organization": "Capital Markets & Securities Research Practice",
+      "position": "Financial Analyst & Market Researcher",
+      "period": "2021 - 2023",
+      "location": "Nepal",
+      "roleType": "Core Analytical Practice",
+      "tagline": "Secondary equity analytics, valuation multiples, and sectoral macroeconomic forecasting.",
+      "responsibilities": [
+        "Conducted quantitative and qualitative valuation research on NEPSE-listed financial institutions, hydropower, and insurance corporations.",
+        "Synthesized macroeconomic indicators, inflation dynamics, and NRB monetary policy directives into quarterly market intelligence reports.",
+        "Assisted institutional investors and advisory clients in portfolio rebalancing and intrinsic equity value assessments."
+      ],
+      "strategicImpact": "Delivered actionable valuation insights that protected client asset allocations during monetary tightening and market consolidation phases.",
+      "leadershipScope": "Spearheaded quarterly market review publications and guided research interns on financial statement forensics.",
+      "skills": [
+        "Equity Valuation",
+        "Discounted Cash Flow (DCF)",
+        "NEPSE Market Analysis",
+        "Macroeconomic Research",
+        "Financial Statement Forensics"
+      ]
+    },
+    {
+      "id": "exp-3",
+      "organization": "Corporate Strategy & Management Consulting Group",
+      "position": "Business Strategy & Operations Analyst",
+      "period": "2019 - 2021",
+      "location": "Nepal",
+      "roleType": "Advisory Practice",
+      "tagline": "Operational cost diagnostics, business process restructuring, and performance optimization.",
+      "responsibilities": [
+        "Diagnosed organizational cost structures, departmental budget variance, and operational productivity bottlenecks.",
+        "Developed business turnaround strategies, key performance indicators (KPIs), and executive management dashboards.",
+        "Conducted market feasibility studies and financial viability evaluations for corporate expansion ventures."
+      ],
+      "strategicImpact": "Identified operational cost containment opportunities resulting in measurable efficiency gains and streamlined departmental workflows.",
+      "leadershipScope": "Facilitated cross-departmental alignment workshops and presented cost optimization roadmaps to senior business executives.",
+      "skills": [
+        "Business Process Optimization",
+        "Cost Variance Analysis",
+        "Feasibility Studies",
+        "KPI Dashboard Architecture",
+        "Executive Presentations"
+      ]
+    }
+  ]
+}

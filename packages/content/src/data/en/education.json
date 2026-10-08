@@ -1,0 +1,44 @@
+{
+  "education": {
+    "title": "Education",
+    "items": [
+      {
+        "degree": "Master of Business Studies (MBS)",
+        "institution": "Tribhuvan University (TU)",
+        "period": "Graduated with Distinction",
+        "field": "Finance, Capital Markets & Strategic Management"
+      },
+      {
+        "degree": "Bachelor of Business Studies (BBS)",
+        "institution": "Tribhuvan University (TU)",
+        "period": "Academic Excellence",
+        "field": "Accounting, Finance & Corporate Administration"
+      },
+      {
+        "degree": "+2 / 12th Grade (Higher Secondary)",
+        "institution": "National Examinations Board (NEB / HSEB)",
+        "period": "First Division",
+        "field": "Management with Computer Science"
+      },
+      {
+        "degree": "School Leaving Certificate (SLC)",
+        "institution": "Government of Nepal Board",
+        "period": "First Division",
+        "field": "General Education with Computer Subject"
+      }
+    ]
+  },
+  "certifications": {
+    "title": "Certifications & Training",
+    "items": [
+      "Professional Financial Analysis & Valuation Certification",
+      "Advanced Banking & Financial Institution Operations Training",
+      "Capital Markets, Securities & Portfolio Management Programs",
+      "Executive Leadership & Organizational Strategy Programs",
+      "Business Coaching & C-Suite Advisory Workshop",
+      "Financial Technology & Quantitative Risk Analytics Training",
+      "High-Level National & International Economic Seminars",
+      "Continuous Professional Development in Corporate Governance"
+    ]
+  }
+}

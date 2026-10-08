@@ -1,0 +1,16 @@
+{
+  "title": "नेतृत्व शैली तथा दृष्टिकोण",
+  "summary": "म स्पष्टताका साथ नेतृत्व गर्छु, सही दिशा निर्धारण गर्छु, सक्षम टोली निर्माण गर्छु र तथ्यमा आधारित निर्णय लिन्छु। मेरो नेतृत्वले विश्लेषणात्मक सोच र मानव स्रोत विकासलाई संयोजन गर्दछ।",
+  "traits": [
+    { "id": "clarity", "title": "रणनीतिक स्पष्टता", "icon": "Compass" },
+    { "id": "accountability", "title": "जवाफदेहिता", "icon": "CheckCircle2" },
+    { "id": "data-decisions", "title": "तथ्यांकमा आधारित निर्णय", "icon": "LineChart" },
+    { "id": "communication", "title": "प्रभावकारी सञ्चार", "icon": "MessageSquare" },
+    { "id": "team-dev", "title": "टोली विकास", "icon": "Users" },
+    { "id": "delegation", "title": "सक्षम कार्य विभाजन", "icon": "Share2" },
+    { "id": "performance", "title": "नतिजामुखी कार्यसम्पादन", "icon": "Zap" },
+    { "id": "ethical-conduct", "title": "नैतिक आचरण", "icon": "Scale" },
+    { "id": "adaptability", "title": "अनुकूलनशीलता", "icon": "Shuffle" },
+    { "id": "crisis-mgmt", "title": "संकट व्यवस्थापन", "icon": "ShieldAlert" }
+  ]
+}

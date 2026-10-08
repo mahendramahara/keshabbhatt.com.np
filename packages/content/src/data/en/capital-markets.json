@@ -1,0 +1,49 @@
+{
+  "capitalMarketPerspective": {
+    "title": "Capital Market & Investment Perspective",
+    "columns": [
+      [
+        "Equity Markets",
+        "Securities Markets",
+        "Investment Analysis",
+        "Fundamental Analysis",
+        "Technical Awareness",
+        "Valuation",
+        "Market Cycles"
+      ],
+      [
+        "Investor Psychology",
+        "Risk-Return Trade-offs",
+        "Portfolio Diversification",
+        "Corporate Financial Performance",
+        "Macroeconomic Influences",
+        "Monetary & Financial Policy",
+        "Financial-Sector Development"
+      ]
+    ]
+  },
+  "analyticalFramework": {
+    "title": "Analytical Framework",
+    "steps": [
+      { "step": 1, "name": "Define" },
+      { "step": 2, "name": "Diagnose" },
+      { "step": 3, "name": "Analyze" },
+      { "step": 4, "name": "Evaluate" },
+      { "step": 5, "name": "Decide" },
+      { "step": 6, "name": "Execute" },
+      { "step": 7, "name": "Measure" },
+      { "step": 8, "name": "Improve" }
+    ],
+    "appliedToLeft": [
+      "Business Problems",
+      "Financial Decisions",
+      "Investment Questions",
+      "Market Opportunities"
+    ],
+    "appliedToRight": [
+      "Organizational Challenges",
+      "Strategic Decisions",
+      "Risk Assessment"
+    ]
+  }
+}

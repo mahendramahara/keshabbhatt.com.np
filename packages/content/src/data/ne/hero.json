@@ -1,0 +1,25 @@
+{
+  "quote": "वित्तीय अन्तर्दृष्टिलाई दिगो अवसरहरूमा रूपान्तरण गर्दै।",
+  "badge": "व्यवस्थापन तथा वित्तीय क्षेत्र विज्ञ",
+  "name": "केशव",
+  "nameHighlight": "दत्त भट्ट",
+  "subtitle": "बैंकिङ | पुँजी बजार | रणनीतिक व्यवस्थापन",
+  "description": "वित्त, रणनीतिक सोच र नेतृत्वमा सबल प्राज्ञिक आधारसहित बैंकिङ तथा वित्तीय क्षेत्रमा दिगो मूल्य अभिवृद्धि गर्न प्रतिबद्ध परिणाममुखी व्यावसायिक व्यक्तित्व।",
+  "tags": [
+    { "id": "banking", "label": "बैंकिङ तथा वित्तीय सेवा", "icon": "Landmark" },
+    { "id": "capital-markets", "label": "पुँजी बजार तथा लगानी", "icon": "TrendingUp" },
+    { "id": "strategy", "label": "रणनीतिक व्यवस्थापन", "icon": "Target" },
+    { "id": "biz-dev", "label": "व्यावसायिक विकास", "icon": "Briefcase" }
+  ],
+  "downloadCvText": "बायोडाटा डाउनलोड (CV)",
+  "cvUrl": "/cv/keshabbhatt.com.np.pdf",
+  "connectLinkedInText": "लिंक्डइनमा जोडिनुहोस्",
+  "linkedInUrl": "https://linkedin.com/in/keshabbhatt",
+  "contactQuickInfo": {
+    "location": "कोटेश्वर ३२, काठमाडौँ, नेपाल",
+    "email": "keshabdattb66@gmail.com",
+    "phone": "+977 9865718024",
+    "linkedIn": "linkedin.com/in/keshabbhatt"
+  },
+  "pillars": ["रणनीति", "पुँजी", "वृद्धि"]
+}

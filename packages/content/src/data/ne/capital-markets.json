@@ -1,0 +1,49 @@
+{
+  "capitalMarketPerspective": {
+    "title": "पुँजी बजार तथा लगानी दृष्टिकोण",
+    "columns": [
+      [
+        "इक्विटी बजार (Equity Markets)",
+        "धितोपत्र बजार (Securities)",
+        "लगानी विश्लेषण (Investment Analysis)",
+        "मौलिक विश्लेषण (Fundamental Analysis)",
+        "प्राविधिक विश्लेषण (Technical Awareness)",
+        "मूल्याङ्कन (Valuation)",
+        "बजार चक्र (Market Cycles)"
+      ],
+      [
+        "लगानीकर्ता मनोविज्ञान (Investor Psychology)",
+        "जोखिम र प्रतिफल सन्तुलन (Risk-Return)",
+        "पोर्टफोलियो विविधीकरण (Diversification)",
+        "संस्थागत वित्तीय कार्यसम्पादन",
+        "समष्टिगत आर्थिक प्रभाव (Macroeconomic Influences)",
+        "मौद्रिक तथा वित्तीय नीति",
+        "वित्तीय क्षेत्र विकास"
+      ]
+    ]
+  },
+  "analyticalFramework": {
+    "title": "विश्लेषणात्मक कार्यढाँचा (Analytical Framework)",
+    "steps": [
+      { "step": 1, "name": "परिभाषित" },
+      { "step": 2, "name": "निदान" },
+      { "step": 3, "name": "विश्लेषण" },
+      { "step": 4, "name": "मूल्याङ्कन" },
+      { "step": 5, "name": "निर्णय" },
+      { "step": 6, "name": "कार्यान्वयन" },
+      { "step": 7, "name": "मापन" },
+      { "step": 8, "name": "सुधार" }
+    ],
+    "appliedToLeft": [
+      "व्यावसायिक समस्याहरू",
+      "वित्तीय निर्णयहरू",
+      "लगानीका प्रश्नहरू",
+      "बजारका अवसरहरू"
+    ],
+    "appliedToRight": [
+      "संगठनात्मक चुनौतीहरू",
+      "रणनीतिक निर्णयहरू",
+      "जोखिम मूल्याङ्कन"
+    ]
+  }
+}

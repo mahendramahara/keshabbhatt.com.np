@@ -1,0 +1,58 @@
+{
+  "selectedWorkAndResearch": {
+    "title": "Selected Work & Research",
+    "items": [
+      {
+        "id": 1,
+        "title": "Financial Analysis & Valuation",
+        "context": "Commercial Banking Sector",
+        "objective": "Assess capital adequacy, balance-sheet resilience, and return on assets.",
+        "approach": "Discounted cash flow, scenario modeling, and comparable multiples valuation.",
+        "findings": "Robust margin defense through calibrated liability pricing and liquidity buffers.",
+        "outcome": "Comprehensive strategic valuation document presented for executive review.",
+        "actionText": "View Details",
+        "url": "#"
+      },
+      {
+        "id": 2,
+        "title": "Market Research & Analysis",
+        "context": "Emerging Securities & Capital Markets",
+        "objective": "Investigate secondary market volatility, turnover trends, and investor behavior.",
+        "approach": "Quantitative regression on macroeconomic indicators and institutional flow patterns.",
+        "findings": "Interest rate shifts directly correlate with retail participation cycles and risk appetites.",
+        "outcome": "Strategic research report providing actionable investment timing principles.",
+        "actionText": "View Details",
+        "url": "#"
+      },
+      {
+        "id": 3,
+        "title": "Strategic Business Analysis",
+        "context": "Corporate Financial Operations",
+        "objective": "Identify operational cost bottlenecks and design sustainable growth structures.",
+        "approach": "Process optimization mapping and departmental cost variance breakdown.",
+        "findings": "Identified high-impact cost containment leverage points across branch operations.",
+        "outcome": "Actionable 3-year transformation roadmap adopted by senior management.",
+        "actionText": "View Details",
+        "url": "#"
+      }
+    ]
+  },
+  "researchInterests": {
+    "title": "Research Interests",
+    "items": [
+      "Banking sector performance",
+      "Capital market development",
+      "Financial inclusion",
+      "Corporate governance",
+      "Investment behavior",
+      "Stock-market efficiency",
+      "Risk management",
+      "Financial technology",
+      "Digital banking",
+      "Monetary & financial policy",
+      "Business strategy",
+      "Leadership & organizational performance",
+      "Economic & financial development"
+    ]
+  }
+}

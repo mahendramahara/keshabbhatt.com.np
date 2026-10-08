@@ -1,0 +1,14 @@
+{
+  "title": "Key Competencies",
+  "categories": [
+    { "category": "Strategic", "skills": ["Strategy", "Planning", "Vision"] },
+    { "category": "Business", "skills": ["Growth", "Markets", "Clients"] },
+    { "category": "Communication", "skills": ["Stakeholder", "Presentation", "Clarity"] },
+    { "category": "Financial", "skills": ["Analysis", "Modelling", "Valuation"] },
+    { "category": "Analytical", "skills": ["Data", "Research", "Problem Solving"] },
+    { "category": "Governance", "skills": ["Compliance", "Ethics", "Risk"] },
+    { "category": "Leadership", "skills": ["People", "Teams", "Influence"] },
+    { "category": "Technical", "skills": ["IT", "Digital", "Innovation"] },
+    { "category": "Management", "skills": ["Execution", "Performance", "Change"] }
+  ]
+}

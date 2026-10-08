@@ -1,0 +1,18 @@
+{
+  "executiveProfile": {
+    "title": "Executive Profile",
+    "body": "I am Keshab Datt Bhatt, a management and financial professional with a strong academic foundation in business and a growing focus on banking, capital markets and strategic management. I bring analytical thinking, a problem-solving mindset and a long-term perspective to create value in financial institutions and the broader financial ecosystem. My goal is to contribute to organizational growth, deepen my expertise in financial markets and advance toward leadership roles in the banking and financial sector.",
+    "readMoreText": "Read More",
+    "readMoreUrl": "#about"
+  },
+  "valueProposition": {
+    "title": "Value Proposition",
+    "body": "I combine strategic thinking, financial analysis and market insight with strong leadership and communication skills to support better decisions, manage risk and unlock growth opportunities. I help organizations and teams turn data into insight, insight into strategy, and strategy into sustainable value.",
+    "tags": ["Strategy", "Analysis", "Leadership"],
+    "workflow": ["Insight", "Decision", "Impact"],
+    "featuredQuote": {
+      "text": "Building financial systems that create inclusive growth and long-term value.",
+      "author": "Keshab Datt Bhatt"
+    }
+  }
+}

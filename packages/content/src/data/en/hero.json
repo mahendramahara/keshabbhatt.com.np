@@ -1,0 +1,25 @@
+{
+  "quote": "Turning financial insight into sustainable opportunities.",
+  "badge": "MANAGEMENT & FINANCIAL SECTOR PROFESSIONAL",
+  "name": "Keshab",
+  "nameHighlight": "Datt Bhatt",
+  "subtitle": "Banking | Capital Markets | Strategic Management",
+  "description": "A results-oriented professional with a strong academic foundation in finance, strategic thinking and leadership, committed to creating value in the banking and financial sector.",
+  "tags": [
+    { "id": "banking", "label": "Banking & Financial Services", "icon": "Landmark" },
+    { "id": "capital-markets", "label": "Capital Markets & Investment", "icon": "TrendingUp" },
+    { "id": "strategy", "label": "Strategic Management", "icon": "Target" },
+    { "id": "biz-dev", "label": "Business Development", "icon": "Briefcase" }
+  ],
+  "downloadCvText": "Download CV",
+  "cvUrl": "/cv/keshabbhatt.com.np.pdf",
+  "connectLinkedInText": "Connect on LinkedIn",
+  "linkedInUrl": "https://linkedin.com/in/keshabbhatt",
+  "contactQuickInfo": {
+    "location": "Koteshwor 32, Kathmandu, Nepal",
+    "email": "keshabdattb66@gmail.com",
+    "phone": "+977 9865718024",
+    "linkedIn": "linkedin.com/in/keshabbhatt"
+  },
+  "pillars": ["STRATEGY", "CAPITAL", "GROWTH"]
+}
