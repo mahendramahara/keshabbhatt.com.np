@@ -51,7 +51,10 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "lint": "expo lint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "build:apk": "eas build --platform android --profile production",
+    "build:preview": "eas build --platform android --profile preview",
+    "build:aab": "eas build --platform android --profile production-aab"
   },
   "private": true
 }

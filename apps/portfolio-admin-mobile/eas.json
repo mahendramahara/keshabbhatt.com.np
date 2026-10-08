@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json.schemastore.org/eas-json.json",
+  "cli": {
+    "version": ">= 12.0.0",
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal"
+    },
+    "preview": {
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      },
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://keshabbhatt.com.np",
+        "EXPO_PUBLIC_WEB_URL": "https://keshabbhatt.com.np",
+        "EXPO_PUBLIC_BRAND_DOMAIN": "keshabbhatt.com.np",
+        "EXPO_ROUTER_DISABLE_RN_NAVIGATION_CHECK": "1"
+      }
+    },
+    "production": {
+      "android": {
+        "buildType": "apk"
+      },
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://keshabbhatt.com.np",
+        "EXPO_PUBLIC_WEB_URL": "https://keshabbhatt.com.np",
+        "EXPO_PUBLIC_BRAND_DOMAIN": "keshabbhatt.com.np",
+        "EXPO_ROUTER_DISABLE_RN_NAVIGATION_CHECK": "1"
+      }
+    },
+    "production-aab": {
+      "android": {
+        "buildType": "app-bundle"
+      },
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://keshabbhatt.com.np",
+        "EXPO_PUBLIC_WEB_URL": "https://keshabbhatt.com.np",
+        "EXPO_PUBLIC_BRAND_DOMAIN": "keshabbhatt.com.np",
+        "EXPO_ROUTER_DISABLE_RN_NAVIGATION_CHECK": "1"
+      }
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}

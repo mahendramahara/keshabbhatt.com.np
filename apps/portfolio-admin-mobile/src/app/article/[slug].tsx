@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { View, Alert, BackHandler } from "react-native";
+import { Alert, BackHandler } from "react-native";
 import { useLocalSearchParams, useRouter, useFocusEffect } from "expo-router";
 import type { BlogPost } from "@keshab-bhatt/types";
 
@@ -37,23 +37,32 @@ export default function ArticleDetailScreen() {
     }, [handleBack])
   );
 
-  const loadBlog = useCallback(async () => {
-    if (!slug) return;
-    setIsLoading(true);
-    setError(null);
-    try {
-      const data = await MobileApiService.getBlogBySlug(slug);
-      setBlog(data);
-    } catch (err: any) {
-      setError(err.message || "Failed to load article.");
-    } finally {
-      setIsLoading(false);
-    }
-  }, [slug]);
-
   useEffect(() => {
-    loadBlog();
-  }, [loadBlog]);
+    let ignore = false;
+    if (!slug) return;
+
+    const fetchDetail = async () => {
+      try {
+        const data = await MobileApiService.getBlogBySlug(slug);
+        if (!ignore) {
+          setBlog(data);
+        }
+      } catch (err: any) {
+        if (!ignore) {
+          setError(err.message || "Failed to load article.");
+        }
+      } finally {
+        if (!ignore) {
+          setIsLoading(false);
+        }
+      }
+    };
+
+    fetchDetail();
+    return () => {
+      ignore = true;
+    };
+  }, [slug]);
 
   const handleDelete = () => {
     if (!blog) return;

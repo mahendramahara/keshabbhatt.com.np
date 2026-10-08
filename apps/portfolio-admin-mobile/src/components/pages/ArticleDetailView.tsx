@@ -106,7 +106,7 @@ export function ArticleDetailView({
               Executive Abstract
             </Text>
             <Text className="text-xs text-slate-300 leading-relaxed italic">
-              "{blog.excerpt}"
+              &ldquo;{blog.excerpt}&rdquo;
             </Text>
           </View>
         ) : null}

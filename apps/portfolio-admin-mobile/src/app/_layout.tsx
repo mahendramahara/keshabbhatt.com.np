@@ -1,6 +1,4 @@
-import "react-native-gesture-handler";
 import "../global.css";
-
 import React, { useCallback, useEffect, useState } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Stack } from "expo-router";

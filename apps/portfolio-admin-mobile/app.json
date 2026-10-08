@@ -10,14 +10,21 @@
     "backgroundColor": "#040e24",
     "ios": {
       "icon": "./assets/images/icon.png",
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "np.com.keshabbhatt.portfolio",
+      "buildNumber": "1"
     },
     "android": {
+      "package": "np.com.keshabbhatt.portfolio",
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/android-icon-foreground.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png",
         "backgroundColor": "#061739"
       },
+      "permissions": [
+        "INTERNET"
+      ],
       "predictiveBackGestureEnabled": false
     },
     "web": {
@@ -38,6 +45,12 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "92484b09-b8de-41a1-85aa-9c9e282db196"
+      }
     }
   }
 }

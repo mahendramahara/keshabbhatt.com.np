@@ -13,7 +13,7 @@ interface CustomDrawerContentProps {
   navigation: DrawerContentComponentProps["navigation"];
 }
 
-const MENU_ITEMS: Array<{ key: TopTabKey; label: string; icon: keyof typeof Ionicons.glyphMap }> = [
+const MENU_ITEMS: { key: TopTabKey; label: string; icon: keyof typeof Ionicons.glyphMap }[] = [
   { key: "home", label: "Executive Dashboard", icon: "grid-outline" },
   { key: "articles", label: "Articles Repository", icon: "newspaper-outline" },
   { key: "create", label: "Publish New Article", icon: "add-circle-outline" },

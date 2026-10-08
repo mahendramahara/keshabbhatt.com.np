@@ -53,7 +53,7 @@ export function CreateArticlePageView({
           </Text>
         </View>
         <Text className="text-xs text-slate-400">
-          Draft executive articles and publish directly to Keshab Bhatt's portfolio via Supabase PostgreSQL.
+          Draft executive articles and publish directly to Keshab Bhatt&apos;s portfolio via Supabase PostgreSQL.
         </Text>
       </View>
 

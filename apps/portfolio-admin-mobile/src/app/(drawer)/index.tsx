@@ -33,7 +33,7 @@ export default function MainCmsScreen() {
   const { activeTab, setActiveTab } = useTab();
 
   const [blogs, setBlogs] = useState<BlogPost[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedLocale, setSelectedLocale] = useState<"all" | "en" | "ne">("all");
@@ -63,8 +63,26 @@ export default function MainCmsScreen() {
   }, []);
 
   useEffect(() => {
-    fetchBlogs();
-  }, [fetchBlogs]);
+    let ignore = false;
+    const load = async () => {
+      try {
+        const res = await MobileApiService.getBlogs({ limit: 50 });
+        if (!ignore) {
+          setBlogs(res.data);
+        }
+      } catch (err: any) {
+        console.warn("Error loading blogs:", err.message);
+      } finally {
+        if (!ignore) {
+          setIsLoading(false);
+        }
+      }
+    };
+    load();
+    return () => {
+      ignore = true;
+    };
+  }, []);
 
   useFocusEffect(
     useCallback(() => {

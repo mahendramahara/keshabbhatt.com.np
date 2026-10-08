@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { View, Alert, BackHandler } from "react-native";
+import { Alert, BackHandler } from "react-native";
 import { useLocalSearchParams, useRouter, useFocusEffect } from "expo-router";
 
 import { MobileApiService, MobileApiError } from "@/services";
@@ -48,31 +48,40 @@ export default function EditArticleScreen() {
     }, [handleCancel])
   );
 
-  const loadBlog = useCallback(async () => {
-    if (!slug) return;
-    setIsLoading(true);
-    setError(null);
-    try {
-      const data = await MobileApiService.getBlogBySlug(slug);
-      setFormData({
-        title: data.title || "",
-        slug: data.slug || "",
-        excerpt: data.excerpt || "",
-        content: data.content || "",
-        category: data.category || "",
-        locale: data.locale || "en",
-        tags: Array.isArray(data.tags) ? data.tags.join(", ") : "",
-      });
-    } catch (err: any) {
-      setError(err.message || "Failed to load article details.");
-    } finally {
-      setIsLoading(false);
-    }
-  }, [slug]);
-
   useEffect(() => {
-    loadBlog();
-  }, [loadBlog]);
+    let ignore = false;
+    if (!slug) return;
+
+    const fetchDetail = async () => {
+      try {
+        const data = await MobileApiService.getBlogBySlug(slug);
+        if (!ignore) {
+          setFormData({
+            title: data.title || "",
+            slug: data.slug || "",
+            excerpt: data.excerpt || "",
+            content: data.content || "",
+            category: data.category || "",
+            locale: data.locale || "en",
+            tags: Array.isArray(data.tags) ? data.tags.join(", ") : "",
+          });
+        }
+      } catch (err: any) {
+        if (!ignore) {
+          setError(err.message || "Failed to load article details.");
+        }
+      } finally {
+        if (!ignore) {
+          setIsLoading(false);
+        }
+      }
+    };
+
+    fetchDetail();
+    return () => {
+      ignore = true;
+    };
+  }, [slug]);
 
   const handleSubmit = async () => {
     const tagsArray = formData.tags

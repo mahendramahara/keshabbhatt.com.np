@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { Animated, Easing, Image, Text, View, useWindowDimensions } from "react-native";
 import { brandDomain } from "../../config/env";
 
@@ -15,9 +15,9 @@ interface BrandSplashProps {
 // Avatar size and background match the native splash so the handoff is seamless
 export function BrandSplash({ onFinish }: BrandSplashProps) {
   const { height } = useWindowDimensions();
-  const containerOpacity = useRef(new Animated.Value(1)).current;
-  const textOpacity = useRef(new Animated.Value(0)).current;
-  const textOffset = useRef(new Animated.Value(12)).current;
+  const [containerOpacity] = React.useState(() => new Animated.Value(1));
+  const [textOpacity] = React.useState(() => new Animated.Value(0));
+  const [textOffset] = React.useState(() => new Animated.Value(12));
 
   useEffect(() => {
     const animation = Animated.sequence([
