@@ -1,16 +1,6 @@
-import dns from "node:dns";
 import mongoose from "mongoose";
 import { Admin, BlogCategoryModel, BlogModel, CvModel, generateSlug } from "@/models";
 import { getArticlesData } from "@keshab-bhatt/content";
-
-// On Windows or local development, ensure Atlas SRV records resolve reliably without ISP DNS blocks
-if (process.platform === "win32" || process.env.NODE_ENV === "development") {
-  try {
-    dns.setServers(["8.8.8.8", "1.1.1.1", "8.8.4.4"]);
-  } catch {
-    // Graceful fallback in environments with restricted DNS config
-  }
-}
 
 declare global {
   var mongooseConnection: {
@@ -19,8 +9,22 @@ declare global {
   } | undefined;
 }
 
-const MONGODB_URI =
+function resolveMongoUri(uri: string): string {
+  if (uri && uri.startsWith("mongodb+srv://") && uri.includes("keshabbhatt-portfolio.wfwxft3.mongodb.net")) {
+    const match = uri.match(/^mongodb\+srv:\/\/([^@]+)@keshabbhatt-portfolio\.wfwxft3\.mongodb\.net\/?([^?]*)(\?.*)?$/);
+    if (match) {
+      const auth = match[1];
+      const db = match[2] || "portfolio_db";
+      return `mongodb://${auth}@ac-rl0fktc-shard-00-00.wfwxft3.mongodb.net:27017,ac-rl0fktc-shard-00-01.wfwxft3.mongodb.net:27017,ac-rl0fktc-shard-00-02.wfwxft3.mongodb.net:27017/${db}?ssl=true&replicaSet=atlas-scw68d-shard-0&authSource=admin&retryWrites=true&w=majority`;
+    }
+  }
+  return uri;
+}
+
+const RAW_MONGODB_URI =
   process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/keshabbhatt_portfolio";
+
+const MONGODB_URI = resolveMongoUri(RAW_MONGODB_URI);
 
 let cached = global.mongooseConnection;
 
@@ -194,25 +198,41 @@ let lastFailureTime = 0;
  * Connect to MongoDB with Mongoose and ensure initial seeding
  */
 export async function connectDatabase(): Promise<typeof mongoose> {
-  if (cached!.conn) {
+  // 1. If an active connection exists, reuse it immediately (readyState 1 = connected)
+  if (cached!.conn && mongoose.connection.readyState === 1) {
     return cached!.conn;
   }
 
-  // If failed recently (within 4 seconds), fail fast to enable immediate static fallback
+  // 2. If already in the process of connecting (readyState 2 = connecting), await existing promise
+  if (mongoose.connection.readyState === 2 && cached!.promise) {
+    cached!.conn = await cached!.promise;
+    return cached!.conn;
+  }
+
+  // 3. Fast failover if failed within cooldown window (4 seconds)
   if (Date.now() - lastFailureTime < 4000) {
     throw new Error("MongoDB recently failed to connect. Cooldown active for fallback.");
+  }
+
+  // Reset stale cache if previous connection dropped
+  if (mongoose.connection.readyState === 0 || mongoose.connection.readyState === 3) {
+    cached!.conn = null;
+    cached!.promise = null;
   }
 
   if (!cached!.promise) {
     const opts: mongoose.ConnectOptions = {
       bufferCommands: false,
       maxPoolSize: 10,
-      serverSelectionTimeoutMS: 8000,
-      connectTimeoutMS: 10000,
+      minPoolSize: 0,
+      serverSelectionTimeoutMS: 5000,
+      connectTimeoutMS: 8000,
+      socketTimeoutMS: 45000,
+      family: 4,
     };
 
     cached!.promise = mongoose.connect(MONGODB_URI, opts).then((mongooseInstance) => {
-      console.log(`[MongoDB] Connected successfully to ${MONGODB_URI.split("@").pop() || "database"}`);
+      console.log(`[MongoDB] Connected successfully to ${RAW_MONGODB_URI.split("@").pop()?.split("/")[0] || "database"}`);
       return mongooseInstance;
     });
   }
@@ -220,16 +240,19 @@ export async function connectDatabase(): Promise<typeof mongoose> {
   try {
     cached!.conn = await cached!.promise;
 
-    // Run seed once after establishing connection
+    // Run seed once in development or initial setup
     if (!isSeedRun) {
       isSeedRun = true;
-      seedInitialData().catch((err) => {
-        console.error("[Database] Initial seeding failed:", err);
-      });
+      if (process.env.NODE_ENV === "development") {
+        seedInitialData().catch((err) => {
+          console.warn("[Database] Initial seeding skipped/failed:", (err as Error).message);
+        });
+      }
     }
 
     return cached!.conn;
   } catch (e) {
+    cached!.conn = null;
     cached!.promise = null;
     lastFailureTime = Date.now();
     if (process.env.NEXT_PHASE !== "phase-production-build") {

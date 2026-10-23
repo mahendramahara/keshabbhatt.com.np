@@ -1,8 +1,8 @@
 {
   "expo": {
     "name": "Keshab Bhatt Admin",
-    "slug": "keshab-bhatt-admin-mobile",
-    "version": "1.2.1",
+    "slug": "keshab-bhatt-portfolio",
+    "version": "1.2.2",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "keshabbhatt",
@@ -12,11 +12,11 @@
       "icon": "./assets/images/icon.png",
       "supportsTablet": true,
       "bundleIdentifier": "np.com.keshabbhatt.portfolio",
-      "buildNumber": "3"
+      "buildNumber": "4"
     },
     "android": {
       "package": "np.com.keshabbhatt.portfolio",
-      "versionCode": 3,
+      "versionCode": 4,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/android-icon-foreground.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png",

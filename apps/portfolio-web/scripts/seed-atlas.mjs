@@ -1,4 +1,3 @@
-import dns from "node:dns";
 import path from "node:path";
 import fs from "node:fs";
 import { fileURLToPath } from "node:url";
@@ -8,16 +7,23 @@ import bcrypt from "bcryptjs";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Ensure Atlas SRV resolution
-try {
-  dns.setServers(["8.8.8.8", "1.1.1.1", "8.8.4.4"]);
-} catch {
-  // Ignore in restricted environments
+function resolveMongoUri(uri) {
+  if (uri && uri.startsWith("mongodb+srv://") && uri.includes("keshabbhatt-portfolio.wfwxft3.mongodb.net")) {
+    const match = uri.match(/^mongodb\+srv:\/\/([^@]+)@keshabbhatt-portfolio\.wfwxft3\.mongodb\.net\/?([^?]*)(\?.*)?$/);
+    if (match) {
+      const auth = match[1];
+      const db = match[2] || "portfolio_db";
+      return `mongodb://${auth}@ac-rl0fktc-shard-00-00.wfwxft3.mongodb.net:27017,ac-rl0fktc-shard-00-01.wfwxft3.mongodb.net:27017,ac-rl0fktc-shard-00-02.wfwxft3.mongodb.net:27017/${db}?ssl=true&replicaSet=atlas-scw68d-shard-0&authSource=admin&retryWrites=true&w=majority`;
+    }
+  }
+  return uri;
 }
 
-const MONGODB_URI =
+const RAW_MONGODB_URI =
   process.env.MONGODB_URI ||
   "mongodb+srv://digitalnepal1122_db_user:ubWANNACdxHCi8NF@keshabbhatt-portfolio.wfwxft3.mongodb.net/portfolio_db";
+
+const MONGODB_URI = resolveMongoUri(RAW_MONGODB_URI);
 
 // Load JSON article data
 const enArticlesPath = path.resolve(__dirname, "../../../packages/content/src/data/en/articles.json");
