@@ -1,7 +1,7 @@
 {
   "name": "@keshab-bhatt/mobile",
   "main": "expo-router/entry",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "dependencies": {
     "@expo/ui": "~58.0.22",
     "@expo/vector-icons": "^15.1.1",

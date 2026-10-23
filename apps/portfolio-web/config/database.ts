@@ -3,11 +3,13 @@ import mongoose from "mongoose";
 import { Admin, BlogCategoryModel, BlogModel, CvModel, generateSlug } from "@/models";
 import { getArticlesData } from "@keshab-bhatt/content";
 
-// Ensure Atlas SRV records resolve reliably across all networks and Windows local DNS
-try {
-  dns.setServers(["8.8.8.8", "1.1.1.1", "8.8.4.4"]);
-} catch {
-  // Graceful fallback in environments with restricted DNS config
+// On Windows or local development, ensure Atlas SRV records resolve reliably without ISP DNS blocks
+if (process.platform === "win32" || process.env.NODE_ENV === "development") {
+  try {
+    dns.setServers(["8.8.8.8", "1.1.1.1", "8.8.4.4"]);
+  } catch {
+    // Graceful fallback in environments with restricted DNS config
+  }
 }
 
 declare global {
