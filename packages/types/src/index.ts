@@ -318,3 +318,65 @@ export interface PaginationMeta {
   hasMore: boolean;
 }
 
+export type AdminRole = "superadmin" | "admin";
+
+export interface AdminUser {
+  id: string;
+  name: string;
+  email: string;
+  username: string;
+  role: AdminRole;
+  isActive: boolean;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface AdminLoginInput {
+  identifier: string; // username or email
+  password: string;
+}
+
+export interface AdminCreateInput {
+  name: string;
+  email: string;
+  username: string;
+  password: string;
+  role?: AdminRole;
+}
+
+export interface AdminUpdateInput {
+  name?: string;
+  email?: string;
+  username?: string;
+  password?: string;
+  role?: AdminRole;
+  isActive?: boolean;
+}
+
+export interface BlogCategory {
+  id: string;
+  name: string;
+  slug: string;
+  description?: string;
+  color?: string;
+  order?: number;
+  blogCount?: number;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface CreateBlogCategoryInput {
+  name: string;
+  slug?: string;
+  description?: string;
+  color?: string;
+  order?: number;
+}
+
+export type UpdateBlogCategoryInput = Partial<CreateBlogCategoryInput>;
+
+export interface AdminAuthSession {
+  admin: AdminUser;
+  token: string;
+}
+

@@ -1,27 +1,31 @@
-import type { BlogPost, CreateBlogInput, UpdateBlogInput, Locale } from "@keshab-bhatt/types";
-import type { Blog as PrismaBlog } from "@prisma/client";
+import mongoose, { Schema, Document, Model, Types } from "mongoose";
+import type { BlogPost, Locale } from "@keshab-bhatt/types";
 
-export interface BlogDatabaseRow {
-  id: string;
-  slug: string;
+export interface IBlogDocument extends Document {
   title: string;
+  slug: string;
   excerpt: string;
   content: string;
-  cover_image: string | null;
-  category: string;
+  coverImage?: string;
+  category: Types.ObjectId | string;
+  categoryName: string;
   tags: string[];
-  is_published: boolean;
-  published_at: string;
-  updated_at: string;
-  locale: "en" | "ne";
-  seo_title: string | null;
-  seo_description: string | null;
-  canonical_url: string | null;
-  og_image: string | null;
-  author_name: string;
-  author_role: string;
-  author_avatar: string | null;
-  view_count: number;
+  isPublished: boolean;
+  publishedAt: Date;
+  updatedAt: Date;
+  createdAt: Date;
+  locale: Locale;
+  seoTitle?: string;
+  seoDescription?: string;
+  canonicalUrl?: string;
+  ogImage?: string;
+  viewCount: number;
+  author: {
+    name: string;
+    role: string;
+    avatarUrl?: string;
+  };
+  toSafeObject(): BlogPost;
 }
 
 export function generateSlug(title: string): string {
@@ -34,114 +38,137 @@ export function generateSlug(title: string): string {
   return baseSlug || `article-${Date.now()}`;
 }
 
-export function mapPrismaBlogToBlogPost(blog: PrismaBlog): BlogPost {
-  return {
-    id: blog.id,
-    slug: blog.slug,
-    title: blog.title,
-    excerpt: blog.excerpt,
-    content: blog.content,
-    coverImage: blog.coverImage ?? undefined,
-    category: blog.category,
-    tags: Array.isArray(blog.tags) ? blog.tags : [],
-    isPublished: blog.isPublished,
-    publishedAt: blog.publishedAt.toISOString(),
-    updatedAt: blog.updatedAt.toISOString(),
-    locale: (blog.locale as Locale) || "en",
-    seoTitle: blog.seoTitle || blog.title,
-    seoDescription: blog.seoDescription || blog.excerpt,
-    canonicalUrl: blog.canonicalUrl ?? undefined,
-    ogImage: blog.ogImage ?? undefined,
-    viewCount: blog.viewCount,
-    author: {
-      name: blog.authorName,
-      role: blog.authorRole,
-      avatarUrl: blog.authorAvatar ?? undefined,
+const BlogSchema = new Schema<IBlogDocument>(
+  {
+    title: {
+      type: String,
+      required: [true, "Title is required"],
+      trim: true,
+      maxlength: 250,
     },
-  };
-}
-
-export function mapDatabaseRowToBlogPost(row: BlogDatabaseRow): BlogPost {
-  return {
-    id: row.id,
-    slug: row.slug,
-    title: row.title,
-    excerpt: row.excerpt,
-    content: row.content,
-    coverImage: row.cover_image ?? undefined,
-    category: row.category,
-    tags: Array.isArray(row.tags) ? row.tags : [],
-    isPublished: row.is_published,
-    publishedAt: row.published_at,
-    updatedAt: row.updated_at,
-    locale: (row.locale as Locale) || "en",
-    seoTitle: row.seo_title || row.title,
-    seoDescription: row.seo_description || row.excerpt,
-    canonicalUrl: row.canonical_url ?? undefined,
-    ogImage: row.og_image ?? undefined,
-    viewCount: row.view_count || 0,
-    author: {
-      name: row.author_name || "Keshab Datt Bhatt",
-      role: row.author_role || "Management & Financial Sector Professional",
-      avatarUrl: row.author_avatar ?? undefined,
+    slug: {
+      type: String,
+      required: [true, "Slug is required"],
+      trim: true,
+      lowercase: true,
+      index: true,
     },
-  };
-}
-
-export function mapCreateInputToDatabaseRow(
-  input: CreateBlogInput
-): Omit<BlogDatabaseRow, "id" | "updated_at" | "view_count"> {
-  const now = new Date().toISOString();
-  const slug = input.slug || generateSlug(input.title);
-
-  return {
-    slug,
-    title: input.title,
-    excerpt: input.excerpt,
-    content: input.content,
-    cover_image: input.coverImage || null,
-    category: input.category,
-    tags: input.tags || [],
-    is_published: input.isPublished ?? true,
-    published_at: input.publishedAt || now,
-    locale: (input.locale as "en" | "ne") || "en",
-    seo_title: input.seoTitle || input.title,
-    seo_description: input.seoDescription || input.excerpt,
-    canonical_url: input.canonicalUrl || null,
-    og_image: input.ogImage || null,
-    author_name: input.author?.name || "Keshab Datt Bhatt",
-    author_role: input.author?.role || "Management & Financial Sector Professional",
-    author_avatar: input.author?.avatarUrl || null,
-  };
-}
-
-export function mapUpdateInputToDatabaseRow(
-  input: UpdateBlogInput
-): Partial<BlogDatabaseRow> {
-  const payload: Partial<BlogDatabaseRow> = {
-    updated_at: new Date().toISOString(),
-  };
-
-  if (input.title !== undefined) payload.title = input.title;
-  if (input.slug !== undefined) payload.slug = input.slug;
-  if (input.excerpt !== undefined) payload.excerpt = input.excerpt;
-  if (input.content !== undefined) payload.content = input.content;
-  if (input.coverImage !== undefined) payload.cover_image = input.coverImage || null;
-  if (input.category !== undefined) payload.category = input.category;
-  if (input.tags !== undefined) payload.tags = input.tags;
-  if (input.isPublished !== undefined) payload.is_published = input.isPublished;
-  if (input.publishedAt !== undefined) payload.published_at = input.publishedAt;
-  if (input.locale !== undefined) payload.locale = input.locale as "en" | "ne";
-  if (input.seoTitle !== undefined) payload.seo_title = input.seoTitle || null;
-  if (input.seoDescription !== undefined) payload.seo_description = input.seoDescription || null;
-  if (input.canonicalUrl !== undefined) payload.canonical_url = input.canonicalUrl || null;
-  if (input.ogImage !== undefined) payload.og_image = input.ogImage || null;
-
-  if (input.author) {
-    if (input.author.name !== undefined) payload.author_name = input.author.name;
-    if (input.author.role !== undefined) payload.author_role = input.author.role;
-    if (input.author.avatarUrl !== undefined) payload.author_avatar = input.author.avatarUrl || null;
+    excerpt: {
+      type: String,
+      required: [true, "Excerpt is required"],
+      trim: true,
+      maxlength: 500,
+    },
+    content: {
+      type: String,
+      required: [true, "Content is required"],
+    },
+    coverImage: {
+      type: String,
+      default: null,
+    },
+    category: {
+      type: Schema.Types.ObjectId,
+      ref: "BlogCategory",
+      required: false,
+    },
+    categoryName: {
+      type: String,
+      required: [true, "Category name is required"],
+      trim: true,
+      index: true,
+    },
+    tags: {
+      type: [String],
+      default: [],
+    },
+    isPublished: {
+      type: Boolean,
+      default: true,
+      index: true,
+    },
+    publishedAt: {
+      type: Date,
+      default: Date.now,
+      index: true,
+    },
+    locale: {
+      type: String,
+      enum: ["en", "ne"],
+      default: "en",
+      index: true,
+    },
+    seoTitle: {
+      type: String,
+      maxlength: 150,
+    },
+    seoDescription: {
+      type: String,
+      maxlength: 300,
+    },
+    canonicalUrl: {
+      type: String,
+    },
+    ogImage: {
+      type: String,
+    },
+    viewCount: {
+      type: Number,
+      default: 0,
+    },
+    author: {
+      name: {
+        type: String,
+        default: "Keshab Datt Bhatt",
+      },
+      role: {
+        type: String,
+        default: "Management & Financial Sector Professional",
+      },
+      avatarUrl: {
+        type: String,
+        default: null,
+      },
+    },
+  },
+  {
+    timestamps: true,
   }
+);
 
-  return payload;
-}
+// Compound indexes
+BlogSchema.index({ slug: 1, locale: 1 }, { unique: true });
+BlogSchema.index({ isPublished: 1, locale: 1, publishedAt: -1 });
+
+BlogSchema.methods.toSafeObject = function (): BlogPost {
+  return {
+    id: this._id.toString(),
+    slug: this.slug,
+    title: this.title,
+    excerpt: this.excerpt,
+    content: this.content,
+    coverImage: this.coverImage || undefined,
+    category: this.categoryName,
+    tags: Array.isArray(this.tags) ? this.tags : [],
+    isPublished: this.isPublished,
+    publishedAt: this.publishedAt ? this.publishedAt.toISOString() : new Date().toISOString(),
+    updatedAt: this.updatedAt ? this.updatedAt.toISOString() : new Date().toISOString(),
+    locale: (this.locale as Locale) || "en",
+    seoTitle: this.seoTitle || this.title,
+    seoDescription: this.seoDescription || this.excerpt,
+    canonicalUrl: this.canonicalUrl || undefined,
+    ogImage: this.ogImage || undefined,
+    viewCount: this.viewCount || 0,
+    author: {
+      name: this.author?.name || "Keshab Datt Bhatt",
+      role: this.author?.role || "Management & Financial Sector Professional",
+      avatarUrl: this.author?.avatarUrl || undefined,
+    },
+  };
+};
+
+export const BlogModel: Model<IBlogDocument> =
+  (mongoose.models.Blog as Model<IBlogDocument>) ||
+  mongoose.model<IBlogDocument>("Blog", BlogSchema);
+
+export default BlogModel;

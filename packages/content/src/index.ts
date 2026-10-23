@@ -192,11 +192,12 @@ export function generateWebSiteJsonLd(locale: Locale = "en") {
 
 export function generateProfilePageJsonLd(locale: Locale = "en") {
   const seo = getSeoConfig(locale);
+  const pageUrl = locale === "ne" ? `${seo.siteUrl}/ne` : seo.siteUrl;
   return {
     "@context": "https://schema.org",
     "@type": "ProfilePage",
-    "@id": `${seo.siteUrl}/${locale}#webpage`,
-    url: `${seo.siteUrl}/${locale}`,
+    "@id": `${pageUrl}#webpage`,
+    url: pageUrl,
     name: seo.defaultTitle,
     isPartOf: {
       "@id": `${seo.siteUrl}/#website`
@@ -211,6 +212,7 @@ export function generateProfilePageJsonLd(locale: Locale = "en") {
 
 export function generateBreadcrumbJsonLd(locale: Locale = "en") {
   const seo = getSeoConfig(locale);
+  const pageUrl = locale === "ne" ? `${seo.siteUrl}/ne` : seo.siteUrl;
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -219,7 +221,7 @@ export function generateBreadcrumbJsonLd(locale: Locale = "en") {
         "@type": "ListItem",
         position: 1,
         name: locale === "ne" ? "गृहपृष्ठ" : "Home",
-        item: `${seo.siteUrl}/${locale}`
+        item: pageUrl
       }
     ]
   };

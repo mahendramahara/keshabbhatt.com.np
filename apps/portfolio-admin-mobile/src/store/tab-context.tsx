@@ -1,25 +1,26 @@
 import React, { createContext, useContext, useState } from "react";
-import type { TopTabKey } from "../components/ui/TopTabBar";
+
+export type AdminTab = "dashboard" | "articles" | "categories" | "admins" | "cv";
 
 interface TabContextValue {
-  activeTab: TopTabKey;
-  setActiveTab: (tab: TopTabKey) => void;
+  activeTab: AdminTab;
+  setActiveTab: (tab: AdminTab) => void;
 }
 
 const TabContext = createContext<TabContextValue>({
-  activeTab: "home",
+  activeTab: "dashboard",
   setActiveTab: () => {},
 });
 
-export function TabProvider({ children }: { children: React.ReactNode }) {
-  const [activeTab, setActiveTab] = useState<TopTabKey>("home");
+export const TabProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [activeTab, setActiveTab] = useState<AdminTab>("dashboard");
 
   return (
     <TabContext.Provider value={{ activeTab, setActiveTab }}>
       {children}
     </TabContext.Provider>
   );
-}
+};
 
 export function useTab(): TabContextValue {
   return useContext(TabContext);

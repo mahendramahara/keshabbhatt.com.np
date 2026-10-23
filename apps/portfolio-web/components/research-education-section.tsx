@@ -40,7 +40,7 @@ export function ResearchEducationSection({
             <span>Academic & Professional Foundation</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-bold text-[var(--text-main)] font-[family-name:var(--font-sans)] tracking-tight">
-            {educationTitle} & {researchTitle}
+            {educationTitle === "शिक्षा" ? "शैक्षिक योग्यता तथा अनुसन्धान आयामहरू" : "Academic Qualifications & Applied Research"}
           </h2>
           <p className="text-xs sm:text-sm text-[var(--text-muted)] max-w-3xl leading-relaxed">
             Rigorous university degrees, empirical research interests, and continuous executive certifications.

@@ -55,6 +55,8 @@ next-env.d.ts
 *.key
 *.cert
 *.crt
+cookies.txt
+cookies*.txt
 # Allow committing example template files
 !.env.example
 !.env.*.example

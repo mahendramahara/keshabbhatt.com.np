@@ -6,14 +6,12 @@ const HIGHLIGHTS_EN = [
   { label: ["Banking &", "Financial Services"], Icon: BankIcon },
   { label: ["Capital Markets", "& Investment"], Icon: ChartIcon },
   { label: ["Strategic", "Management"], Icon: BarsIcon },
-  { label: ["Business", "Development"], Icon: BulbIcon },
 ];
 
 const HIGHLIGHTS_NE = [
   { label: ["बैंकिङ तथा", "वित्तीय सेवा"], Icon: BankIcon },
   { label: ["पुँजी बजार", "तथा लगानी"], Icon: ChartIcon },
   { label: ["रणनीतिक", "व्यवस्थापन"], Icon: BarsIcon },
-  { label: ["व्यावसायिक", "विकास"], Icon: BulbIcon },
 ];
 
 const PILLARS_EN = ["Strategy", "Capital", "Growth"];
@@ -31,7 +29,7 @@ export interface HeroProps {
 }
 
 const circleButton =
-  "flex h-7 w-7 items-center justify-center rounded-full border border-white/40 bg-[#061739]/50 text-white/90 transition hover:border-[var(--accent-hero)] hover:text-[var(--accent-hero)]";
+  "flex h-6 w-6 xl:h-7 xl:w-7 items-center justify-center rounded-full border border-white/40 bg-[#061739]/50 text-white/90 transition hover:border-[var(--accent-hero)] hover:text-[var(--accent-hero)]";
 
 export function Hero({
   data,
@@ -107,42 +105,72 @@ export function Hero({
             height={760}
             priority
             loading="eager"
-            className="relative z-10 h-[340px] w-auto object-contain object-bottom drop-shadow-[0_10px_30px_rgba(0,0,0,0.45)] sm:h-[400px] lg:ml-6 lg:h-[360px] xl:ml-24 xl:h-[450px]"
+            className="relative z-10 h-[340px] w-auto object-contain object-bottom drop-shadow-[0_10px_30px_rgba(0,0,0,0.45)] sm:h-[400px] lg:ml-8 lg:h-[360px] xl:ml-24 xl:h-[450px] [mask-image:linear-gradient(to_bottom,black_80%,transparent_100%)] lg:[mask-image:none]"
           />
+
+          {/* Mobile Portrait Base Divider Line: Slowly thick in center, tapering to left and right */}
+          <div
+            className="absolute bottom-0 left-1/2 z-20 flex w-full -translate-x-1/2 items-center justify-center px-6 lg:hidden pointer-events-none"
+            aria-hidden="true"
+          >
+            <svg
+              viewBox="0 0 320 6"
+              className="h-1.5 w-full max-w-[260px] overflow-visible text-[var(--accent-hero)]"
+              fill="none"
+            >
+              <defs>
+                <linearGradient id="mobileHeroLineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="currentColor" stopOpacity="0" />
+                  <stop offset="25%" stopColor="currentColor" stopOpacity="0.4" />
+                  <stop offset="50%" stopColor="currentColor" stopOpacity="1" />
+                  <stop offset="75%" stopColor="currentColor" stopOpacity="0.4" />
+                  <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
+                </linearGradient>
+              </defs>
+              <path
+                d="M 10 3 Q 160 0 310 3 Q 160 6 10 3 Z"
+                fill="url(#mobileHeroLineGrad)"
+                className="drop-shadow-[0_0_8px_currentColor]"
+              />
+            </svg>
+          </div>
         </div>
 
-        <div className="flex flex-col justify-center py-8 lg:py-10 lg:px-6">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-white/80 drop-shadow">
+        {/* Column 2: Name, Designation, 3 Core Domain Highlights, Actions */}
+        <div className="flex flex-col justify-center py-7 sm:py-8 lg:py-8 lg:px-4 xl:py-10 xl:px-6">
+          <p className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.14em] text-white/80 drop-shadow">
             {badge}
           </p>
 
-          <h1 className="mt-2 text-[40px] font-bold leading-[1.05] tracking-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)] sm:text-5xl lg:text-[44px] xl:text-[56px]">
+          <h1 className="mt-1.5 text-[34px] font-bold leading-[1.05] tracking-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)] sm:text-5xl lg:text-[40px] xl:text-[48px] 2xl:text-[54px]">
             {name} <span className="text-[var(--accent-hero)]">{nameHighlight}</span>
+            <span className="sr-only"> - {isNepali ? "व्यावसायिक तथा वित्तीय सल्लाहकार" : "Business & Finance Consultant Nepal"}</span>
           </h1>
 
-          <p className="mt-3 text-base font-medium text-white/95 sm:text-lg">
+          <p className="mt-2 text-sm sm:text-base font-medium text-white/95 xl:text-[17px]">
             {subtitleParts.map((part, index) => (
               <React.Fragment key={part}>
-                {index > 0 && <span className="mx-2 text-white/50">|</span>}
+                {index > 0 && <span className="mx-1.5 sm:mx-2 text-white/50">|</span>}
                 {part}
               </React.Fragment>
             ))}
           </p>
 
-          <p className="mt-4 max-w-md text-[13.5px] leading-relaxed text-white/85 drop-shadow">
+          <p className="mt-3 max-w-lg text-[13px] leading-relaxed text-white/85 drop-shadow xl:text-[13.5px]">
             {description}
           </p>
 
-          <ul className="mt-5 grid w-full grid-cols-2 gap-x-4 gap-y-3 sm:flex sm:justify-between sm:gap-0">
+          {/* 3 Core Domain Highlights (Banking, Capital Markets, Strategic Management) */}
+          <ul className="mt-4 grid w-full grid-cols-3 gap-x-2 sm:flex sm:items-center sm:justify-between sm:gap-0 max-w-xl">
             {highlights.map(({ label, Icon }, index) => (
               <li
                 key={label.join(" ")}
-                className={`flex items-center gap-2 ${
-                  index > 0 ? "sm:border-l sm:border-white/25 sm:pl-3" : ""
-                } ${index < highlights.length - 1 ? "sm:pr-3" : ""}`}
+                className={`flex items-center gap-1.5 sm:gap-2 ${
+                  index > 0 ? "border-l border-white/20 pl-2 sm:pl-3 lg:pl-3 xl:pl-4" : ""
+                } ${index < highlights.length - 1 ? "pr-2 sm:pr-3 lg:pr-3 xl:pr-4" : ""}`}
               >
-                <Icon className="h-6 w-6 shrink-0 text-[var(--accent-hero)]" />
-                <span className="whitespace-nowrap text-[11px] leading-tight text-white/90">
+                <Icon className="h-4 w-4 sm:h-5 sm:w-5 shrink-0 text-[var(--accent-hero)]" />
+                <span className="whitespace-nowrap text-[10px] sm:text-[11px] lg:text-[11px] xl:text-[11.5px] leading-tight text-white/90">
                   {label[0]}
                   <br />
                   {label[1]}
@@ -151,36 +179,37 @@ export function Hero({
             ))}
           </ul>
 
-          <div className="mt-6 flex flex-wrap items-center gap-2.5">
+          {/* Action Buttons & Contact Icons */}
+          <div className="mt-5 flex flex-wrap items-center gap-2 xl:gap-2.5">
             <a
               href={activeCvUrl}
               download="keshabbhatt.com.np.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-[13px] font-semibold btn-executive-primary"
+              className="inline-flex items-center gap-1.5 rounded-lg px-3.5 py-2.5 text-[12px] font-semibold btn-executive-primary sm:text-[12.5px] xl:px-4 xl:text-[13px]"
             >
-              <DownloadIcon className="h-4 w-4" />
+              <DownloadIcon className="h-3.5 w-3.5 xl:h-4 xl:w-4" />
               {downloadText}
             </a>
             <a
               href={activeLinkedinUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg border border-white/60 bg-[#061739]/40 px-4 py-2.5 text-[13px] font-semibold text-white backdrop-blur-sm transition hover:border-[var(--accent-hero)] hover:text-[var(--accent-hero)]"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-white/60 bg-[#061739]/40 px-3.5 py-2.5 text-[12px] font-semibold text-white backdrop-blur-sm transition hover:border-[var(--accent-hero)] hover:text-[var(--accent-hero)] sm:text-[12.5px] xl:px-4 xl:text-[13px]"
             >
-              <LinkedInIcon className="h-4 w-4" />
+              <LinkedInIcon className="h-3.5 w-3.5 xl:h-4 xl:w-4" />
               {connectText}
             </a>
 
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-1 sm:gap-1.5">
               <a href={`mailto:${activeEmail}`} aria-label="Email" className={circleButton}>
-                <MailIcon className="h-3.5 w-3.5" />
+                <MailIcon className="h-3 w-3 xl:h-3.5 xl:w-3.5" />
               </a>
               <a href={`tel:${activePhone.replace(/\s/g, "")}`} aria-label="Phone" className={circleButton}>
-                <PhoneIcon className="h-3.5 w-3.5" />
+                <PhoneIcon className="h-3 w-3 xl:h-3.5 xl:w-3.5" />
               </a>
               <a href="#contact" aria-label="Location" className={circleButton}>
-                <PinIcon className="h-3.5 w-3.5" />
+                <PinIcon className="h-3 w-3 xl:h-3.5 xl:w-3.5" />
               </a>
               <a
                 href={activeLinkedinUrl}
@@ -189,32 +218,33 @@ export function Hero({
                 aria-label="LinkedIn"
                 className={circleButton}
               >
-                <LinkedInIcon className="h-3.5 w-3.5" />
+                <LinkedInIcon className="h-3 w-3 xl:h-3.5 xl:w-3.5" />
               </a>
             </div>
           </div>
         </div>
 
-        <div className="flex flex-col justify-between border-t border-white/25 py-6 lg:my-10 lg:border-l lg:border-t-0 lg:py-0 lg:pl-8">
-          <ul className="flex flex-1 flex-col justify-center gap-5">
+        {/* Column 3: Quick Contact List & Executive Pillars */}
+        <div className="flex flex-col justify-between border-t border-white/25 py-5 sm:py-6 lg:my-8 lg:border-l lg:border-t-0 lg:py-0 lg:pl-5 xl:my-10 xl:pl-7">
+          <ul className="flex flex-1 flex-col justify-center gap-3.5 lg:gap-3 xl:gap-4.5">
             {contacts.map(({ Icon, text, href }) => (
-              <li key={text} className="flex items-center gap-3">
-                <Icon className="h-5 w-5 shrink-0 text-[var(--accent-hero)]" />
+              <li key={text} className="flex items-center gap-2.5 xl:gap-3">
+                <Icon className="h-4 w-4 xl:h-4.5 xl:w-4.5 shrink-0 text-[var(--accent-hero)]" />
                 {href ? (
                   <a
                     href={href}
-                    className="break-all text-[13px] text-white/95 transition hover:text-[var(--accent-hero)]"
+                    className="break-all text-[12px] xl:text-[13px] text-white/95 transition hover:text-[var(--accent-hero)]"
                   >
                     {text}
                   </a>
                 ) : (
-                  <span className="text-[13px] text-white/95">{text}</span>
+                  <span className="text-[12px] xl:text-[13px] text-white/95">{text}</span>
                 )}
               </li>
             ))}
           </ul>
 
-          <p className="mt-6 text-right font-display text-[11px] font-semibold uppercase leading-[1.55] tracking-[0.3em] text-[var(--accent-hero)] lg:text-sm">
+          <p className="mt-4 text-right font-display text-[10px] font-semibold uppercase leading-[1.5] tracking-[0.25em] text-[var(--accent-hero)] xl:text-[11px] xl:tracking-[0.3em] 2xl:text-sm">
             {pillars.map((pillar) => (
               <span key={pillar} className="block">
                 {pillar}
@@ -261,14 +291,6 @@ function BarsIcon({ className }: { className?: string }) {
   return (
     <svg {...base} className={className}>
       <path d="M4 20V12M10 20V6M16 20v-9M22 20H2" />
-    </svg>
-  );
-}
-
-function BulbIcon({ className }: { className?: string }) {
-  return (
-    <svg {...base} className={className}>
-      <path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.500 10.900c.700.600 1 1.300 1 2.100h5c0-.800.300-1.500 1-2.100A6 6 0 0 0 12 3Z" />
     </svg>
   );
 }

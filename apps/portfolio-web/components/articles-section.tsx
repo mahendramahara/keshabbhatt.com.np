@@ -1,9 +1,8 @@
-"use client";
-
-import React, { useRef } from "react";
+import React from "react";
 import Link from "next/link";
-import { Edit3, ChevronLeft, ChevronRight, ArrowRight, Clock, Calendar, Sparkles } from "lucide-react";
+import { Edit3, ArrowRight, Clock, Calendar, Sparkles, BookOpen } from "lucide-react";
 import type { ArticlePreviewItem, Locale } from "@keshab-bhatt/types";
+import { ArticlesScrollControls } from "./articles-scroll-controls";
 
 interface ArticlesSectionProps {
   title?: string;
@@ -20,16 +19,8 @@ export function ArticlesSection({
   items,
   locale = "en",
 }: ArticlesSectionProps) {
-  const scrollRef = useRef<HTMLDivElement>(null);
-
   const displayItems = items.slice(0, 9);
-
-  const scroll = (direction: "left" | "right") => {
-    if (scrollRef.current) {
-      const scrollAmount = direction === "left" ? -380 : 380;
-      scrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
-    }
-  };
+  const containerId = "featured-articles-scroller";
 
   return (
     <section id="articles" className="py-7 sm:py-9 bg-[var(--bg-app)] border-b border-[var(--border-subtle)]">
@@ -50,45 +41,42 @@ export function ArticlesSection({
             </div>
           </div>
 
-          <div className="flex items-center gap-2 self-end sm:self-auto">
-            <span className="text-xs font-semibold text-[var(--text-muted)] mr-2 hidden sm:inline-block">
-              {displayItems.length} Featured Articles
-            </span>
-            <button
-              type="button"
-              onClick={() => scroll("left")}
-              aria-label="Scroll left"
-              className="p-2 rounded-lg border border-[var(--border-card)] bg-[var(--bg-card)] text-[var(--text-main)] hover:border-[var(--accent-gold)] hover:text-[var(--accent-gold)] transition-colors shadow-2xs cursor-pointer"
-            >
-              <ChevronLeft className="w-4 h-4" />
-            </button>
-            <button
-              type="button"
-              onClick={() => scroll("right")}
-              aria-label="Scroll right"
-              className="p-2 rounded-lg border border-[var(--border-card)] bg-[var(--bg-card)] text-[var(--text-main)] hover:border-[var(--accent-gold)] hover:text-[var(--accent-gold)] transition-colors shadow-2xs cursor-pointer"
-            >
-              <ChevronRight className="w-4 h-4" />
-            </button>
-          </div>
+          {displayItems.length > 0 && (
+            <ArticlesScrollControls containerId={containerId} totalCount={displayItems.length} />
+          )}
         </div>
 
-        <div
-          ref={scrollRef}
-          tabIndex={0}
-          aria-label="Horizontal list of articles"
-          className="flex gap-5 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-3 pt-1 focus:outline-none"
-          style={{ scrollbarWidth: "thin" }}
-        >
+        {displayItems.length === 0 ? (
+          <div className="p-8 sm:p-12 text-center rounded-2xl bg-[var(--bg-card)] border border-[var(--border-card)] space-y-3">
+            <div className="w-12 h-12 rounded-full bg-[var(--accent-gold)]/10 text-[var(--accent-gold)] flex items-center justify-center mx-auto">
+              <BookOpen className="w-6 h-6" />
+            </div>
+            <h3 className="text-base font-bold text-[var(--text-main)]">
+              {locale === "ne" ? "कुनै प्रकाशित लेख उपलब्ध छैन" : "No Published Articles Available"}
+            </h3>
+            <p className="text-xs sm:text-sm text-[var(--text-muted)] max-w-md mx-auto">
+              {locale === "ne"
+                ? "यस भाषाका लागि नयाँ लेख तथा अनुसन्धान प्रकाशित भएपछि यहाँ देखिनेछ।"
+                : "Executive insights and research articles in this language will appear here once published."}
+            </p>
+          </div>
+        ) : (
+          <div
+            id={containerId}
+            tabIndex={0}
+            aria-label="Horizontal list of articles"
+            className="flex gap-5 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-3 pt-1 focus:outline-none"
+            style={{ scrollbarWidth: "thin" }}
+          >
           {displayItems.map((art, index) => {
             const articleUrl = art.slug
-              ? `/${locale}/articles/${art.slug}`
-              : `/${locale}/articles`;
+              ? (locale === "ne" ? `/ne/articles/${art.slug}` : `/articles/${art.slug}`)
+              : (locale === "ne" ? "/ne/articles" : "/articles");
 
             return (
               <div
                 key={art.id || index}
-                className="w-[320px] sm:w-[370px] shrink-0 snap-start p-5 sm:p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-card)] border-t-[3px] border-t-[var(--accent-gold)] shadow-xs hover:shadow-md transition-all flex flex-col justify-between space-y-4"
+                className="w-[320px] sm:w-[370px] shrink-0 snap-start p-5 sm:p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-card)] shadow-xs hover:shadow-md hover:border-[var(--accent-gold)]/40 transition-all duration-200 flex flex-col justify-between space-y-4 group"
               >
                 <div className="space-y-3">
                   <div className="flex items-center justify-between gap-2 text-[11px]">
@@ -101,10 +89,10 @@ export function ArticlesSection({
                     </span>
                   </div>
 
-                  <h3 className="text-sm sm:text-[15px] font-bold text-[var(--text-main)] leading-snug line-clamp-2">
+                  <h3 className="text-sm sm:text-[15px] font-bold text-[var(--text-main)] leading-snug line-clamp-2 group-hover:text-[var(--accent-gold)] transition-colors">
                     <Link
                       href={articleUrl}
-                      className="hover:text-[var(--accent-gold)] transition-colors"
+                      className="transition-colors"
                     >
                       {art.title}
                     </Link>
@@ -114,7 +102,7 @@ export function ArticlesSection({
                     {art.summary}
                   </p>
 
-                  {art.keyArgument && (
+                  {art.keyArgument && art.keyArgument.trim() !== art.summary.trim() && (
                     <div className="p-3 rounded-xl bg-[var(--bg-card-inner)] border border-[var(--border-subtle)] space-y-1">
                       <div className="text-[10px] font-bold uppercase tracking-wider text-[var(--accent-gold)] flex items-center gap-1">
                         <Sparkles className="w-3 h-3" />
@@ -136,25 +124,30 @@ export function ArticlesSection({
                   <Link
                     href={articleUrl}
                     className="inline-flex items-center gap-1 text-xs font-bold text-[var(--accent-gold)] hover:underline"
+                    aria-label={`${art.actionText || "Read"}: ${art.title}`}
                   >
                     <span>{art.actionText || (locale === "ne" ? "थप हेर्नुहोस्" : "See More")}</span>
+                    <span className="sr-only">: {art.title}</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>
               </div>
             );
           })}
-        </div>
+          </div>
+        )}
 
-        <div className="pt-4 flex justify-center">
-          <Link
-            href={`/${locale}/articles`}
-            className="inline-flex items-center gap-2.5 px-6 py-3 rounded-xl btn-executive-primary font-semibold text-xs sm:text-sm shadow-md transition-all active:scale-[0.98]"
-          >
-            <span>{viewAllText}</span>
-            <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
+        {displayItems.length > 0 && (
+          <div className="pt-4 flex justify-center">
+            <Link
+              href={locale === "ne" ? "/ne/articles" : "/articles"}
+              className="inline-flex items-center gap-2.5 px-6 py-3 rounded-xl btn-executive-primary font-semibold text-xs sm:text-sm shadow-md transition-all active:scale-[0.98]"
+            >
+              <span>{viewAllText}</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        )}
 
       </div>
     </section>

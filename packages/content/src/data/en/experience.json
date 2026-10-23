@@ -5,15 +5,15 @@
   "foundationItems": [
     {
       "id": "found-1",
-      "title": "18-Month Computer Application Diploma",
-      "duration": "18 Months",
+      "title": "6-Month Computer Operating Course",
+      "duration": "6 Months",
       "category": "Office Productivity & Financial Computing",
       "gainedTitle": "Gained from this experience:",
       "gainedPoints": [
-        "Advanced spreadsheet financial modeling, analytical formulas, and pivot reporting in Excel.",
-        "Computerized accounting operations, journal entries, and financial ledger management in Tally ERP.",
-        "Database fundamentals, data structuring, and electronic documentation management.",
-        "Professional business reporting, document digitisation, and office workflow optimization."
+        "Spreadsheet financial modeling, analytical formulas, and structured reporting in Microsoft Excel.",
+        "Computerized accounting operations, journal entries, and ledger management in Tally ERP.",
+        "Computer operating systems, file structures, and electronic documentation management.",
+        "Professional business reporting, document digitisation, and office productivity workflows."
       ]
     },
     {

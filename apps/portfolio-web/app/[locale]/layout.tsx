@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import type { Locale } from "@keshab-bhatt/types";
 import { getSeoConfig } from "@keshab-bhatt/content";
 
+import { getSeoAlternates } from "@/lib/seo";
+
 export function generateStaticParams() {
   return [{ locale: "en" }, { locale: "ne" }];
 }
@@ -17,24 +19,22 @@ export async function generateMetadata({
     return {};
   }
 
-  const seo = getSeoConfig(locale as Locale);
+  const currentLocale = locale as Locale;
+  const seo = getSeoConfig(currentLocale);
+  const alternates = getSeoAlternates("", currentLocale);
 
   return {
-    title: seo.defaultTitle,
+    title: {
+      absolute: seo.defaultTitle,
+    },
     description: seo.description,
     keywords: seo.keywords,
-    alternates: {
-      canonical: `/${locale}`,
-      languages: {
-        "en-US": "/en",
-        "ne-NP": "/ne",
-      },
-    },
+    alternates,
     openGraph: {
       title: seo.openGraph.title,
       description: seo.openGraph.description,
-      url: seo.openGraph.url,
-      locale: seo.openGraph.locale,
+      url: alternates.canonical,
+      locale: currentLocale === "ne" ? "ne_NP" : "en_US",
       type: "website",
       siteName: seo.openGraph.siteName,
       images: seo.openGraph.images,

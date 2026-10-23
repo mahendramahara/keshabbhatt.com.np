@@ -31,7 +31,7 @@ export function WorkResearchSection({
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
-          {items.map((work, index) => {
+          {items.map((work) => {
             const formattedIndex = work.id < 10 ? `0${work.id}` : `${work.id}`;
 
             return (

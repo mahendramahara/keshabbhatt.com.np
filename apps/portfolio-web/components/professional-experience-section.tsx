@@ -1,6 +1,4 @@
-"use client";
-
-import React, { useRef } from "react";
+import React from "react";
 import {
   Briefcase,
   Laptop,
@@ -10,14 +8,13 @@ import {
   Landmark,
   TrendingUp,
   CheckCircle2,
-  ChevronLeft,
-  ChevronRight,
 } from "lucide-react";
 import type {
   FoundationExperienceItem,
   InstitutionalExperienceItem,
   ProfessionalExperienceItem,
 } from "@keshab-bhatt/types";
+import { ExperienceScrollControls } from "./experience-scroll-controls";
 
 interface ProfessionalExperienceSectionProps {
   title?: string;
@@ -35,19 +32,7 @@ export function ProfessionalExperienceSection({
   foundationItems = [],
   institutionalItems = [],
 }: ProfessionalExperienceSectionProps) {
-  const scrollRef = useRef<HTMLDivElement | null>(null);
-
-  const scrollLeft = () => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: -320, behavior: "smooth" });
-    }
-  };
-
-  const scrollRight = () => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: 320, behavior: "smooth" });
-    }
-  };
+  const containerId = "institutional-experience-track";
 
   const getFoundationIcon = (index: number) => {
     switch (index) {
@@ -134,27 +119,10 @@ export function ProfessionalExperienceSection({
         </div>
 
         <div className="relative pt-1">
-          <div className="flex items-center justify-end gap-1.5 pb-2">
-            <button
-              type="button"
-              onClick={scrollLeft}
-              aria-label="Scroll left"
-              className="p-1.5 rounded-md bg-[var(--bg-card)] border border-[var(--border-card)] text-[var(--text-muted)] hover:text-[var(--text-main)] hover:border-[var(--accent-gold)] transition-colors shadow-2xs"
-            >
-              <ChevronLeft className="w-3.5 h-3.5" />
-            </button>
-            <button
-              type="button"
-              onClick={scrollRight}
-              aria-label="Scroll right"
-              className="p-1.5 rounded-md bg-[var(--bg-card)] border border-[var(--border-card)] text-[var(--text-muted)] hover:text-[var(--text-main)] hover:border-[var(--accent-gold)] transition-colors shadow-2xs"
-            >
-              <ChevronRight className="w-3.5 h-3.5" />
-            </button>
-          </div>
+          <ExperienceScrollControls containerId={containerId} />
 
           <div
-            ref={scrollRef}
+            id={containerId}
             className="flex gap-3 sm:gap-4 overflow-x-auto pb-2 snap-x snap-mandatory scroll-smooth no-scrollbar"
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >

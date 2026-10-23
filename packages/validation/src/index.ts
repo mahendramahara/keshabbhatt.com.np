@@ -88,3 +88,69 @@ export const blogQuerySchema = z.object({
 
 export type BlogQuerySchemaInput = z.infer<typeof blogQuerySchema>;
 
+export const adminLoginSchema = z.object({
+  identifier: z
+    .string({ required_error: "Username or email is required" })
+    .min(3, "Identifier must be at least 3 characters")
+    .trim(),
+  password: z
+    .string({ required_error: "Password is required" })
+    .min(6, "Password must be at least 6 characters"),
+});
+
+export type AdminLoginSchemaInput = z.infer<typeof adminLoginSchema>;
+
+export const createAdminSchema = z.object({
+  name: z
+    .string({ required_error: "Name is required" })
+    .min(2, "Name must be at least 2 characters")
+    .max(100),
+  email: z
+    .string({ required_error: "Email is required" })
+    .email("Must be a valid email address")
+    .trim()
+    .toLowerCase(),
+  username: z
+    .string({ required_error: "Username is required" })
+    .min(3, "Username must be at least 3 characters")
+    .max(50)
+    .regex(/^[a-zA-Z0-9_-]+$/, "Username can only contain letters, numbers, underscores and hyphens")
+    .trim()
+    .toLowerCase(),
+  password: z
+    .string({ required_error: "Password is required" })
+    .min(6, "Password must be at least 6 characters"),
+  role: z.enum(["superadmin", "admin"]).default("admin"),
+});
+
+export type CreateAdminSchemaInput = z.infer<typeof createAdminSchema>;
+
+export const updateAdminSchema = z.object({
+  name: z.string().min(2).max(100).optional(),
+  email: z.string().email().trim().toLowerCase().optional(),
+  username: z.string().min(3).max(50).regex(/^[a-zA-Z0-9_-]+$/).trim().toLowerCase().optional(),
+  password: z.string().min(6).optional().or(z.literal("")),
+  role: z.enum(["superadmin", "admin"]).optional(),
+  isActive: z.boolean().optional(),
+});
+
+export type UpdateAdminSchemaInput = z.infer<typeof updateAdminSchema>;
+
+export const blogCategorySchema = z.object({
+  name: z
+    .string({ required_error: "Category name is required" })
+    .min(2, "Category name must be at least 2 characters")
+    .max(100)
+    .trim(),
+  slug: z
+    .string()
+    .min(2, "Slug must be at least 2 characters")
+    .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "Slug must be lowercase alphanumeric with hyphens")
+    .optional(),
+  description: z.string().max(500).optional().or(z.literal("")),
+  color: z.string().max(50).optional().or(z.literal("")),
+  order: z.coerce.number().int().default(0),
+});
+
+export type BlogCategorySchemaInput = z.infer<typeof blogCategorySchema>;
+

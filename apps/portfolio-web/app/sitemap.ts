@@ -7,13 +7,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const staticRoutes: MetadataRoute.Sitemap = [
     {
-      url: `${baseUrl}/en`,
+      url: `${baseUrl}`,
       lastModified: currentDate,
       changeFrequency: "weekly",
       priority: 1.0,
       alternates: {
         languages: {
-          en: `${baseUrl}/en`,
+          en: `${baseUrl}`,
           ne: `${baseUrl}/ne`,
         },
       },
@@ -25,19 +25,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.9,
       alternates: {
         languages: {
-          en: `${baseUrl}/en`,
+          en: `${baseUrl}`,
           ne: `${baseUrl}/ne`,
         },
       },
     },
     {
-      url: `${baseUrl}/en/articles`,
+      url: `${baseUrl}/articles`,
       lastModified: currentDate,
       changeFrequency: "daily",
       priority: 0.9,
       alternates: {
         languages: {
-          en: `${baseUrl}/en/articles`,
+          en: `${baseUrl}/articles`,
           ne: `${baseUrl}/ne/articles`,
         },
       },
@@ -49,7 +49,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.85,
       alternates: {
         languages: {
-          en: `${baseUrl}/en/articles`,
+          en: `${baseUrl}/articles`,
           ne: `${baseUrl}/ne/articles`,
         },
       },
@@ -65,85 +65,28 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     if (blogs && blogs.length > 0) {
       articleRoutes = blogs.map((blog) => {
-        const locale = blog.locale || "en";
-        const otherLocale = locale === "en" ? "ne" : "en";
+        const isNe = blog.locale === "ne";
+        const enArticleUrl = `${baseUrl}/articles/${blog.slug}`;
+        const neArticleUrl = `${baseUrl}/ne/articles/${blog.slug}`;
+        const currentUrl = isNe ? neArticleUrl : enArticleUrl;
+
         return {
-          url: `${baseUrl}/${locale}/articles/${blog.slug}`,
+          url: currentUrl,
           lastModified: blog.updatedAt || currentDate,
           changeFrequency: "weekly" as const,
           priority: 0.8,
           alternates: {
             languages: {
-              [locale]: `${baseUrl}/${locale}/articles/${blog.slug}`,
-              [otherLocale]: `${baseUrl}/${otherLocale}/articles/${blog.slug}`,
+              en: enArticleUrl,
+              ne: neArticleUrl,
             },
           },
         };
       });
-    } else {
-      const { getArticlesData } = await import("@keshab-bhatt/content");
-      const staticArticles = getArticlesData("en").items;
-      articleRoutes = staticArticles.flatMap((art) => [
-        {
-          url: `${baseUrl}/en/articles/${art.slug}`,
-          lastModified: currentDate,
-          changeFrequency: "weekly" as const,
-          priority: 0.8,
-          alternates: {
-            languages: {
-              en: `${baseUrl}/en/articles/${art.slug}`,
-              ne: `${baseUrl}/ne/articles/${art.slug}`,
-            },
-          },
-        },
-        {
-          url: `${baseUrl}/ne/articles/${art.slug}`,
-          lastModified: currentDate,
-          changeFrequency: "weekly" as const,
-          priority: 0.8,
-          alternates: {
-            languages: {
-              en: `${baseUrl}/en/articles/${art.slug}`,
-              ne: `${baseUrl}/ne/articles/${art.slug}`,
-            },
-          },
-        },
-      ]);
     }
   } catch (error) {
-    console.warn("Sitemap: loading dynamic blogs failed, falling back to static articles:", error);
-    try {
-      const { getArticlesData } = await import("@keshab-bhatt/content");
-      const staticArticles = getArticlesData("en").items;
-      articleRoutes = staticArticles.flatMap((art) => [
-        {
-          url: `${baseUrl}/en/articles/${art.slug}`,
-          lastModified: currentDate,
-          changeFrequency: "weekly" as const,
-          priority: 0.8,
-          alternates: {
-            languages: {
-              en: `${baseUrl}/en/articles/${art.slug}`,
-              ne: `${baseUrl}/ne/articles/${art.slug}`,
-            },
-          },
-        },
-        {
-          url: `${baseUrl}/ne/articles/${art.slug}`,
-          lastModified: currentDate,
-          changeFrequency: "weekly" as const,
-          priority: 0.8,
-          alternates: {
-            languages: {
-              en: `${baseUrl}/en/articles/${art.slug}`,
-              ne: `${baseUrl}/ne/articles/${art.slug}`,
-            },
-          },
-        },
-      ]);
-    } catch {
-      // Fallback only static core routes
-    }
+    console.warn("Sitemap: loading dynamic blogs failed:", error);
+    articleRoutes = [];
   }
 
   return [...staticRoutes, ...articleRoutes];

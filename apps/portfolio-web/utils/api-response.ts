@@ -123,3 +123,20 @@ export function apiValidationError(details: unknown): NextResponse<ApiErrorRespo
 export function apiNotFound(entityName = "Resource"): NextResponse<ApiErrorResponse> {
   return apiError(`${entityName} not found.`, "NOT_FOUND", 404);
 }
+
+export function apiUnauthorized(message = "Unauthorized access."): NextResponse<ApiErrorResponse> {
+  return apiError(message, "UNAUTHORIZED", 401);
+}
+
+export function apiForbidden(message = "Access forbidden."): NextResponse<ApiErrorResponse> {
+  return apiError(message, "FORBIDDEN", 403);
+}
+
+export function apiBadRequest(message = "Bad request."): NextResponse<ApiErrorResponse> {
+  return apiError(message, "BAD_REQUEST", 400);
+}
+
+export function apiInternalError(message = "Internal server error."): NextResponse<ApiErrorResponse> {
+  return apiError(message, "INTERNAL_SERVER_ERROR", 500);
+}
+

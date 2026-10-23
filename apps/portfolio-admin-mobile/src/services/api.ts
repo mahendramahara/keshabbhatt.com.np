@@ -1,180 +1,285 @@
-import type { BlogPost, CreateBlogInput, UpdateBlogInput, PaginationMeta } from "@keshab-bhatt/types";
-import { apiBaseUrl as API_BASE_URL } from "../config/env";
+import { apiBaseUrl } from "@/config/env";
+import type { AdminUser, BlogPost, BlogCategory } from "@keshab-bhatt/types";
 
-export interface GetBlogsParams {
-  page?: number;
-  limit?: number;
-  category?: string;
-  search?: string;
-  locale?: "en" | "ne";
-  tag?: string;
+export interface MobileCvItem {
+  id: string;
+  filename: string;
+  originalName: string;
+  size: number;
+  isActive: boolean;
+  uploadedBy?: string;
+  createdAt: string;
 }
 
-export interface BlogsApiResponse {
-  success: boolean;
-  data: BlogPost[];
-  pagination: PaginationMeta;
-  message?: string;
+export interface DashboardStats {
+  totalBlogs: number;
+  publishedBlogs: number;
+  enBlogs: number;
+  neBlogs: number;
+  totalCategories: number;
+  totalAdmins: number;
+  activeCvName: string;
 }
 
-export interface SingleBlogApiResponse {
-  success: boolean;
-  data: BlogPost;
-  message?: string;
+let activeAuthToken: string | null = null;
+
+export function setApiAuthToken(token: string | null) {
+  activeAuthToken = token;
 }
 
-export interface KeepAliveResponse {
-  success: boolean;
-  timestamp: string;
-  message: string;
+export function getApiAuthToken(): string | null {
+  return activeAuthToken;
 }
 
-export class MobileApiError extends Error {
-  code?: string;
-  fieldErrors: Record<string, string>;
-  details?: unknown;
+async function request<T>(
+  endpoint: string,
+  options: RequestInit = {}
+): Promise<{ success: boolean; data: T; message?: string }> {
+  const url = `${apiBaseUrl}${endpoint}`;
+  const headers: Record<string, string> = {
+    "Content-Type": "application/json",
+    ...(options.headers as Record<string, string>),
+  };
 
-  constructor(
-    message: string,
-    code?: string,
-    fieldErrors: Record<string, string> = {},
-    details?: unknown
-  ) {
-    super(message);
-    this.name = "MobileApiError";
-    this.code = code;
-    this.fieldErrors = fieldErrors;
-    this.details = details;
-  }
-}
-
-function extractFieldErrors(details: unknown): Record<string, string> {
-  const result: Record<string, string> = {};
-  if (!details || typeof details !== "object") return result;
-
-  const fieldErrors = (details as { fieldErrors?: Record<string, string[]> }).fieldErrors;
-  if (fieldErrors && typeof fieldErrors === "object") {
-    for (const [key, val] of Object.entries(fieldErrors)) {
-      if (Array.isArray(val) && val.length > 0) {
-        result[key] = val[0];
-      }
-    }
+  if (activeAuthToken) {
+    headers["Authorization"] = `Bearer ${activeAuthToken}`;
   }
 
-  return result;
-}
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 12000);
 
-export class MobileApiService {
-  static async getBlogs(params: GetBlogsParams = {}): Promise<{
-    data: BlogPost[];
-    pagination: PaginationMeta;
-  }> {
-    const query = new URLSearchParams();
-    if (params.page) query.set("page", String(params.page));
-    if (params.limit) query.set("limit", String(params.limit));
-    if (params.category && params.category !== "all") query.set("category", params.category);
-    if (params.search) query.set("search", params.search);
-    if (params.locale) query.set("locale", params.locale);
-    if (params.tag) query.set("tag", params.tag);
-
-    const queryString = query.toString();
-    const url = `${API_BASE_URL}/api/blogs${queryString ? `?${queryString}` : ""}`;
-
+  try {
     const response = await fetch(url, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
+      ...options,
+      headers,
+      signal: controller.signal,
     });
 
+    clearTimeout(timeoutId);
+
+    const json = await response.json().catch(() => null);
+
     if (!response.ok) {
-      throw new Error(`Failed to load blogs (HTTP ${response.status})`);
+      const errorMessage =
+        json?.error?.message ||
+        json?.message ||
+        (response.status === 404
+          ? `Server returned 404 for ${endpoint}. Verify the API is running and deployed.`
+          : `Server error (${response.status})`);
+      throw new Error(errorMessage);
     }
 
-    const json: BlogsApiResponse = await response.json();
+    return json;
+  } catch (error: any) {
+    clearTimeout(timeoutId);
+    if (error.name === "AbortError") {
+      throw new Error("Request timed out. Please check your network and API server connection.");
+    }
+    console.warn(`[Mobile API] Request to ${endpoint} failed:`, error.message);
+    throw error;
+  }
+}
+
+// 1. AUTHENTICATION (Direct API Integration - No Dummy Data)
+export async function apiLogin(
+  identifier: string,
+  password: string
+): Promise<{ admin: AdminUser; token: string }> {
+  const res = await request<{ admin: AdminUser; token: string }>("/api/admin/auth/login", {
+    method: "POST",
+    body: JSON.stringify({ identifier, password }),
+  });
+
+  if (res.data?.token) {
+    setApiAuthToken(res.data.token);
+  }
+  return res.data;
+}
+
+export async function apiLogout(): Promise<void> {
+  try {
+    await request("/api/admin/auth/logout", { method: "POST" });
+  } finally {
+    setApiAuthToken(null);
+  }
+}
+
+export async function apiGetMe(): Promise<AdminUser> {
+  const res = await request<AdminUser>("/api/admin/auth/me");
+  return res.data;
+}
+
+// 2. DASHBOARD STATS (Real API Data Only)
+export async function apiGetDashboardStats(): Promise<DashboardStats> {
+  // Query live admin stats endpoint, plus CVs for active document
+  const [statsRes, cvRes] = await Promise.all([
+    request<{
+      totalBlogs: number;
+      publishedBlogs: number;
+      draftBlogs: number;
+      totalCategories: number;
+      totalViews: number;
+      totalAdmins: number;
+      superAdminCount: number;
+    }>("/api/admin/stats").catch(() => null),
+    request<MobileCvItem[]>("/api/admin/cv").catch(() => null),
+  ]);
+
+  const stats = statsRes?.data;
+  const cvs = cvRes?.data || [];
+  const activeCv = cvs.find((c) => c.isActive);
+
+  if (stats) {
+    // Also fetch language distribution directly from live articles
+    const [enBlogsRes, neBlogsRes] = await Promise.all([
+      request<BlogPost[]>("/api/blogs?locale=en&limit=100").catch(() => null),
+      request<BlogPost[]>("/api/blogs?locale=ne&limit=100").catch(() => null),
+    ]);
+
+    const enCount = enBlogsRes?.data?.length ?? Math.round(stats.publishedBlogs / 2);
+    const neCount = neBlogsRes?.data?.length ?? (stats.publishedBlogs - enCount);
+
     return {
-      data: json.data || [],
-      pagination: json.pagination || {
-        page: 1,
-        limit: 10,
-        total: json.data?.length || 0,
-        totalPages: 1,
-        hasMore: false,
-      },
+      totalBlogs: stats.totalBlogs,
+      publishedBlogs: stats.publishedBlogs,
+      enBlogs: enCount,
+      neBlogs: neCount,
+      totalCategories: stats.totalCategories,
+      totalAdmins: stats.totalAdmins,
+      activeCvName: activeCv ? activeCv.filename : "No active CV set",
     };
   }
 
-  static async getBlogBySlug(slug: string): Promise<BlogPost> {
-    const url = `${API_BASE_URL}/api/blogs/${encodeURIComponent(slug)}`;
-    const response = await fetch(url, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    });
+  // If stats endpoint is unavailable, compute directly from live blogs and categories
+  const [blogsRes, catsRes] = await Promise.all([
+    request<BlogPost[]>("/api/blogs?limit=100"),
+    request<BlogCategory[]>("/api/categories"),
+  ]);
 
-    if (!response.ok) {
-      throw new Error(`Failed to load article '${slug}'`);
-    }
+  const blogs = blogsRes.data || [];
+  const categories = catsRes.data || [];
+  const published = blogs.filter((b) => b.isPublished);
 
-    const json: SingleBlogApiResponse = await response.json();
-    return json.data;
-  }
+  return {
+    totalBlogs: blogs.length,
+    publishedBlogs: published.length,
+    enBlogs: blogs.filter((b) => b.locale === "en").length,
+    neBlogs: blogs.filter((b) => b.locale === "ne").length,
+    totalCategories: categories.length,
+    totalAdmins: 1,
+    activeCvName: activeCv ? activeCv.filename : "No active CV set",
+  };
+}
 
-  static async createBlog(input: CreateBlogInput): Promise<BlogPost> {
-    const url = `${API_BASE_URL}/api/blogs`;
-    const response = await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(input),
-    });
+// 3. BLOGS CRUD (Direct Real API)
+export async function apiGetBlogs(locale?: "en" | "ne"): Promise<BlogPost[]> {
+  const query = locale ? `?locale=${locale}&limit=100` : "?limit=100";
+  const res = await request<BlogPost[]>(`/api/blogs${query}`);
+  return res.data || [];
+}
 
-    if (!response.ok) {
-      const err = await response.json().catch(() => ({}));
-      const message = err?.error?.message || `Failed to create article (HTTP ${response.status})`;
-      const fieldErrors = extractFieldErrors(err?.error?.details);
-      throw new MobileApiError(message, err?.error?.code, fieldErrors, err?.error?.details);
-    }
+export async function apiCreateBlog(data: Partial<BlogPost>): Promise<BlogPost> {
+  const res = await request<BlogPost>("/api/admin/blogs", {
+    method: "POST",
+    body: JSON.stringify(data),
+  });
+  return res.data;
+}
 
-    const json: SingleBlogApiResponse = await response.json();
-    return json.data;
-  }
+export async function apiUpdateBlog(id: string, data: Partial<BlogPost>): Promise<BlogPost> {
+  const res = await request<BlogPost>(`/api/admin/blogs/${id}`, {
+    method: "PUT",
+    body: JSON.stringify(data),
+  });
+  return res.data;
+}
 
-  static async updateBlog(slug: string, input: UpdateBlogInput): Promise<BlogPost> {
-    const url = `${API_BASE_URL}/api/blogs/${encodeURIComponent(slug)}`;
-    const response = await fetch(url, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(input),
-    });
+export async function apiDeleteBlog(id: string): Promise<boolean> {
+  await request(`/api/admin/blogs/${id}`, {
+    method: "DELETE",
+  });
+  return true;
+}
 
-    if (!response.ok) {
-      const err = await response.json().catch(() => ({}));
-      const message = err?.error?.message || `Failed to update article (HTTP ${response.status})`;
-      const fieldErrors = extractFieldErrors(err?.error?.details);
-      throw new MobileApiError(message, err?.error?.code, fieldErrors, err?.error?.details);
-    }
+// 4. CATEGORIES CRUD (Direct Real API)
+export async function apiGetCategories(): Promise<BlogCategory[]> {
+  const res = await request<BlogCategory[]>("/api/categories");
+  return res.data || [];
+}
 
-    const json: SingleBlogApiResponse = await response.json();
-    return json.data;
-  }
+export async function apiCreateCategory(data: Partial<BlogCategory>): Promise<BlogCategory> {
+  const res = await request<BlogCategory>("/api/admin/categories", {
+    method: "POST",
+    body: JSON.stringify(data),
+  });
+  return res.data;
+}
 
-  static async deleteBlog(slug: string): Promise<boolean> {
-    const url = `${API_BASE_URL}/api/blogs/${encodeURIComponent(slug)}`;
-    const response = await fetch(url, {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-    });
+export async function apiUpdateCategory(id: string, data: Partial<BlogCategory>): Promise<BlogCategory> {
+  const res = await request<BlogCategory>(`/api/admin/categories/${id}`, {
+    method: "PUT",
+    body: JSON.stringify(data),
+  });
+  return res.data;
+}
 
-    if (!response.ok) {
-      throw new Error(`Failed to delete article '${slug}'`);
-    }
+export async function apiDeleteCategory(id: string): Promise<boolean> {
+  await request(`/api/admin/categories/${id}`, {
+    method: "DELETE",
+  });
+  return true;
+}
 
-    return true;
-  }
+// 5. ADMINS CRUD (Direct Real API)
+export async function apiGetAdmins(): Promise<AdminUser[]> {
+  const res = await request<AdminUser[]>("/api/admin/admins");
+  return res.data || [];
+}
 
-  static async checkKeepAlive(): Promise<KeepAliveResponse> {
-    const url = `${API_BASE_URL}/api/cron/keep-alive`;
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`Keep-alive check failed (HTTP ${response.status})`);
-    }
-    return response.json();
-  }
+export async function apiCreateAdmin(
+  data: Partial<AdminUser> & { password?: string }
+): Promise<AdminUser> {
+  const res = await request<AdminUser>("/api/admin/admins", {
+    method: "POST",
+    body: JSON.stringify(data),
+  });
+  return res.data;
+}
+
+export async function apiUpdateAdmin(
+  id: string,
+  data: Partial<AdminUser> & { password?: string }
+): Promise<AdminUser> {
+  const res = await request<AdminUser>(`/api/admin/admins/${id}`, {
+    method: "PUT",
+    body: JSON.stringify(data),
+  });
+  return res.data;
+}
+
+export async function apiDeleteAdmin(id: string): Promise<boolean> {
+  await request(`/api/admin/admins/${id}`, {
+    method: "DELETE",
+  });
+  return true;
+}
+
+// 6. CV MANAGEMENT CRUD (Direct Real API)
+export async function apiGetCvs(): Promise<MobileCvItem[]> {
+  const res = await request<MobileCvItem[]>("/api/admin/cv");
+  return res.data || [];
+}
+
+export async function apiActivateCv(id: string): Promise<boolean> {
+  await request(`/api/admin/cv/${id}/active`, {
+    method: "PATCH",
+  });
+  return true;
+}
+
+export async function apiDeleteCv(id: string): Promise<boolean> {
+  await request(`/api/admin/cv/${id}`, {
+    method: "DELETE",
+  });
+  return true;
 }

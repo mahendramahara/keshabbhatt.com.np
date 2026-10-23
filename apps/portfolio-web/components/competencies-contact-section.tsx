@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { Target, Mail, Phone, MapPin, ArrowRight, QrCode } from "lucide-react";
+import { Target, Mail, Phone, MapPin, ArrowRight } from "lucide-react";
 import type { KeyCompetencyCategory, ContactSectionData } from "@keshab-bhatt/types";
 import { LinkedInIcon } from "./icons";
 
@@ -142,22 +142,39 @@ export function CompetenciesContactSection({
                   <span className="text-[11.5px]">{contact.location}</span>
                 </div>
                 <a
-                  href={contact.linkedInUrl || "#"}
+                  href={contact.linkedInUrl || "https://linkedin.com/in/keshabbhatt"}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 hover:text-[var(--accent-gold)] transition-colors"
+                  aria-label="Connect on LinkedIn"
                 >
                   <LinkedInIcon className="w-3.5 h-3.5 text-[var(--accent-gold)] shrink-0" />
                   <span className="truncate text-[11.5px]">{contact.linkedInDisplay}</span>
+                </a>
+                <a
+                  href="https://twitter.com/keshabbhatt"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 hover:text-[var(--accent-gold)] transition-colors"
+                  aria-label="Follow on X (Twitter)"
+                >
+                  <span className="w-3.5 h-3.5 text-[var(--accent-gold)] font-bold text-xs flex items-center justify-center shrink-0">𝕏</span>
+                  <span className="truncate text-[11.5px]">twitter.com/keshabbhatt</span>
                 </a>
               </div>
             </div>
 
             <div className="pt-2 flex items-center gap-3 border-t border-[var(--border-subtle)]">
-              <div className="w-13 h-13 bg-[var(--bg-card-inner)] rounded-lg p-1.5 flex items-center justify-center shrink-0 shadow-sm border border-[var(--border-subtle)]">
-                <QrCode className="w-10 h-10 text-[var(--text-main)]" />
+              <div className="w-14 h-14 bg-white rounded-lg p-1 flex items-center justify-center shrink-0 shadow-xs border border-[var(--border-subtle)] overflow-hidden">
+                <Image
+                  src="/images/qr-code.png"
+                  alt="LinkedIn Profile QR Code"
+                  width={56}
+                  height={56}
+                  className="w-full h-full object-contain"
+                />
               </div>
-              <p className="text-[10px] text-[var(--text-muted)] leading-tight">
+              <p className="text-[10.5px] text-[var(--text-muted)] leading-tight">
                 {contact.qrNotice}
               </p>
             </div>

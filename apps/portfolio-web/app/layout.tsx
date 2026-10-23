@@ -3,7 +3,7 @@ import { Plus_Jakarta_Sans, Mukta, Playfair_Display, Caveat, Cinzel } from "next
 import "./globals.css";
 import { ThemeProvider } from "@/components";
 import { startKeepAliveScheduler } from "@/lib";
-import { absoluteUrl, siteUrl } from "@/config";
+import { siteUrl } from "@/config";
 
 if (typeof window === "undefined") {
   startKeepAliveScheduler();
@@ -43,14 +43,15 @@ const caveat = Caveat({
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Keshab Datt Bhatt | Business Consultant & Financial Sector Professional",
-    template: "%s | Keshab Datt Bhatt"
+    default: "Keshab Datt Bhatt | Business & Finance Consultant",
+    template: "%s | Keshab Datt Bhatt",
   },
-  description: "Official executive portfolio of Keshab Datt Bhatt: Business Consultant, Business Coach, and Financial Sector Leader in Kathmandu, Nepal.",
+  description: "Executive portfolio of Keshab Datt Bhatt — Business Consultant & Financial Sector Leader in Nepal specializing in banking, capital markets, and strategy.",
   keywords: [
     "Keshab Bhatt",
     "Keshab Datt Bhatt",
     "Business Consultant Nepal",
+    "Finance Consultant Nepal",
     "Business Coach Nepal",
     "Management Consultant Kathmandu",
     "Banking and Capital Markets Nepal",
@@ -66,16 +67,17 @@ export const metadata: Metadata = {
     telephone: false,
   },
   alternates: {
-    canonical: "/en",
+    canonical: "/",
     languages: {
-      "en-US": "/en",
-      "ne-NP": "/ne",
+      en: "/",
+      ne: "/ne",
+      "x-default": "/",
     },
   },
   openGraph: {
-    title: "Keshab Datt Bhatt | Business Consultant & Financial Sector Leader",
-    description: "Official portfolio of Keshab Datt Bhatt: Business Consultant, Business Coach, and Capital Markets Specialist in Nepal.",
-    url: absoluteUrl("/en"),
+    title: "Keshab Datt Bhatt | Business & Finance Consultant",
+    description: "Executive portfolio of Keshab Datt Bhatt — Business Consultant & Financial Sector Leader in Nepal.",
+    url: siteUrl,
     siteName: "Keshab Datt Bhatt Portfolio",
     locale: "en_US",
     type: "website",
@@ -90,8 +92,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Keshab Datt Bhatt | Business Consultant & Strategy Leader",
-    description: "Business Consultant, Business Coach, and Banking/Capital Markets Specialist in Nepal.",
+    title: "Keshab Datt Bhatt | Business & Finance Consultant",
+    description: "Executive portfolio of Keshab Datt Bhatt — Business Consultant & Financial Sector Leader in Nepal.",
     images: ["/images/og-cover.jpg"],
   },
   robots: {

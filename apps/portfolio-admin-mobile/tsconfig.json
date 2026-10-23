@@ -1,6 +1,12 @@
 {
-  "extends": "@react-native/typescript-config",
+  "extends": "expo/tsconfig.base",
   "compilerOptions": {
+    "target": "ESNext",
+    "module": "preserve",
+    "moduleResolution": "bundler",
+    "customConditions": ["react-native"],
+    "jsx": "react-jsx",
+    "lib": ["DOM", "ESNext"],
     "strict": true,
     "paths": {
       "@/*": [
@@ -18,4 +24,4 @@
     "expo-env.d.ts",
     "nativewind-env.d.ts"
   ]
-}
+}

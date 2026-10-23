@@ -1,7 +1,7 @@
-import prisma from "./prisma";
+import { connectDatabase } from "@/config/database";
 
 let isSchedulerRunning = false;
-const PING_INTERVAL_MS = 1000 * 60 * 60 * 24; // Supabase free tier pauses inactive projects
+const PING_INTERVAL_MS = 1000 * 60 * 60 * 24;
 
 export async function pingDatabaseKeepAlive(source = "internal-scheduler"): Promise<{
   success: boolean;
@@ -10,28 +10,15 @@ export async function pingDatabaseKeepAlive(source = "internal-scheduler"): Prom
 }> {
   const timestamp = new Date().toISOString();
   try {
-    await prisma.$queryRaw`SELECT 1`;
-
-    await prisma.systemKeepAlive.create({
-      data: {
-        source,
-        status: "alive",
-      },
-    });
-
-    const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
-    await prisma.systemKeepAlive.deleteMany({
-      where: {
-        pingedAt: {
-          lt: thirtyDaysAgo,
-        },
-      },
-    });
+    const mongoose = await connectDatabase();
+    const isConnected = mongoose.connection.readyState === 1;
 
     return {
-      success: true,
+      success: isConnected,
       timestamp,
-      message: "Supabase database successfully pinged and kept active.",
+      message: isConnected
+        ? `MongoDB database connected and healthy (Source: ${source}).`
+        : `MongoDB connection state: ${mongoose.connection.readyState}`,
     };
   } catch (error) {
     const errorMsg = error instanceof Error ? error.message : "Unknown keep-alive error";

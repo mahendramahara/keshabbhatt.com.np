@@ -1,45 +1,38 @@
 import "../global.css";
-import React, { useCallback, useEffect, useState } from "react";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { Stack } from "expo-router";
+import React from "react";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
-import * as SplashScreen from "expo-splash-screen";
-
+import { Stack } from "expo-router";
+import { ThemeProvider, useAppTheme } from "@/store/theme-context";
+import { AuthProvider } from "@/store/auth-context";
 import { TabProvider } from "@/store/tab-context";
-import { BrandSplash } from "@/components/ui";
+import { DataProvider } from "@/store/data-context";
 
-SplashScreen.preventAutoHideAsync().catch((error) => {
-  console.warn("Could not keep native splash visible:", error);
-});
-
-export default function RootLayout() {
-  const [isSplashVisible, setIsSplashVisible] = useState(true);
-
-  useEffect(() => {
-    SplashScreen.hideAsync().catch((error) => {
-      console.warn("Could not hide native splash:", error);
-    });
-  }, []);
-
-  const handleSplashFinish = useCallback(() => setIsSplashVisible(false), []);
+function RootAppContent() {
+  const { mode } = useAppTheme();
 
   return (
-    <GestureHandlerRootView style={{ flex: 1, backgroundColor: "#040e24" }}>
-      <TabProvider>
-        <StatusBar style="light" />
-        <Stack
-          screenOptions={{
-            headerShown: false,
-            contentStyle: { backgroundColor: "#040e24" },
-            animation: "slide_from_right",
-          }}
-        >
-          <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
-          <Stack.Screen name="article/[slug]" options={{ headerShown: false }} />
-          <Stack.Screen name="article/edit/[slug]" options={{ headerShown: false }} />
-        </Stack>
-        {isSplashVisible ? <BrandSplash onFinish={handleSplashFinish} /> : null}
-      </TabProvider>
-    </GestureHandlerRootView>
+    <>
+      <StatusBar style={mode === "dark" ? "light" : "dark"} />
+      <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="index" />
+      </Stack>
+    </>
+  );
+}
+
+export default function RootLayout() {
+  return (
+    <SafeAreaProvider>
+      <ThemeProvider>
+        <AuthProvider>
+          <DataProvider>
+            <TabProvider>
+              <RootAppContent />
+            </TabProvider>
+          </DataProvider>
+        </AuthProvider>
+      </ThemeProvider>
+    </SafeAreaProvider>
   );
 }

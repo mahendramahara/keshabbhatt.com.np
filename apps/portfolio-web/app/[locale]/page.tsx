@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import type { Locale, ArticlePreviewItem } from "@keshab-bhatt/types";
 import { getPortfolioData, getSeoConfig } from "@keshab-bhatt/content";
 import { BlogService } from "@/services";
-import { absoluteUrl, siteUrl } from "@/config/env";
+import { siteUrl } from "@/config/env";
 import {
   Header,
   HeroSection,
@@ -22,6 +22,8 @@ import {
   StructuredData,
 } from "@/components";
 
+import { getSeoAlternates } from "@/lib/seo";
+
 interface PageProps {
   params: Promise<{ locale: string }>;
 }
@@ -35,27 +37,22 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const currentLocale = locale as Locale;
   const seo = getSeoConfig(currentLocale);
   const isNe = currentLocale === "ne";
-  const canonicalUrl = absoluteUrl(`/${currentLocale}`);
+  const alternates = getSeoAlternates("", currentLocale);
 
   return {
-    title: seo.defaultTitle,
+    title: {
+      absolute: seo.defaultTitle,
+    },
     description: seo.description,
     keywords: seo.keywords,
     authors: [{ name: "Keshab Datt Bhatt", url: siteUrl }],
     creator: "Keshab Datt Bhatt",
     publisher: "Keshab Datt Bhatt",
-    alternates: {
-      canonical: canonicalUrl,
-      languages: {
-        "en-US": absoluteUrl("/en"),
-        "ne-NP": absoluteUrl("/ne"),
-        "x-default": absoluteUrl("/en"),
-      },
-    },
+    alternates,
     openGraph: {
       title: seo.openGraph.title,
       description: seo.openGraph.description,
-      url: canonicalUrl,
+      url: alternates.canonical,
       siteName: seo.siteName,
       locale: isNe ? "ne_NP" : "en_US",
       alternateLocale: isNe ? ["en_US"] : ["ne_NP"],
@@ -92,32 +89,30 @@ export default async function LocalizedPortfolioPage({
   const data = getPortfolioData(currentLocale);
   const isNe = currentLocale === "ne";
 
-  let featuredArticles: ArticlePreviewItem[] = data.articlesAndInsights.items;
+  let featuredArticles: ArticlePreviewItem[] = [];
   try {
     const dynamicBlogs = await BlogService.getBlogs({
       locale: currentLocale,
       isPublished: true,
       limit: 9,
     });
-    if (dynamicBlogs.data.length > 0) {
-      featuredArticles = dynamicBlogs.data.map((blog) => ({
-        id: blog.id,
-        slug: blog.slug,
-        title: blog.title,
-        category: blog.category,
-        summary: blog.excerpt,
-        keyArgument: blog.excerpt,
-        implications: blog.seoDescription || blog.excerpt,
-        actionText: isNe ? "लेख पढ्नुहोस्" : "Read Article",
-        url: `/${currentLocale}/articles/${blog.slug}`,
-        date: blog.publishedAt ? blog.publishedAt.split("T")[0] : undefined,
-        readTime: `${Math.max(2, Math.ceil(blog.content.trim().split(/\s+/).length / 180))} min read`,
-        content: blog.content.split("\n\n").filter(Boolean),
-        author: blog.author.name,
-      }));
-    }
+    featuredArticles = dynamicBlogs.data.map((blog) => ({
+      id: blog.id,
+      slug: blog.slug,
+      title: blog.title,
+      category: blog.category,
+      summary: blog.excerpt,
+      keyArgument: blog.excerpt,
+      implications: blog.seoDescription || blog.excerpt,
+      actionText: isNe ? "लेख पढ्नुहोस्" : "Read Article",
+      url: currentLocale === "ne" ? `/ne/articles/${blog.slug}` : `/articles/${blog.slug}`,
+      date: blog.publishedAt ? blog.publishedAt.split("T")[0] : undefined,
+      readTime: `${Math.max(2, Math.ceil(blog.content.trim().split(/\s+/).length / 180))} min read`,
+      content: blog.content.split("\n\n").filter(Boolean),
+      author: blog.author.name,
+    }));
   } catch (err) {
-    console.warn("Failed to load dynamic articles for home page:", err);
+    console.error("Failed to load dynamic articles for home page:", err);
   }
 
   return (

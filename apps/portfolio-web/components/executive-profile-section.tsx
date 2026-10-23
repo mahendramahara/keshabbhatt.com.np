@@ -32,9 +32,11 @@ export function ExecutiveProfileSection({ profile, proposition }: ExecutiveProfi
             <div className="pt-6">
               <a
                 href={profile.readMoreUrl}
+                aria-label={`${profile.readMoreText}: ${profile.title}`}
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-[var(--border-card)] bg-[var(--bg-card)] text-xs font-semibold text-[var(--text-main)] hover:bg-[var(--bg-card-hover)] hover:border-[var(--accent-gold-border)] transition-all shadow-xs"
               >
                 <span>{profile.readMoreText}</span>
+                <span className="sr-only">: {profile.title}</span>
                 <ArrowRight className="w-3.5 h-3.5 text-[var(--text-muted)]" />
               </a>
             </div>

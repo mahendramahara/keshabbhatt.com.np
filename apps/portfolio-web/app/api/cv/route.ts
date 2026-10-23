@@ -1,34 +1,27 @@
 import { NextResponse } from "next/server";
-import fs from "node:fs";
-import path from "node:path";
+import { CvService } from "@/services";
+
+export const dynamic = "force-dynamic";
 
 export async function GET() {
   try {
-    const candidatePaths = [
-      path.join(process.cwd(), "public", "cv", "keshabbhatt.com.np.pdf"),
-      path.join(process.cwd(), "apps", "portfolio-web", "public", "cv", "keshabbhatt.com.np.pdf"),
-      path.resolve(process.cwd(), "public/cv/keshabbhatt.com.np.pdf"),
-      path.resolve(process.cwd(), "apps/portfolio-web/public/cv/keshabbhatt.com.np.pdf"),
-      path.join(process.cwd(), "public", "cv", "keshab-datt-bhatt-cv.pdf"),
-      path.join(process.cwd(), "apps", "portfolio-web", "public", "cv", "keshab-datt-bhatt-cv.pdf"),
-    ];
-
-    const filePath = candidatePaths.find((p) => fs.existsSync(p));
-    if (!filePath) {
-      return NextResponse.redirect(
-        new URL("/cv/keshabbhatt.com.np.pdf", process.env.NEXT_PUBLIC_SITE_URL || "https://keshabbhatt.com.np")
+    const cv = await CvService.getActiveCv();
+    if (!cv || !cv.buffer) {
+      return NextResponse.json(
+        { success: false, message: "CV document not found." },
+        { status: 404 }
       );
     }
 
-    const fileBuffer = fs.readFileSync(filePath);
+    const body = new Uint8Array(cv.buffer);
 
-    return new NextResponse(fileBuffer, {
+    return new NextResponse(body, {
       status: 200,
       headers: {
-        "Content-Type": "application/pdf",
-        "Content-Disposition": 'attachment; filename="keshabbhatt.com.np.pdf"',
-        "Content-Length": fileBuffer.length.toString(),
-        "Cache-Control": "public, max-age=3600, s-maxage=3600",
+        "Content-Type": cv.mimeType || "application/pdf",
+        "Content-Disposition": `attachment; filename="${cv.filename}"`,
+        "Content-Length": body.length.toString(),
+        "Cache-Control": "public, max-age=60, s-maxage=300",
       },
     });
   } catch (error) {
@@ -36,3 +29,4 @@ export async function GET() {
     return new NextResponse("Failed to download CV", { status: 500 });
   }
 }
+

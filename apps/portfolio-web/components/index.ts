@@ -17,3 +17,5 @@ export * from "./language-switcher";
 export * from "./theme-switcher";
 export * from "./theme-provider";
 export * from "./mobile-menu";
+export * from "./articles-scroll-controls";
+export * from "./experience-scroll-controls";
