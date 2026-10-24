@@ -9,22 +9,46 @@ declare global {
   } | undefined;
 }
 
-function resolveMongoUri(uri: string): string {
-  if (uri && uri.startsWith("mongodb+srv://") && uri.includes("keshabbhatt-portfolio.wfwxft3.mongodb.net")) {
-    const match = uri.match(/^mongodb\+srv:\/\/([^@]+)@keshabbhatt-portfolio\.wfwxft3\.mongodb\.net\/?([^?]*)(\?.*)?$/);
+export function resolveMongoUri(uri: string): string {
+  if (!uri) return "";
+  const cleaned = uri.trim().replace(/^["']+|["']+$/g, "").trim();
+
+  // If this is the known Atlas cluster for Keshab Bhatt's portfolio, convert to direct replica set to prevent DNS SRV failures
+  if (cleaned.includes("keshabbhatt-portfolio.wfwxft3.mongodb.net")) {
+    const match = cleaned.match(/^(?:mongodb(?:\+srv)?:\/\/)([^@]+)@keshabbhatt-portfolio\.wfwxft3\.mongodb\.net\/?([^?]*)(\?.*)?$/);
     if (match) {
       const auth = match[1];
-      const db = match[2] || "portfolio_db";
+      let db = match[2]?.trim();
+      if (!db || db === "test") {
+        db = "portfolio_db";
+      }
       return `mongodb://${auth}@ac-rl0fktc-shard-00-00.wfwxft3.mongodb.net:27017,ac-rl0fktc-shard-00-01.wfwxft3.mongodb.net:27017,ac-rl0fktc-shard-00-02.wfwxft3.mongodb.net:27017/${db}?ssl=true&replicaSet=atlas-scw68d-shard-0&authSource=admin&retryWrites=true&w=majority`;
     }
   }
-  return uri;
+
+  // Ensure default database is portfolio_db instead of 'test' if missing
+  if (cleaned.startsWith("mongodb+srv://") || cleaned.startsWith("mongodb://")) {
+    const urlPattern = /^((?:mongodb(?:\+srv)?):\/\/[^/]+)(\/([^?]*))?(\?.*)?$/;
+    const match = cleaned.match(urlPattern);
+    if (match) {
+      const base = match[1];
+      let db = match[3]?.trim();
+      const query = match[4] || "";
+      if (!db || db === "test") {
+        db = "portfolio_db";
+        return `${base}/${db}${query}`;
+      }
+    }
+  }
+
+  return cleaned;
 }
 
-const RAW_MONGODB_URI =
-  process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/keshabbhatt_portfolio";
-
-const MONGODB_URI = resolveMongoUri(RAW_MONGODB_URI);
+export function getMongoUri(): string {
+  const raw =
+    process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/portfolio_db";
+  return resolveMongoUri(raw);
+}
 
 let cached = global.mongooseConnection;
 
@@ -221,18 +245,19 @@ export async function connectDatabase(): Promise<typeof mongoose> {
   }
 
   if (!cached!.promise) {
+    const mongoUri = getMongoUri();
     const opts: mongoose.ConnectOptions = {
       bufferCommands: false,
       maxPoolSize: 10,
       minPoolSize: 0,
-      serverSelectionTimeoutMS: 5000,
-      connectTimeoutMS: 8000,
+      serverSelectionTimeoutMS: 12000,
+      connectTimeoutMS: 12000,
       socketTimeoutMS: 45000,
       family: 4,
     };
 
-    cached!.promise = mongoose.connect(MONGODB_URI, opts).then((mongooseInstance) => {
-      console.log(`[MongoDB] Connected successfully to ${RAW_MONGODB_URI.split("@").pop()?.split("/")[0] || "database"}`);
+    cached!.promise = mongoose.connect(mongoUri, opts).then((mongooseInstance) => {
+      console.log(`[MongoDB] Connected successfully to ${mongoUri.split("@").pop()?.split("/")[0] || "database"}`);
       return mongooseInstance;
     });
   }
@@ -240,14 +265,12 @@ export async function connectDatabase(): Promise<typeof mongoose> {
   try {
     cached!.conn = await cached!.promise;
 
-    // Run seed once in development or initial setup
+    // Run seed once if database is completely uninitialized
     if (!isSeedRun) {
       isSeedRun = true;
-      if (process.env.NODE_ENV === "development") {
-        seedInitialData().catch((err) => {
-          console.warn("[Database] Initial seeding skipped/failed:", (err as Error).message);
-        });
-      }
+      seedInitialData().catch((err) => {
+        console.warn("[Database] Initial seeding skipped/failed:", (err as Error).message);
+      });
     }
 
     return cached!.conn;

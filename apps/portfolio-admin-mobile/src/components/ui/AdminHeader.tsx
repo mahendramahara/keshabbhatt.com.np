@@ -12,7 +12,7 @@ export interface AdminHeaderProps {
 
 export const AdminHeader: React.FC<AdminHeaderProps> = ({
   title = "Keshab Bhatt",
-  subtitle = "Admin Portal v1.2.2",
+  subtitle = "Admin Portal v1.2.3",
 }) => {
   const insets = useSafeAreaInsets();
   const { colors, mode, toggleTheme } = useAppTheme();

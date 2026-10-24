@@ -11,6 +11,9 @@ import { siteUrl } from "@/config/env";
 
 import { getSeoAlternates } from "@/lib/seo";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 interface ArticlesPageProps {
   params: Promise<{ locale: string }>;
 }

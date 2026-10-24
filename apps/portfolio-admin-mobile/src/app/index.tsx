@@ -53,7 +53,7 @@ export default function AdminAppMain() {
   return (
     <View style={{ backgroundColor: colors.background }} className="flex-1">
       {/* Top Header */}
-      <AdminHeader title="Keshab Bhatt" subtitle="Admin Portal v1.2.2" />
+      <AdminHeader title="Keshab Bhatt" subtitle="Admin Portal v1.2.3" />
 
       {/* Main Tab Views */}
       <View className="flex-1">

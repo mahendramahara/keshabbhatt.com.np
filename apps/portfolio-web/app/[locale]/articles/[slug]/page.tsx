@@ -13,7 +13,9 @@ import { renderSafeMarkdown } from "@/lib/markdown";
 
 import { getSeoAlternates } from "@/lib/seo";
 
+export const dynamic = "force-dynamic";
 export const dynamicParams = true;
+export const revalidate = 0;
 
 interface ArticleDetailPageProps {
   params: Promise<{ locale: string; slug: string }>;

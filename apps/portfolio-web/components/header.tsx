@@ -164,20 +164,20 @@ export function Header({
   return (
     <>
       <header className="sticky top-0 z-50 transition-colors duration-200 header-theme">
-        <div className="mx-auto flex h-[72px] max-w-[1400px] items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto flex h-[72px] max-w-[1400px] items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
           
           {/* Brand Logo & Name */}
-          <a href={getLinkHref("#home")} className="group flex shrink-0 items-center gap-3" aria-label="Keshab Datt Bhatt – Home">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg transition-transform group-hover:scale-105 header-logo-box">
-              <span className="font-[family-name:var(--font-display)] text-lg font-bold tracking-tight">
+          <a href={getLinkHref("#home")} className="group flex min-w-0 items-center gap-2.5 sm:gap-3 shrink-0" aria-label="Keshab Datt Bhatt – Home">
+            <div className="flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-lg transition-transform group-hover:scale-105 header-logo-box">
+              <span className="font-[family-name:var(--font-display)] text-base sm:text-lg font-bold tracking-tight">
                 KB
               </span>
             </div>
-            <div className="leading-tight">
-              <p className="font-[family-name:var(--font-display)] text-[15px] font-bold tracking-[0.14em] uppercase transition-colors sm:text-[16px] header-brand-title">
+            <div className="leading-tight min-w-0">
+              <p className="font-[family-name:var(--font-display)] text-[14px] sm:text-[16px] font-bold tracking-[0.12em] sm:tracking-[0.14em] uppercase transition-colors header-brand-title truncate">
                 {language === "ne" ? "केशव दत्त भट्ट" : "Keshab Datt Bhatt"}
               </p>
-              <p className="text-[10.5px] font-medium tracking-wider sm:text-[11px] header-brand-sub">
+              <p className="text-[10px] sm:text-[11px] font-medium tracking-wider header-brand-sub truncate">
                 {language === "ne" ? (
                   <>वित्त <span className="mx-1.5 font-bold header-brand-pipe">|</span> रणनीति <span className="mx-1.5 font-bold header-brand-pipe">|</span> नेतृत्व</>
                 ) : (
@@ -211,9 +211,9 @@ export function Header({
           </nav>
 
           {/* Right Header Utilities */}
-          <div className="flex items-center gap-2 sm:gap-3">
-            {/* Theme Dropdown */}
-            <div className="relative" ref={themeRef}>
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+            {/* Theme Dropdown - Hidden on mobile screens, visible on desktop */}
+            <div className="relative hidden lg:block" ref={themeRef}>
               <button
                 type="button"
                 onClick={() => setThemeOpen((o) => !o)}
@@ -305,8 +305,8 @@ export function Header({
               )}
             </div>
 
-            {/* Language Switcher with Flags and Popup */}
-            <div className="relative" ref={langRef}>
+            {/* Language Switcher - Hidden on mobile screens, visible on desktop */}
+            <div className="relative hidden lg:block" ref={langRef}>
               <button
                 type="button"
                 onClick={() => setLangOpen((o) => !o)}
@@ -378,14 +378,14 @@ export function Header({
               )}
             </div>
 
-            {/* Desktop CV Download */}
+            {/* Desktop CV Download - Hidden on mobile, visible on desktop */}
             <a
               href={cvUrl}
               download="keshabbhatt.com.np.pdf"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Download CV"
-              className="hidden items-center gap-2 rounded-lg px-4 py-2 text-[13px] font-semibold btn-executive-primary sm:inline-flex"
+              className="hidden items-center gap-2 rounded-lg px-4 py-2 text-[13px] font-semibold btn-executive-primary lg:inline-flex"
             >
               <DownloadIcon className="h-4 w-4" />
               <span className="inline">
@@ -522,40 +522,46 @@ export function Header({
               </div>
 
               {/* Appearance & Color Accent Options */}
-              <div className="space-y-3 pt-2 border-t header-menu-divider">
-                <div className="flex items-center justify-between text-xs header-brand-title">
-                  <span className="font-semibold">{language === "ne" ? "स्वरूप (मोड)" : "Appearance"}:</span>
-                  <div className="flex items-center gap-1.5">
-                    {MODES.map(({ value, label, Icon }) => (
+              <div className="p-3.5 rounded-xl space-y-3.5 header-drawer-box">
+                {/* Appearance Mode */}
+                <div className="space-y-1.5">
+                  <div className="text-[10.5px] font-bold uppercase tracking-wider header-menu-header">
+                    {language === "ne" ? "स्वरूप (मोड)" : "Appearance"}
+                  </div>
+                  <div className="grid grid-cols-3 gap-1.5">
+                    {MODES.map(({ value, label, labelNe, Icon }) => (
                       <button
                         key={value}
                         type="button"
                         onClick={() => setMode(value)}
-                        className={`flex items-center gap-1 px-2.5 py-1 rounded-md text-xs border transition-colors ${
-                          mode === value ? "header-drawer-pill-active" : "header-drawer-pill"
+                        className={`flex items-center justify-center gap-1.5 py-2 px-1 rounded-lg text-xs font-semibold border transition-all ${
+                          mode === value ? "header-drawer-btn-active" : "header-drawer-btn"
                         }`}
                       >
-                        <Icon className="w-3.5 h-3.5" />
-                        <span>{label}</span>
+                        <Icon className="w-3.5 h-3.5 shrink-0" />
+                        <span>{language === "ne" ? labelNe : label}</span>
                       </button>
                     ))}
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between text-xs header-brand-title">
-                  <span className="font-semibold">{language === "ne" ? "रङ विषयवस्तु" : "Color Accent"}:</span>
-                  <div className="flex items-center gap-1.5">
-                    {PALETTES.map(({ id, label, color }) => (
+                {/* Color Accent */}
+                <div className="space-y-1.5 pt-2.5 border-t header-menu-divider">
+                  <div className="text-[10.5px] font-bold uppercase tracking-wider header-menu-header">
+                    {language === "ne" ? "रङ विषयवस्तु (Accent)" : "Color Accent"}
+                  </div>
+                  <div className="grid grid-cols-3 gap-1.5">
+                    {PALETTES.map(({ id, label, labelNe, color }) => (
                       <button
                         key={id}
                         type="button"
                         onClick={() => setActivePalette(id)}
-                        className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs border transition-colors ${
-                          activePalette === id ? "header-drawer-pill-active" : "header-drawer-pill"
+                        className={`flex items-center justify-center gap-1.5 py-2 px-1 rounded-lg text-[11px] font-semibold border transition-all ${
+                          activePalette === id ? "header-drawer-btn-active" : "header-drawer-btn"
                         }`}
                       >
-                        <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: color }} />
-                        <span>{label.split(" ")[0]}</span>
+                        <span className="w-2.5 h-2.5 rounded-full shrink-0 shadow-xs border border-black/20" style={{ backgroundColor: color }} />
+                        <span className="truncate">{language === "ne" ? labelNe.split(" ")[0] : label.split(" ")[0]}</span>
                       </button>
                     ))}
                   </div>

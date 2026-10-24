@@ -203,8 +203,13 @@ export async function apiDeleteBlog(id: string): Promise<boolean> {
 
 // 4. CATEGORIES CRUD (Direct Real API)
 export async function apiGetCategories(): Promise<BlogCategory[]> {
-  const res = await request<BlogCategory[]>("/api/categories");
-  return res.data || [];
+  try {
+    const res = await request<BlogCategory[]>("/api/categories");
+    return res.data || [];
+  } catch {
+    const res = await request<BlogCategory[]>("/api/admin/categories");
+    return res.data || [];
+  }
 }
 
 export async function apiCreateCategory(data: Partial<BlogCategory>): Promise<BlogCategory> {

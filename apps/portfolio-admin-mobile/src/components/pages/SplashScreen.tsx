@@ -54,7 +54,7 @@ export const SplashScreen: React.FC = () => {
           className="px-3 py-1 rounded-full mb-8"
         >
           <Text style={{ color: colors.gold }} className="text-xs font-bold uppercase tracking-wider">
-            Version 1.2.2
+            Version 1.2.3
           </Text>
         </View>
 
