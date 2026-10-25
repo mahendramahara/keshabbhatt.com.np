@@ -61,79 +61,81 @@ export function ArticlesSection({
             </p>
           </div>
         ) : (
-          <div
-            id={containerId}
-            tabIndex={0}
-            aria-label="Horizontal list of articles"
-            className="flex gap-5 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-3 pt-1 focus:outline-none"
-            style={{ scrollbarWidth: "thin" }}
-          >
-          {displayItems.map((art, index) => {
-            const articleUrl = art.slug
-              ? (locale === "ne" ? `/ne/articles/${art.slug}` : `/articles/${art.slug}`)
-              : (locale === "ne" ? "/ne/articles" : "/articles");
+          <div className="relative max-w-full overflow-hidden">
+            <div
+              id={containerId}
+              tabIndex={0}
+              aria-label="Horizontal list of articles"
+              className="flex gap-5 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-3 pt-1 max-w-full overscroll-x-contain focus:outline-none"
+              style={{ scrollbarWidth: "thin" }}
+            >
+            {displayItems.map((art, index) => {
+              const articleUrl = art.slug
+                ? (locale === "ne" ? `/ne/articles/${art.slug}` : `/articles/${art.slug}`)
+                : (locale === "ne" ? "/ne/articles" : "/articles");
 
-            return (
-              <div
-                key={art.id || index}
-                className="w-[320px] sm:w-[370px] shrink-0 snap-start p-5 sm:p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-card)] shadow-xs hover:shadow-md hover:border-[var(--accent-gold)]/40 transition-all duration-200 flex flex-col justify-between space-y-4 group"
-              >
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between gap-2 text-[11px]">
-                    <span className="font-semibold text-[var(--accent-gold)] bg-[var(--accent-gold-soft)] px-2.5 py-0.5 rounded-full border border-[var(--accent-gold-border)] truncate max-w-[200px]">
-                      {art.category}
-                    </span>
-                    <span className="text-[var(--text-muted)] flex items-center gap-1 shrink-0">
-                      <Clock className="w-3 h-3" />
-                      {art.readTime || "5 min read"}
-                    </span>
+              return (
+                <div
+                  key={art.id || index}
+                  className="w-[320px] sm:w-[370px] shrink-0 snap-start p-5 sm:p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-card)] shadow-xs hover:shadow-md hover:border-[var(--accent-gold)]/40 transition-all duration-200 flex flex-col justify-between space-y-4 group"
+                >
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between gap-2 text-[11px]">
+                      <span className="font-semibold text-[var(--accent-gold)] bg-[var(--accent-gold-soft)] px-2.5 py-0.5 rounded-full border border-[var(--accent-gold-border)] truncate max-w-[200px]">
+                        {art.category}
+                      </span>
+                      <span className="text-[var(--text-muted)] flex items-center gap-1 shrink-0">
+                        <Clock className="w-3 h-3" />
+                        {art.readTime || "5 min read"}
+                      </span>
+                    </div>
+
+                    <h3 className="text-sm sm:text-[15px] font-bold text-[var(--text-main)] leading-snug line-clamp-2 group-hover:text-[var(--accent-gold)] transition-colors">
+                      <Link
+                        href={articleUrl}
+                        className="transition-colors"
+                      >
+                        {art.title}
+                      </Link>
+                    </h3>
+
+                    <p className="text-xs text-[var(--text-muted)] leading-relaxed line-clamp-3">
+                      {art.summary}
+                    </p>
+
+                    {art.keyArgument && art.keyArgument.trim() !== art.summary.trim() && (
+                      <div className="p-3 rounded-xl bg-[var(--bg-card-inner)] border border-[var(--border-subtle)] space-y-1">
+                        <div className="text-[10px] font-bold uppercase tracking-wider text-[var(--accent-gold)] flex items-center gap-1">
+                          <Sparkles className="w-3 h-3" />
+                          <span>Core Insight</span>
+                        </div>
+                        <p className="text-[11.5px] text-[var(--text-sub)] leading-normal line-clamp-2">
+                          {art.keyArgument}
+                        </p>
+                      </div>
+                    )}
                   </div>
 
-                  <h3 className="text-sm sm:text-[15px] font-bold text-[var(--text-main)] leading-snug line-clamp-2 group-hover:text-[var(--accent-gold)] transition-colors">
+                  <div className="pt-3 border-t border-[var(--border-subtle)] flex items-center justify-between text-xs">
+                    <span className="text-[11px] text-[var(--text-muted)] flex items-center gap-1">
+                      <Calendar className="w-3 h-3 text-[var(--text-muted)]" />
+                      <span>{art.date || "2026"}</span>
+                    </span>
+
                     <Link
                       href={articleUrl}
-                      className="transition-colors"
+                      className="inline-flex items-center gap-1 text-xs font-bold text-[var(--accent-gold)] hover:underline"
+                      aria-label={`${art.actionText || "Read"}: ${art.title}`}
                     >
-                      {art.title}
+                      <span>{art.actionText || (locale === "ne" ? "थप हेर्नुहोस्" : "See More")}</span>
+                      <span className="sr-only">: {art.title}</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
                     </Link>
-                  </h3>
-
-                  <p className="text-xs text-[var(--text-muted)] leading-relaxed line-clamp-3">
-                    {art.summary}
-                  </p>
-
-                  {art.keyArgument && art.keyArgument.trim() !== art.summary.trim() && (
-                    <div className="p-3 rounded-xl bg-[var(--bg-card-inner)] border border-[var(--border-subtle)] space-y-1">
-                      <div className="text-[10px] font-bold uppercase tracking-wider text-[var(--accent-gold)] flex items-center gap-1">
-                        <Sparkles className="w-3 h-3" />
-                        <span>Core Insight</span>
-                      </div>
-                      <p className="text-[11.5px] text-[var(--text-sub)] leading-normal line-clamp-2">
-                        {art.keyArgument}
-                      </p>
-                    </div>
-                  )}
+                  </div>
                 </div>
-
-                <div className="pt-3 border-t border-[var(--border-subtle)] flex items-center justify-between text-xs">
-                  <span className="text-[11px] text-[var(--text-muted)] flex items-center gap-1">
-                    <Calendar className="w-3 h-3 text-[var(--text-muted)]" />
-                    <span>{art.date || "2026"}</span>
-                  </span>
-
-                  <Link
-                    href={articleUrl}
-                    className="inline-flex items-center gap-1 text-xs font-bold text-[var(--accent-gold)] hover:underline"
-                    aria-label={`${art.actionText || "Read"}: ${art.title}`}
-                  >
-                    <span>{art.actionText || (locale === "ne" ? "थप हेर्नुहोस्" : "See More")}</span>
-                    <span className="sr-only">: {art.title}</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
-                </div>
-              </div>
-            );
-          })}
+              );
+            })}
+            </div>
           </div>
         )}
 

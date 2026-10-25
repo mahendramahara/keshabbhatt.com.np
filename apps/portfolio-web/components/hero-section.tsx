@@ -161,7 +161,7 @@ export function Hero({
           </p>
 
           {/* 3 Core Domain Highlights (Banking, Capital Markets, Strategic Management) */}
-          <ul className="mt-4 grid w-full grid-cols-3 gap-x-2 sm:flex sm:items-center sm:justify-between sm:gap-0 max-w-xl">
+          <ul className="mt-4 grid w-full grid-cols-3 gap-x-2 sm:flex sm:items-center sm:justify-between sm:gap-0 max-w-full overflow-hidden">
             {highlights.map(({ label, Icon }, index) => (
               <li
                 key={label.join(" ")}
@@ -170,7 +170,7 @@ export function Hero({
                 } ${index < highlights.length - 1 ? "pr-2 sm:pr-3 lg:pr-3 xl:pr-4" : ""}`}
               >
                 <Icon className="h-4 w-4 sm:h-5 sm:w-5 shrink-0 text-[var(--accent-hero)]" />
-                <span className="whitespace-nowrap text-[10px] sm:text-[11px] lg:text-[11px] xl:text-[11.5px] leading-tight text-white/90">
+                <span className="sm:whitespace-nowrap text-[10px] sm:text-[11px] lg:text-[11px] xl:text-[11.5px] leading-tight text-white/90">
                   {label[0]}
                   <br />
                   {label[1]}

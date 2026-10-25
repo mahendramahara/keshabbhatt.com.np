@@ -1,13 +1,28 @@
+import dns from "node:dns";
 import path from "node:path";
 import fs from "node:fs";
 import { fileURLToPath } from "node:url";
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 
+try {
+  dns.setServers(["8.8.8.8", "1.1.1.1"]);
+} catch {
+  // Ignore
+}
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 function resolveMongoUri(uri) {
+  if (uri && uri.includes("main-cluster.q0du6xs.mongodb.net")) {
+    const match = uri.match(/^(?:mongodb(?:\+srv)?:\/\/)([^@]+)@main-cluster\.q0du6xs\.mongodb\.net\/?([^?]*)(\?.*)?$/);
+    if (match) {
+      const auth = match[1];
+      const db = match[2] || "portfolio_db";
+      return `mongodb://${auth}@ac-1yb1jll-shard-00-00.q0du6xs.mongodb.net:27017,ac-1yb1jll-shard-00-01.q0du6xs.mongodb.net:27017,ac-1yb1jll-shard-00-02.q0du6xs.mongodb.net:27017/${db}?ssl=true&replicaSet=atlas-5iciy9-shard-0&authSource=admin&retryWrites=true&w=majority`;
+    }
+  }
   if (uri && uri.startsWith("mongodb+srv://") && uri.includes("keshabbhatt-portfolio.wfwxft3.mongodb.net")) {
     const match = uri.match(/^mongodb\+srv:\/\/([^@]+)@keshabbhatt-portfolio\.wfwxft3\.mongodb\.net\/?([^?]*)(\?.*)?$/);
     if (match) {
@@ -19,9 +34,36 @@ function resolveMongoUri(uri) {
   return uri;
 }
 
-const RAW_MONGODB_URI =
-  process.env.MONGODB_URI ||
-  "mongodb+srv://digitalnepal1122_db_user:ubWANNACdxHCi8NF@keshabbhatt-portfolio.wfwxft3.mongodb.net/portfolio_db";
+function getEnvVar(key) {
+  if (process.env[key]) {
+    return process.env[key];
+  }
+  const envLocalPath = path.resolve(__dirname, "../.env.local");
+  if (fs.existsSync(envLocalPath)) {
+    const content = fs.readFileSync(envLocalPath, "utf-8");
+    const match = content.match(new RegExp(`${key}=["']?([^"'\\r\\n]+)["']?`));
+    if (match) return match[1];
+  }
+  const rootEnvPath = path.resolve(__dirname, "../../../.env");
+  if (fs.existsSync(rootEnvPath)) {
+    const content = fs.readFileSync(rootEnvPath, "utf-8");
+    const match = content.match(new RegExp(`${key}=["']?([^"'\\r\\n]+)["']?`));
+    if (match) return match[1];
+  }
+  const envPath = path.resolve(__dirname, "../.env");
+  if (fs.existsSync(envPath)) {
+    const content = fs.readFileSync(envPath, "utf-8");
+    const match = content.match(new RegExp(`${key}=["']?([^"'\\r\\n]+)["']?`));
+    if (match) return match[1];
+  }
+  return "";
+}
+
+const RAW_MONGODB_URI = getEnvVar("MONGODB_URI");
+if (!RAW_MONGODB_URI) {
+  console.error("Error: MONGODB_URI is required. Please define it in your environment or .env.local.");
+  process.exit(1);
+}
 
 const MONGODB_URI = resolveMongoUri(RAW_MONGODB_URI);
 
@@ -72,17 +114,27 @@ async function runSeed() {
 
   // 2. Seed Superadmin
   const adminsCollection = db.collection("admins");
+  const superadminName = getEnvVar("SUPERADMIN_NAME") || "Keshab Datt Bhatt";
+  const superadminEmail = (getEnvVar("SUPERADMIN_EMAIL") || "").toLowerCase();
+  const superadminUsername = (getEnvVar("SUPERADMIN_USERNAME") || "").toLowerCase();
+  const superadminPassword = getEnvVar("SUPERADMIN_PASSWORD");
+
+  if (!superadminEmail || !superadminUsername || !superadminPassword) {
+    console.error("Error: SUPERADMIN_EMAIL, SUPERADMIN_USERNAME, and SUPERADMIN_PASSWORD must be configured in environment or .env/.env.local");
+    process.exit(1);
+  }
+
   const existingAdmin = await adminsCollection.findOne({
-    $or: [{ username: "admin" }, { email: "admin@keshabbhatt.com.np" }],
+    $or: [{ username: superadminUsername }, { email: superadminEmail }],
   });
 
   if (!existingAdmin) {
     const salt = await bcrypt.genSalt(12);
-    const hashedPassword = await bcrypt.hash("AdminSecurePassword123!", salt);
+    const hashedPassword = await bcrypt.hash(superadminPassword, salt);
     await adminsCollection.insertOne({
-      name: "Keshab Datt Bhatt",
-      email: "admin@keshabbhatt.com.np",
-      username: "admin",
+      name: superadminName,
+      email: superadminEmail,
+      username: superadminUsername,
       password: hashedPassword,
       role: "superadmin",
       isActive: true,
@@ -90,9 +142,9 @@ async function runSeed() {
       createdAt: new Date(),
       updatedAt: new Date(),
     });
-    console.log("Superadmin seeded: admin (admin@keshabbhatt.com.np)");
+    console.log(`Superadmin seeded: ${superadminUsername} (${superadminEmail})`);
   } else {
-    console.log("Superadmin already verified.");
+    console.log(`Superadmin already verified (${superadminUsername}).`);
   }
 
   // 3. Seed Blogs

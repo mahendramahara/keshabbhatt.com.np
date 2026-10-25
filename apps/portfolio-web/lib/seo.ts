@@ -14,8 +14,8 @@ export function getSeoAlternates(pathWithoutLocale = "", locale: Locale = "en") 
   const normalized = pathWithoutLocale.replace(/^\/+/, "");
   const cleanPath = normalized ? `/${normalized}` : "";
 
-  // English URL (no /en prefix)
-  const enUrl = cleanPath ? `${siteUrl}${cleanPath}` : `${siteUrl}/`;
+  // English URL (no /en prefix, matching Next.js canonical)
+  const enUrl = `${siteUrl}${cleanPath}`;
   
   // Nepali URL (/ne prefix)
   const neUrl = `${siteUrl}/ne${cleanPath}`;

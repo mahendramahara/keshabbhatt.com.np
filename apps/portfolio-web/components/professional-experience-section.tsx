@@ -118,12 +118,12 @@ export function ProfessionalExperienceSection({
           ))}
         </div>
 
-        <div className="relative pt-1">
+        <div className="relative pt-1 max-w-full overflow-hidden">
           <ExperienceScrollControls containerId={containerId} />
 
           <div
             id={containerId}
-            className="flex gap-3 sm:gap-4 overflow-x-auto pb-2 snap-x snap-mandatory scroll-smooth no-scrollbar"
+            className="flex gap-3 sm:gap-4 overflow-x-auto pb-2 snap-x snap-mandatory scroll-smooth no-scrollbar max-w-full overscroll-x-contain"
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
             {institutionalItems.map((item, index) => (

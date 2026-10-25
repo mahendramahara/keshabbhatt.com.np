@@ -66,14 +66,6 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  alternates: {
-    canonical: "/",
-    languages: {
-      en: "/",
-      ne: "/ne",
-      "x-default": "/",
-    },
-  },
   openGraph: {
     title: "Keshab Datt Bhatt | Business & Finance Consultant",
     description: "Executive portfolio of Keshab Datt Bhatt — Business Consultant & Financial Sector Leader in Nepal.",

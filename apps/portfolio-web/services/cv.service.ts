@@ -24,7 +24,7 @@ export class CvService {
       path.join(process.cwd(), "apps", "portfolio-web", "public", "cv"),
       path.join(process.cwd(), "public", "cv"),
     ];
-    return dirs.filter((d) => fs.existsSync(d));
+    return dirs.filter((d) => fs.existsSync(/*turbopackIgnore: true*/ d));
   }
 
   private static getCvStorageDir(): string {
@@ -32,11 +32,11 @@ export class CvService {
     const directDir = path.join(process.cwd(), "public", "cv");
 
     let dir = directDir;
-    if (fs.existsSync(path.join(process.cwd(), "apps", "portfolio-web", "public"))) {
+    if (fs.existsSync(/*turbopackIgnore: true*/ path.join(process.cwd(), "apps", "portfolio-web", "public"))) {
       dir = monorepoDir;
     }
 
-    if (!fs.existsSync(dir)) {
+    if (!fs.existsSync(/*turbopackIgnore: true*/ dir)) {
       fs.mkdirSync(dir, { recursive: true });
     }
     return dir;
@@ -149,12 +149,12 @@ export class CvService {
     ];
 
     for (const fname of candidateFiles) {
-      const fullPath = path.join(storageDir, fname);
-      if (fs.existsSync(fullPath)) {
+      const fullPath = path.join(/*turbopackIgnore: true*/ storageDir, fname);
+      if (fs.existsSync(/*turbopackIgnore: true*/ fullPath)) {
         return {
           filename: "Keshab-Datt-Bhatt-Executive-CV.pdf",
           mimeType: "application/pdf",
-          buffer: fs.readFileSync(fullPath),
+          buffer: fs.readFileSync(/*turbopackIgnore: true*/ fullPath),
         };
       }
     }

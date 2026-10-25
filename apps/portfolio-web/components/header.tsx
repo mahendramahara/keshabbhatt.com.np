@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import type { Locale, ThemeMode, ThemePalette } from "@keshab-bhatt/types";
@@ -85,8 +86,13 @@ export function Header({
   const pathname = usePathname() || "/en";
 
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const language = locale;
   const { mode, theme: activePalette, setMode, setTheme: setActivePalette } = useTheme();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const navIds = NAV_LINKS.map((l) => l.id);
   const [active, setActive] = useScrollSpy(navIds);
@@ -96,15 +102,24 @@ export function Header({
   const themeRef = useRef<HTMLDivElement>(null);
   const langRef = useRef<HTMLDivElement>(null);
 
-  // Lock body scrolling when mobile side menu is open
+  // Lock body scrolling when mobile side menu is open, guaranteeing zero horizontal scroll
   useEffect(() => {
     if (mobileOpen) {
       document.body.style.overflow = "hidden";
+      if (typeof window !== "undefined") {
+        window.scrollTo({ left: 0, behavior: "instant" });
+      }
     } else {
       document.body.style.overflow = "";
+      if (typeof window !== "undefined") {
+        window.scrollTo({ left: 0, behavior: "instant" });
+      }
     }
     return () => {
       document.body.style.overflow = "";
+      if (typeof window !== "undefined") {
+        window.scrollTo({ left: 0, behavior: "instant" });
+      }
     };
   }, [mobileOpen]);
 
@@ -408,20 +423,20 @@ export function Header({
       </header>
 
       {/* ========================================================================= */}
-      {/* PROFESSIONAL OVERLAPPING MOBILE SIDE DRAWER (Z-INDEX 100+)               */}
+      {/* PROFESSIONAL OVERLAPPING MOBILE SIDE DRAWER (PORTALED TO BODY)            */}
       {/* ========================================================================= */}
-      {mobileOpen && (
-        <div className="fixed inset-0 z-[100] lg:hidden">
+      {mounted && mobileOpen && typeof document !== "undefined" && createPortal(
+        <div className="fixed inset-0 z-[9999] overflow-hidden lg:hidden" role="dialog" aria-modal="true">
           {/* Fullscreen Backdrop Dimmer */}
           <div
-            className="fixed inset-0 bg-black/75 backdrop-blur-sm transition-opacity duration-300 animate-in fade-in"
+            className="fixed inset-0 bg-black/75 backdrop-blur-xs transition-opacity duration-300"
             onClick={() => setMobileOpen(false)}
             aria-hidden="true"
           />
 
           {/* Overlapping Slide-in Panel */}
           <aside
-            className="fixed top-0 bottom-0 right-0 z-[101] w-[86%] max-w-[360px] shadow-2xl flex flex-col transform transition-transform duration-300 ease-out animate-in slide-in-from-right header-drawer-panel"
+            className="fixed top-0 bottom-0 right-0 z-[10000] w-[85%] max-w-[350px] shadow-2xl flex flex-col header-drawer-panel"
             aria-label="Mobile Navigation Drawer"
           >
             {/* Drawer Top Header */}
@@ -598,7 +613,8 @@ export function Header({
               <div className="text-[10px] opacity-70">© {new Date().getFullYear()} Keshab Datt Bhatt</div>
             </div>
           </aside>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   );

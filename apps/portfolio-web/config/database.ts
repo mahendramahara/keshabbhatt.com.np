@@ -1,6 +1,14 @@
+import dns from "node:dns";
 import mongoose from "mongoose";
 import { Admin, BlogCategoryModel, BlogModel, CvModel, generateSlug } from "@/models";
 import { getArticlesData } from "@keshab-bhatt/content";
+
+// Configure robust public DNS fallback for MongoDB Atlas SRV lookups on local environments
+try {
+  dns.setServers(["8.8.8.8", "1.1.1.1"]);
+} catch {
+  // Ignore in environments where setting DNS servers is not supported
+}
 
 declare global {
   var mongooseConnection: {
@@ -13,7 +21,20 @@ export function resolveMongoUri(uri: string): string {
   if (!uri) return "";
   const cleaned = uri.trim().replace(/^["']+|["']+$/g, "").trim();
 
-  // If this is the known Atlas cluster for Keshab Bhatt's portfolio, convert to direct replica set to prevent DNS SRV failures
+  // If this is the main Atlas cluster for Keshab Bhatt's portfolio, convert to direct replica set to prevent DNS SRV failures on local ISPs/routers
+  if (cleaned.includes("main-cluster.q0du6xs.mongodb.net")) {
+    const match = cleaned.match(/^(?:mongodb(?:\+srv)?:\/\/)([^@]+)@main-cluster\.q0du6xs\.mongodb\.net\/?([^?]*)(\?.*)?$/);
+    if (match) {
+      const auth = match[1];
+      let db = match[2]?.trim();
+      if (!db || db === "test") {
+        db = "portfolio_db";
+      }
+      return `mongodb://${auth}@ac-1yb1jll-shard-00-00.q0du6xs.mongodb.net:27017,ac-1yb1jll-shard-00-01.q0du6xs.mongodb.net:27017,ac-1yb1jll-shard-00-02.q0du6xs.mongodb.net:27017/${db}?ssl=true&replicaSet=atlas-5iciy9-shard-0&authSource=admin&retryWrites=true&w=majority`;
+    }
+  }
+
+  // Previous cluster fallback
   if (cleaned.includes("keshabbhatt-portfolio.wfwxft3.mongodb.net")) {
     const match = cleaned.match(/^(?:mongodb(?:\+srv)?:\/\/)([^@]+)@keshabbhatt-portfolio\.wfwxft3\.mongodb\.net\/?([^?]*)(\?.*)?$/);
     if (match) {
@@ -65,27 +86,24 @@ export async function seedInitialData() {
     // 1. Seed Super Admin
     const adminCount = await Admin.countDocuments();
     if (adminCount === 0) {
-      const superadminEmail = (
-        process.env.SUPERADMIN_EMAIL || "admin@keshabbhatt.com.np"
-      ).toLowerCase();
-      const superadminUsername = (
-        process.env.SUPERADMIN_USERNAME || "admin"
-      ).toLowerCase();
-      const superadminPassword =
-        process.env.SUPERADMIN_PASSWORD || "AdminSecurePassword123!";
-      const superadminName =
-        process.env.SUPERADMIN_NAME || "Keshab Datt Bhatt";
+      const superadminEmail = process.env.SUPERADMIN_EMAIL?.trim().toLowerCase();
+      const superadminUsername = process.env.SUPERADMIN_USERNAME?.trim().toLowerCase();
+      const superadminPassword = process.env.SUPERADMIN_PASSWORD;
+      const superadminName = process.env.SUPERADMIN_NAME?.trim() || "Keshab Datt Bhatt";
 
-      await Admin.create({
-        name: superadminName,
-        email: superadminEmail,
-        username: superadminUsername,
-        password: superadminPassword, // hashed via pre-save hook
-        role: "superadmin",
-        isActive: true,
-      });
-
-      console.log(`[Database Seed] Superadmin initialized: ${superadminUsername} (${superadminEmail})`);
+      if (superadminEmail && superadminUsername && superadminPassword) {
+        await Admin.create({
+          name: superadminName,
+          email: superadminEmail,
+          username: superadminUsername,
+          password: superadminPassword, // hashed via pre-save hook
+          role: "superadmin",
+          isActive: true,
+        });
+        console.log(`[Database Seed] Superadmin initialized: ${superadminUsername} (${superadminEmail})`);
+      } else {
+        console.warn("[Database Seed] Skipping superadmin auto-seed: SUPERADMIN_EMAIL, SUPERADMIN_USERNAME, or SUPERADMIN_PASSWORD is not set in environment.");
+      }
     }
 
     // 2. Seed Default Categories (Both English & Nepali)
