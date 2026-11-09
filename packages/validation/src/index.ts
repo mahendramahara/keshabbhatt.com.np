@@ -36,7 +36,11 @@ export const createBlogSchema = z.object({
   excerpt: z
     .string({ required_error: "Excerpt is required" })
     .min(10, "Excerpt must be at least 10 characters")
-    .max(500, "Excerpt cannot exceed 500 characters"),
+    .max(5000, "Excerpt cannot exceed 5000 characters")
+    .refine(
+      (val) => val.trim().split(/\s+/).filter(Boolean).length <= 500,
+      { message: "Excerpt cannot exceed 500 words" }
+    ),
   content: z
     .string({ required_error: "Content is required" })
     .min(20, "Content must be at least 20 characters"),

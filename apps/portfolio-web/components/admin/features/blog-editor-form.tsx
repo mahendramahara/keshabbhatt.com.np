@@ -91,6 +91,11 @@ export const BlogEditorForm: React.FC<BlogEditorFormProps> = ({
     }
   };
 
+  // Excerpt word count (up to 500 words)
+  const excerptWordCount = excerpt.trim()
+    ? excerpt.trim().split(/\s+/).filter(Boolean).length
+    : 0;
+
   // Fetch categories for normalized selection
   useEffect(() => {
     fetch("/api/admin/categories")
@@ -126,6 +131,11 @@ export const BlogEditorForm: React.FC<BlogEditorFormProps> = ({
 
     if (!excerpt.trim()) {
       setErrorMessage("Please provide a concise excerpt or executive summary.");
+      return;
+    }
+
+    if (excerptWordCount > 500) {
+      setErrorMessage(`Excerpt cannot exceed 500 words (currently ${excerptWordCount} words).`);
       return;
     }
 
@@ -325,11 +335,17 @@ export const BlogEditorForm: React.FC<BlogEditorFormProps> = ({
           {/* Excerpt */}
           <AdminTextarea
             label="Executive Excerpt / Summary"
-            placeholder="Provide a concise 2-3 sentence strategic executive summary of this analysis..."
+            placeholder="Provide a strategic executive summary of this analysis (up to 500 words)..."
             value={excerpt}
             onChange={(e) => handleExcerptChange(e.target.value)}
-            rows={3}
+            rows={4}
             required
+            helperText={`${excerptWordCount} / 500 words`}
+            error={
+              excerptWordCount > 500
+                ? `Excerpt exceeds the 500-word limit (${excerptWordCount}/500 words)`
+                : undefined
+            }
           />
 
           {/* Rich Text Editor */}

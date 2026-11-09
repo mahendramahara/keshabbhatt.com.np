@@ -57,7 +57,14 @@ const BlogSchema = new Schema<IBlogDocument>(
       type: String,
       required: [true, "Excerpt is required"],
       trim: true,
-      maxlength: 500,
+      maxlength: [5000, "Excerpt cannot exceed 5000 characters"],
+      validate: {
+        validator: function (v: string) {
+          if (!v) return false;
+          return v.trim().split(/\s+/).filter(Boolean).length <= 500;
+        },
+        message: "Excerpt cannot exceed 500 words",
+      },
     },
     content: {
       type: String,
